@@ -1,0 +1,121 @@
+openapi: 3.1.0
+info:
+  title: Veritus Calls Interactions API
+  description: API for the Veritus Agent Platform
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://sandbox.veritus.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: Interactions
+paths:
+  /interactions/{interactionId}/analyze:
+    post:
+      description: Run on-demand analysis on an interaction to extract outcome variables. Supports SMS, voice, and email channels. Analysis is idempotent — if the interaction has already been analyzed, the existing results are returned.
+      parameters:
+      - name: interactionId
+        in: path
+        required: true
+        description: The unique identifier of the interaction to analyze.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyzeInteractionRequest'
+      responses:
+        '200':
+          description: Analysis completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyzeInteractionResponse'
+              example:
+                requestId: 96b887fb-9371-4515-b51e-28434f58dd7e
+                success: true
+                data:
+                  interactionId: 550e8400-e29b-41d4-a716-446655440000
+                  channel: sms
+                  outputVariables:
+                    stop-requests: false
+                    human-follow-up-requested: true
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              example:
+                requestId: 96b887fb-9371-4515-b51e-28434f58dd7e
+                publicFacingMessage: Analysis was skipped.
+                success: false
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                requestId: 96b887fb-9371-4515-b51e-28434f58dd7e
+                publicFacingMessage: Unauthorized. Make sure to pass the correct authorization token.
+                success: false
+        '404':
+          description: Interaction not found
+          content:
+            application/json:
+              example:
+                requestId: 96b887fb-9371-4515-b51e-28434f58dd7e
+                publicFacingMessage: Interaction not found
+                success: false
+      security:
+      - bearerAuth: []
+      tags:
+      - Interactions
+components:
+  schemas:
+    AnalyzeInteractionResponse:
+      required:
+      - requestId
+      - success
+      - data
+      type: object
+      properties:
+        requestId:
+          description: The request identifier.
+          type: string
+          format: uuid
+        success:
+          description: Whether the operation completed successfully.
+          type: boolean
+        data:
+          type: object
+          properties:
+            interactionId:
+              description: The ID of the analyzed interaction.
+              type: string
+              format: uuid
+            channel:
+              description: The channel of the interaction.
+              type: string
+              enum:
+              - sms
+              - voice
+              - email
+            outputVariables:
+              description: The analysis outcome variables extracted from the interaction. The specific fields depend on your organization's analysis configuration.
+              type: object
+              additionalProperties: true
+              nullable: true
+    AnalyzeInteractionRequest:
+      type: object
+      properties:
+        applyOutcomes:
+          description: Whether to apply configured outcome actions (tags, escalations) to the customer based on the analysis results.
+          type: boolean
+          default: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

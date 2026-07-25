@@ -1,0 +1,338 @@
+openapi: 3.1.0
+info:
+  title: Veritus Calls API
+  description: API for the Veritus Agent Platform
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://sandbox.veritus.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: Calls
+paths:
+  /calls/bulk:
+    post:
+      description: Creates outbound voice calls to multiple customers in a single request. Each customer is processed independently and runs through the compliance engine. Returns partial success - some calls may be created while others fail validation or compliance checks.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkCreateCallsRequest'
+        required: true
+      responses:
+        '200':
+          description: Bulk create calls response. Contains summary counts and detailed results for each customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkCreateCallsResponse'
+              example:
+                requestId: 838be160-334c-47aa-a559-d92d5cdc2ef4
+                success: true
+                data:
+                  summary:
+                    total: 3
+                    successful: 2
+                    failed: 1
+                  results:
+                  - customerId: 550e8400-e29b-41d4-a716-446655440000
+                    success: true
+                    data:
+                      id: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                      threadId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                      toPhoneNumber: '+14155551234'
+                      fromPhoneNumber: '+14155559876'
+                      compliance:
+                        passed: true
+                        checksPassed:
+                        - id: is-active
+                          name: Is Active
+                          description: Check if customer is active
+                          reason: Customer is active
+                        - id: cease-and-desist-exclusion
+                          name: Cease and Desist Exclusion
+                          description: Prevent calling customers who have requested cease and desist
+                          reason: Customer has not requested cease and desist
+                        checksFailed: []
+                      createdAt: '2024-10-24T15:30:00.000Z'
+                  - customerId: 550e8400-e29b-41d4-a716-446655440001
+                    success: true
+                    data:
+                      id: a1b2c3d4-e5f6-4789-a012-3456789abcde
+                      threadId: b2c3d4e5-f6a7-4890-b123-456789abcdef
+                      toPhoneNumber: '+14155552345'
+                      fromPhoneNumber: '+14155559876'
+                      compliance:
+                        passed: true
+                        checksPassed:
+                        - id: is-active
+                          name: Is Active
+                          description: Check if customer is active
+                          reason: Customer is active
+                        checksFailed: []
+                      createdAt: '2024-10-24T15:30:00.500Z'
+                  - customerId: 550e8400-e29b-41d4-a716-446655440002
+                    success: false
+                    error: 'Customer not eligible for call. 2 failed rule(s): 1. Respectful Hours Check [Customer local time is 03:00 (outside respectful hours 8am-8:50pm)], 2. Four Voice Call Per Day [Customer has had 4 voice calls today within respectful hours window (America/Los_Angeles), exceeding the limit of 4]'
+        '400':
+          description: Bad request - invalid request body or schema validation errors
+          content:
+            application/json:
+              example:
+                requestId: 838be160-334c-47aa-a559-d92d5cdc2ef4
+                publicFacingMessage: customerIds must not contain duplicates
+                success: false
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                requestId: 838be160-334c-47aa-a559-d92d5cdc2ef4
+                publicFacingMessage: Unauthorized. Make sure to pass the correct authorization token.
+                success: false
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                requestId: 838be160-334c-47aa-a559-d92d5cdc2ef4
+                success: false
+      tags:
+      - Calls
+  /calls/get-signed-url:
+    post:
+      description: Get a signed URL for a call recording.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGetSignedUrlRequest'
+        required: true
+      responses:
+        '200':
+          description: Signed url response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSignedUrlResponse'
+      tags:
+      - Calls
+components:
+  schemas:
+    BulkCreateCallsRequest:
+      required:
+      - agentId
+      - customerIds
+      type: object
+      properties:
+        agentId:
+          description: The agent identifier to use for all calls. This will be assigned to you.
+          type: string
+          format: uuid
+        customerIds:
+          description: Array of customer IDs to create calls for. Must contain between 1 and 100 unique customer IDs.
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+        webhook:
+          description: Webhook-related information to send the call updates to.
+          type: object
+          properties:
+            url:
+              description: The endpoint to send the call updates to.
+              type: string
+              format: uri
+              nullable: true
+            secretId:
+              description: The ID of the webhook secret for signing.
+              type: string
+              format: uuid
+    NewGetSignedUrlRequest:
+      required:
+      - callId
+      properties:
+        callId:
+          description: The call ID. This is returned from `/calls/create`
+          type: string
+          format: uuid
+    GetSignedUrlResponse:
+      required:
+      - requestId
+      - success
+      - data
+      properties:
+        requestId:
+          description: The request identifier for the call.
+          type: string
+          format: uuid
+        success:
+          description: Whether the call was successful.
+          type: boolean
+        data:
+          description: The data for the call.
+          type: object
+          required:
+          - callId
+          - signedUrl
+          properties:
+            callId:
+              description: The call ID. This is returned in `/calls/create`
+              type: string
+              format: uuid
+            signedUrl:
+              description: Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change).
+              type: string
+    BulkCreateCallsResponse:
+      required:
+      - success
+      - requestId
+      - data
+      type: object
+      properties:
+        requestId:
+          description: The request identifier.
+          type: string
+          format: uuid
+        success:
+          description: Whether the bulk operation completed (always true for 200 responses).
+          type: boolean
+        data:
+          type: object
+          required:
+          - summary
+          - results
+          properties:
+            summary:
+              description: Summary counts of the bulk operation.
+              type: object
+              required:
+              - total
+              - successful
+              - failed
+              properties:
+                total:
+                  description: Total number of customers in the request.
+                  type: integer
+                successful:
+                  description: Number of calls successfully created.
+                  type: integer
+                failed:
+                  description: Number of calls that failed to be created.
+                  type: integer
+            results:
+              description: Detailed results for each customer.
+              type: array
+              items:
+                oneOf:
+                - title: Success Result
+                  type: object
+                  required:
+                  - customerId
+                  - success
+                  - data
+                  properties:
+                    customerId:
+                      description: The customer ID.
+                      type: string
+                      format: uuid
+                    success:
+                      description: Whether the call was successfully created.
+                      type: boolean
+                      enum:
+                      - true
+                    data:
+                      description: The created call data.
+                      type: object
+                      required:
+                      - id
+                      - threadId
+                      - toPhoneNumber
+                      - fromPhoneNumber
+                      - compliance
+                      - createdAt
+                      properties:
+                        id:
+                          description: The call identifier.
+                          type: string
+                          format: uuid
+                        threadId:
+                          description: The thread identifier for the call.
+                          type: string
+                          format: uuid
+                        toPhoneNumber:
+                          description: The customer's phone number.
+                          type: string
+                        fromPhoneNumber:
+                          description: The phone number the call is from.
+                          type: string
+                        compliance:
+                          description: Compliance check results.
+                          type: object
+                          required:
+                          - passed
+                          - checksPassed
+                          - checksFailed
+                          properties:
+                            passed:
+                              description: Whether all compliance checks passed.
+                              type: boolean
+                            checksPassed:
+                              description: List of compliance checks that passed.
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  description:
+                                    type: string
+                                  reason:
+                                    type: string
+                            checksFailed:
+                              description: List of compliance checks that failed.
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  description:
+                                    type: string
+                                  reason:
+                                    type: string
+                        createdAt:
+                          description: ISO 8601 timestamp of when the call was created.
+                          type: string
+                          format: date-time
+                - title: Failure Result
+                  type: object
+                  required:
+                  - customerId
+                  - success
+                  - error
+                  properties:
+                    customerId:
+                      description: The customer ID.
+                      type: string
+                      format: uuid
+                    success:
+                      description: Whether the call was successfully created.
+                      type: boolean
+                      enum:
+                      - false
+                    error:
+                      description: Error message describing why the call creation failed.
+                      type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
