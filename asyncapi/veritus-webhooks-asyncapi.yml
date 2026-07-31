@@ -1,0 +1,212 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/veritus-openapi.json (webhooks) + https://docs.veritus.com/guides/webhook-security
+asyncapi: 3.0.0
+info:
+  title: Veritus Agent Webhooks
+  version: 1.0.0
+  description: >-
+    Outbound webhooks Veritus Agent POSTs to a subscriber-supplied URL when calls
+    complete or drip-campaign events occur. Payloads are signed with HMAC SHA-256.
+    Register a webhook by supplying `webhook.url` (and optional `webhook.secretId`)
+    when creating a call or enrolling a drip campaign.
+defaultContentType: application/json
+servers:
+  subscriber:
+    host: your-application.example.com
+    protocol: https
+    description: Subscriber-hosted HTTPS endpoint that receives webhook POSTs.
+channels:
+  calls:
+    address: /calls/webhook
+    description: Fired when a directly-created (one-off) call is created or completed.
+    messages:
+      callCreated:
+        $ref: '#/components/messages/CallCreated'
+      callEnded:
+        $ref: '#/components/messages/CallEnded'
+  dripCampaigns:
+    address: /drip-campaigns/webhook
+    description: Fired for each outreach event within an omnichannel drip campaign.
+    messages:
+      dripCallCreated:
+        $ref: '#/components/messages/DripCampaignCallCreated'
+      dripCallEnded:
+        $ref: '#/components/messages/DripCampaignCallEnded'
+      dripSms:
+        $ref: '#/components/messages/DripCampaignSms'
+operations:
+  receiveCallWebhook:
+    action: receive
+    channel:
+      $ref: '#/channels/calls'
+  receiveDripCampaignWebhook:
+    action: receive
+    channel:
+      $ref: '#/channels/dripCampaigns'
+components:
+  messages:
+    CallCreated:
+      name: call-created
+      title: Call Created
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/SignatureHeaders'
+      payload:
+        type: object
+        properties:
+          type:
+            const: call-created
+          id:
+            type: string
+            format: uuid
+          customerId:
+            type: string
+            format: uuid
+          status:
+            type: string
+            enum: [in-progress, completed, canceled]
+          createdAt:
+            type: string
+            format: date-time
+          callCreated:
+            type: object
+            description: id, threadId, toPhoneNumber, fromPhoneNumber, createdAt.
+    CallEnded:
+      name: call-ended
+      title: Call Ended
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/SignatureHeaders'
+      payload:
+        type: object
+        properties:
+          type:
+            const: call-ended
+          id:
+            type: string
+            format: uuid
+          customerId:
+            type: string
+            format: uuid
+          status:
+            type: string
+            enum: [in-progress, completed, canceled]
+          createdAt:
+            type: string
+            format: date-time
+          callEnded:
+            type: object
+            description: >-
+              endedReason (customer-did-not-answer|voicemail|customer-ended-call|
+              agent-ended-call|silence-timed-out|unknown), recordingUrl (signed,
+              30-min TTL), durationMs, messages[] transcript turns, inputVariables,
+              outputVariables.
+    DripCampaignCallCreated:
+      name: drip-campaign.call-created
+      title: Drip Campaign - Call Created
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/SignatureHeaders'
+      payload:
+        type: object
+        properties:
+          type:
+            const: drip-campaign.call-created
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          customerId:
+            type: string
+            format: uuid
+          status:
+            type: string
+            enum: [in-progress, completed, canceled]
+          createdAt:
+            type: string
+            format: date-time
+    DripCampaignCallEnded:
+      name: drip-campaign.call-ended
+      title: Drip Campaign - Call Ended
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/SignatureHeaders'
+      payload:
+        type: object
+        properties:
+          type:
+            const: drip-campaign.call-ended
+          id:
+            type: string
+            format: uuid
+          name:
+            type: string
+          customerId:
+            type: string
+            format: uuid
+          status:
+            type: string
+            enum: [in-progress, completed, canceled]
+          createdAt:
+            type: string
+            format: date-time
+    DripCampaignSms:
+      name: drip-campaign.sms
+      title: Drip Campaign - SMS
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/SignatureHeaders'
+      payload:
+        type: object
+        properties:
+          type:
+            const: drip-campaign.sms
+          id:
+            type: string
+            format: uuid
+          threadId:
+            type: string
+            format: uuid
+          direction:
+            type: string
+            enum: [inbound, outbound]
+          name:
+            type: string
+          customerId:
+            type: string
+            format: uuid
+          status:
+            type: string
+            enum: [in-progress, completed, canceled]
+          createdAt:
+            type: string
+            format: date-time
+          sms:
+            type: object
+            description: id, message, toPhoneNumber, fromPhoneNumber, createdAt.
+  schemas:
+    SignatureHeaders:
+      type: object
+      description: >-
+        Present when the webhook is registered with a secretId. Verify with a
+        constant-time compare of sha256={hmac} over `{timestamp}.{raw_json_body}`,
+        and reject timestamps older than 300 seconds.
+      properties:
+        X-Webhook-Signature:
+          type: string
+          description: HMAC SHA-256 signature, format sha256={hex}.
+        X-Webhook-Timestamp:
+          type: string
+          description: Unix timestamp (seconds) when the webhook was sent.
+
+# --- API Evangelist provenance -------------------------------------------
+x-superseded-by:
+  reason: >-
+    Provider publishes this event surface themselves in as-published OpenAPI; this document was authored by API Evangelist before that source was harvested.
+  published_spec: all/veritus/openapi/_original/veritus-openapi.json
+  published_event_object: webhooks
+  published_events: 2
+  status: superseded
+  reviewed: '2026-07-31'
