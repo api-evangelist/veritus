@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+source: https://trust.veritus.com/
+url: https://trust.veritus.com/
+platform: Secureframe
+certifications:
+- SOC 2 Type 2
+- ISO 27001
+- PCI DSS
+- HIPAA
+- EU AI Act
+control_families:
+- Change Management
+- Availability
+- Organizational Management
+- Confidentiality
+- Vulnerability Management
+- Incident Response
+- Risk Assessment
+- Network Security
+- Access Security
+- Physical Security
+- Communications
+highlights:
+- Third-Party Penetration Test
+- Encryption-at-Rest and Encryption-in-Transit
+- Incident Response Plan (tested)
+- Confidential Reporting Channel
+- Vendor Risk Management
+evidence:
+- source: https://trust.veritus.com/
+  keywords:
+  - soc 2 type 2
+  - iso 27001
+  - pci dss
+  - hipaa
+  - eu ai act
+  - trust center
+  - secureframe

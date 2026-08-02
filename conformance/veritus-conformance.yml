@@ -1,0 +1,52 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/veritus-openapi.json + https://trust.veritus.com/ + docs.veritus.com
+notes: >-
+  Cross-cutting standard and compliance-program conformance for the Veritus API.
+  Technical conformance derived from the OpenAPI + guides; compliance programs
+  sourced from the Secureframe-hosted trust center.
+standards:
+  - id: openapi-3.1
+    conforms: true
+    evidence: Native OpenAPI 3.1.0 published at https://docs.veritus.com/api-reference/openapi.json
+  - id: http-bearer-auth
+    conforms: true
+    evidence: securitySchemes.bearerAuth (type http, scheme bearer); global security applies.
+  - id: oauth2
+    conforms: false
+    evidence: No OAuth2 flows; authentication is a static bearer key.
+  - id: oidc
+    conforms: false
+    evidence: No OpenID Connect / discovery document.
+  - id: rfc9457-problem-json
+    conforms: false
+    evidence: Errors use a custom {requestId, success, publicFacingMessage} envelope, not application/problem+json.
+  - id: json-api
+    conforms: false
+    evidence: Responses use a custom data-envelope, not the JSON:API media type.
+  - id: pagination
+    conforms: false
+    evidence: List endpoints return full arrays; no cursor/page parameters.
+  - id: idempotency
+    conforms: partial
+    evidence: No Idempotency-Key header; natural-key dedup on externalId (409) and idempotent interaction analysis.
+  - id: webhooks-hmac-signing
+    conforms: true
+    evidence: HMAC SHA-256 over {timestamp}.{body} via X-Webhook-Signature + X-Webhook-Timestamp, with a 5-minute replay window.
+  - id: e164-phone-numbers
+    conforms: true
+    evidence: All phone fields specified in E.164 format.
+  - id: iso8601-timestamps
+    conforms: true
+    evidence: Timestamps use ISO-8601 / RFC 3339 date-time.
+  - id: tcpa-compliance-engine
+    conforms: true
+    evidence: Built-in compliance engine enforces respectful hours, frequency limits, cease-and-desist, and model-validation-notice rules before contact.
+compliance_programs:
+  source: https://trust.veritus.com/
+  certifications:
+    - SOC 2 Type 2
+    - ISO 27001
+    - PCI DSS
+    - HIPAA
+    - EU AI Act

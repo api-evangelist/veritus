@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: probed
+source: live HTTP probes (July 2026)
+notes: >-
+  Probed standard discovery endpoints on the primary host. None of the RFC
+  well-known paths are served; the only machine-readable discovery surface is the
+  Mintlify docs llms.txt (captured separately in llms/).
+probes:
+  - path: https://veritus.com/.well-known/security.txt
+    status: 404
+    file: null
+  - path: https://veritus.com/.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: https://veritus.com/.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: https://veritus.com/.well-known/api-catalog
+    status: 404
+    file: null
+  - path: https://veritus.com/.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: https://docs.veritus.com/llms.txt
+    status: 200
+    file: ../llms/veritus-llms.txt

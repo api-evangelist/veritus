@@ -1,0 +1,18 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.veritus.com/guides/authentication
+docs: https://docs.veritus.com/guides/authentication
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  key_format: Static secret key with an `sk-` prefix.
+  header: 'Authorization: Bearer <key>'
+  issuance: Keys are provisioned directly by Veritus and cannot be self-regenerated; if lost or compromised a new key must be requested.
+  environment_scoped: true
+  sources:
+  - openapi/veritus-openapi.json
+  - https://docs.veritus.com/guides/authentication

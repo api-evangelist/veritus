@@ -1,0 +1,70 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.veritus.com/
+docs:
+  - https://docs.veritus.com/guides/authentication
+  - https://docs.veritus.com/guides/environments
+  - https://docs.veritus.com/guides/webhook-security
+  - https://docs.veritus.com/guides/core-concepts/creating-calls
+conventions:
+  auth:
+    style: http-bearer
+    header: 'Authorization: Bearer <key>'
+    key_format: Static secret key, prefix `sk-`; issued by Veritus and not self-regenerable.
+    ref: authentication/veritus-authentication.yml
+  base_url:
+    production: https://app.veritus.com/api/v1
+    sandbox: https://sandbox.veritus.com/api/v1
+  media_type: application/json
+  response_envelope:
+    fields:
+      requestId: Server-generated UUID, returned on every response.
+      success: Boolean status flag.
+      data: Payload object/array, present on success.
+      publicFacingMessage: Human-readable message, present on many errors.
+  request_tracing:
+    id_field: requestId
+    location: response body (all responses)
+    notes: No client-supplied request-id header documented; the server mints requestId and echoes it for support/correlation.
+  ids:
+    format: UUID (v4) for server-side resources; caller-owned externalId string for customers.
+    phone_format: E.164
+    timestamps: ISO-8601 / RFC 3339
+  idempotency:
+    supported: partial
+    mechanisms:
+      - natural_key: Customer creation is de-duplicated on `externalId`; a duplicate returns 409 (safe to treat as already-created).
+      - idempotent_operation: Interaction analysis (POST /interactions/{id}/analyze) is idempotent - repeat calls return the existing analysis rather than re-running.
+    header: None. There is no Idempotency-Key request header; safe-retry relies on natural keys and idempotent operations.
+    ref: errors/veritus-problem-types.yml
+  pagination:
+    supported: false
+    notes: List Clients returns the full array under data[]; no page/cursor/limit parameters are documented.
+  bulk:
+    style: partial-success
+    limits: Up to 100 items per bulk request (customers, calls, sms/email import).
+    response: data.summary {total, succeeded/successful, failed} plus per-item data.results[] each with its own success flag.
+  versioning:
+    style: uri
+    current: v1
+    ref: lifecycle/veritus-lifecycle.yml
+  rate_limiting:
+    api_signaling: Not documented (no rate-limit headers published).
+    domain_frequency_limits: >-
+      The compliance engine enforces contact-frequency limits per customer (e.g.
+      "Four Voice Call Per Day" within respectful-hours windows). Exceeding these
+      surfaces as a 422 compliance failure, not a 429.
+  errors:
+    envelope: custom (not RFC 9457)
+    ref: errors/veritus-problem-types.yml
+  webhooks:
+    signing: HMAC SHA-256 over `{timestamp}.{raw_json_body}`
+    headers:
+      - X-Webhook-Signature
+      - X-Webhook-Timestamp
+    replay_window_seconds: 300
+    ref: asyncapi/veritus-webhooks-asyncapi.yml
+  channels:
+    - voice
+    - sms
+    - email

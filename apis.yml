@@ -1,8 +1,29 @@
 aid: veritus
 name: Veritus
-description: 'Veritus is a company surfaced as a portfolio company of threshold-ventures and added to
-  the API Evangelist network as a stub for enrichment. Sector: unknown. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Veritus (Veritus Agent) is a San Francisco fintech (Y Combinator S2025) building
+  compliant, voice-first AI agents for the consumer-lending lifecycle - origination,
+  servicing, and collections. Its omnichannel platform places AI voice calls, SMS,
+  and email to borrowers, running every contact through a built-in compliance engine
+  (respectful hours, frequency limits, cease-and-desist, model-validation notices)
+  before outreach. The REST API (OpenAPI 3.1, bearer auth, isolated sandbox and
+  production environments, HMAC-signed webhooks) lets lenders, servicers, and
+  collections agencies create customers, place compliance-checked calls, run
+  omnichannel drip campaigns, import and analyze SMS/email interactions, and
+  retrieve call recordings.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://veritus.com/apple-touch-icon.png
 url: https://raw.githubusercontent.com/api-evangelist/veritus/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,11 +33,137 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-- Unknown
-apis: []
+- Fintech
+- Consumer Lending
+- Collections
+- AI Agents
+- Voice AI
+- Communications
+- Compliance
+apis:
+- aid: veritus:veritus-calls-api
+  name: Veritus Calls API
+  description: The Calls API from Veritus — 2 operation(s) for calls.
+  humanURL: https://docs.veritus.com/
+  baseURL: https://app.veritus.com/api/v1
+  tags:
+  - Calls
+  properties:
+  - type: OpenAPI
+    url: openapi/veritus-calls-api-openapi.yml
+  - type: Documentation
+    url: https://docs.veritus.com/
+  - type: APIReference
+    url: https://docs.veritus.com/api-reference/customers/post
+  - type: GettingStarted
+    url: https://docs.veritus.com/
+  - type: LLMsTxt
+    url: llms/veritus-llms.txt
+  - type: ErrorCatalog
+    url: errors/veritus-problem-types.yml
+  - type: Conventions
+    url: conventions/veritus-conventions.yml
+  - type: Sandbox
+    url: sandbox/veritus-sandbox.yml
+  - type: Conformance
+    url: conformance/veritus-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/veritus-lifecycle.yml
+  - type: DataModel
+    url: data-model/veritus-data-model.yml
+- aid: veritus:veritus-clients-api
+  name: Veritus Clients API
+  description: The Clients API from Veritus — 1 operation(s) for clients.
+  humanURL: https://docs.veritus.com/
+  baseURL: https://app.veritus.com/api/v1
+  tags:
+  - Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/veritus-clients-api-openapi.yml
+  - type: Documentation
+    url: https://docs.veritus.com/
+  - type: APIReference
+    url: https://docs.veritus.com/api-reference/customers/post
+  - type: GettingStarted
+    url: https://docs.veritus.com/
+  - type: LLMsTxt
+    url: llms/veritus-llms.txt
+  - type: ErrorCatalog
+    url: errors/veritus-problem-types.yml
+  - type: Conventions
+    url: conventions/veritus-conventions.yml
+  - type: Sandbox
+    url: sandbox/veritus-sandbox.yml
+  - type: Conformance
+    url: conformance/veritus-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/veritus-lifecycle.yml
+  - type: DataModel
+    url: data-model/veritus-data-model.yml
+- aid: veritus:veritus-customers-api
+  name: Veritus Customers API
+  description: The Customers API from Veritus — 12 operation(s) for customers.
+  humanURL: https://docs.veritus.com/
+  baseURL: https://app.veritus.com/api/v1
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/veritus-customers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.veritus.com/
+  - type: APIReference
+    url: https://docs.veritus.com/api-reference/customers/post
+  - type: GettingStarted
+    url: https://docs.veritus.com/
+  - type: LLMsTxt
+    url: llms/veritus-llms.txt
+  - type: ErrorCatalog
+    url: errors/veritus-problem-types.yml
+  - type: Conventions
+    url: conventions/veritus-conventions.yml
+  - type: Sandbox
+    url: sandbox/veritus-sandbox.yml
+  - type: Conformance
+    url: conformance/veritus-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/veritus-lifecycle.yml
+  - type: DataModel
+    url: data-model/veritus-data-model.yml
+- aid: veritus:veritus-interactions-api
+  name: Veritus Interactions API
+  description: The Interactions API from Veritus — 1 operation(s) for interactions.
+  humanURL: https://docs.veritus.com/
+  baseURL: https://app.veritus.com/api/v1
+  tags:
+  - Interactions
+  properties:
+  - type: OpenAPI
+    url: openapi/veritus-interactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.veritus.com/
+  - type: APIReference
+    url: https://docs.veritus.com/api-reference/customers/post
+  - type: GettingStarted
+    url: https://docs.veritus.com/
+  - type: LLMsTxt
+    url: llms/veritus-llms.txt
+  - type: ErrorCatalog
+    url: errors/veritus-problem-types.yml
+  - type: Conventions
+    url: conventions/veritus-conventions.yml
+  - type: Sandbox
+    url: sandbox/veritus-sandbox.yml
+  - type: Conformance
+    url: conformance/veritus-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/veritus-lifecycle.yml
+  - type: DataModel
+    url: data-model/veritus-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,3 +172,40 @@ maintainers:
 common:
 - type: Website
   url: https://veritus.com/
+- type: DeveloperPortal
+  url: https://docs.veritus.com/
+- type: Documentation
+  url: https://docs.veritus.com/
+- type: SignUp
+  url: https://app.veritus.com/try
+- type: Login
+  url: https://app.veritus.com
+- type: TermsOfService
+  url: https://veritus.com/terms
+- type: PrivacyPolicy
+  url: https://veritus.com/privacy
+- type: LinkedIn
+  url: https://www.linkedin.com/company/veritus-agent
+- type: Authentication
+  url: authentication/veritus-authentication.yml
+- type: Idempotency
+  url: conventions/veritus-conventions.yml
+- type: StatusPage
+  url: https://status.veritus.com/
+- type: AsyncAPI
+  url: asyncapi/veritus-webhooks-asyncapi.yml
+- type: Webhooks
+  url: asyncapi/veritus-webhooks-asyncapi.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: TrustCenter
+  url: security/veritus-trust-center.yml
+- type: Compliance
+  url: security/veritus-trust-center.yml
+- type: DomainSecurity
+  url: security/veritus-domain-security.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v1

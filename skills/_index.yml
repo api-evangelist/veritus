@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/veritus-openapi.json + docs.veritus.com guides
+api: Veritus API
+skills:
+  - name: veritus-outbound-call
+    file: veritus-outbound-call.md
+    description: Create a customer and place a compliance-checked outbound voice call, then fetch the recording.
+    operations:
+      - POST /customers
+      - POST /customers/{customerId}/calls
+      - POST /calls/get-signed-url
+  - name: veritus-drip-campaign
+    file: veritus-drip-campaign.md
+    description: Enroll a customer into an omnichannel drip campaign and manage its lifecycle.
+    operations:
+      - POST /customers
+      - POST /customers/{customerId}/drip-campaigns
+      - DELETE /customers/{customerId}/drip-campaigns/{dripCampaignId}
+  - name: veritus-import-analyze-interaction
+    file: veritus-import-analyze-interaction.md
+    description: Import historical SMS/email interactions and run idempotent outcome analysis.
+    operations:
+      - POST /customers/{customerId}/interactions/sms/import
+      - POST /customers/{customerId}/interactions/email/import
+      - POST /interactions/{interactionId}/analyze

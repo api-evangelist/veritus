@@ -1,0 +1,3542 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Veritus API",
+    "description": "API for the Veritus Agent Platform",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://sandbox.veritus.com/api/v1"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/customers": {
+      "post": {
+        "description": "Create a new customer. Once created, you can use the customer ID to enroll them into drip campaigns or make outbound calls. ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Customer response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                },
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": true,
+                  "data": {
+                    "id": "550e8400-e29b-41d4-a716-446655440000",
+                    "externalId": "CUST-12345",
+                    "firstName": "John",
+                    "middleName": "Christopher",
+                    "lastName": "Doe",
+                    "email": "john.doe@example.com",
+                    "primaryPhone": "+12025551234",
+                    "secondaryPhone": "+12025555678",
+                    "address": {
+                      "line1": "123 Main St",
+                      "line2": "Apt 4B",
+                      "city": "Washington",
+                      "state": "DC",
+                      "zip": "20001"
+                    },
+                    "collections": {
+                      "principalBalance": 5000.0,
+                      "originalCreditor": "ABC Bank",
+                      "accruedInterestAmount": 250.5,
+                      "totalBalance": 5250.5,
+                      "chargeOffDate": "2023-01-15",
+                      "firstDelinquencyDate": "2022-06-01",
+                      "settlementAggregationRate": 0.65,
+                      "originalAccountNumber": "4111111111111111",
+                      "itemizationBalance": 5000.0,
+                      "postItemizationInterest": 150.25,
+                      "postItemizationFees": 100.25,
+                      "postItemizationCredits": 50.0,
+                      "postItemizationPayments": 200.0,
+                      "productType": "Credit Card",
+                      "originalProductType": "Visa Signature",
+                      "extensions": null
+                    },
+                    "ssnLastFour": "1234",
+                    "dateOfBirth": "1985-03-15"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Customer already exists",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "A customer with external ID 'abc1234' already exists.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/bulk": {
+      "post": {
+        "description": "Create multiple customers in a single request. Returns partial success - some customers may be created while others fail validation or already exist.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateCustomersRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk customer creation response. Contains arrays of successful and failed customer creations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkCreateCustomersResponse"
+                },
+                "example": {
+                  "requestId": "838be160-334c-47aa-a559-d92d5cdc2ef4",
+                  "success": true,
+                  "data": {
+                    "summary": {
+                      "total": 2,
+                      "succeeded": 1,
+                      "failed": 1
+                    },
+                    "results": [
+                      {
+                        "externalId": "CUST-123456",
+                        "success": false,
+                        "error": "Customer with external ID 'CUST-123456' already exists"
+                      },
+                      {
+                        "success": true,
+                        "customer": {
+                          "id": "7ff34749-ddef-4a1f-8568-296a2240a6cc",
+                          "externalId": "CUST-987654",
+                          "firstName": "Johnny",
+                          "middleName": "Fuji",
+                          "lastName": "Appleseed",
+                          "email": "johnny@veritus.com",
+                          "primaryPhone": "+14153334444",
+                          "secondaryPhone": null,
+                          "ssnLastFour": "5345",
+                          "dateOfBirth": "1990-01-21",
+                          "address": {
+                            "line1": "123 Main St",
+                            "line2": "Suite 200",
+                            "city": "San Francisco",
+                            "state": "CA",
+                            "zip": "94131"
+                          },
+                          "collections": {
+                            "principalBalance": 5000,
+                            "originalCreditor": "ABC Bank",
+                            "accruedInterestAmount": 250.5,
+                            "totalBalance": 5250.5,
+                            "chargeOffDate": "2023-01-15",
+                            "firstDelinquencyDate": "2022-06-01",
+                            "extensions": null
+                          },
+                          "createdAt": "2025-10-23T05:38:45.468Z"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}": {
+      "patch": {
+        "description": "Update an existing customer's information. All fields are optional - only provide the fields you want to update.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "The unique identifier of the customer to update",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomerRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Customer successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCustomerResponse"
+                },
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": true,
+                  "data": {
+                    "id": "550e8400-e29b-41d4-a716-446655440000",
+                    "externalId": "CUST-12345",
+                    "firstName": "Jane",
+                    "middleName": "Marie",
+                    "lastName": "Doe",
+                    "email": "jane.doe@example.com",
+                    "primaryPhone": "+12025551234",
+                    "secondaryPhone": "+12025555678",
+                    "address": {
+                      "line1": "456 Oak Ave",
+                      "line2": "Unit 12",
+                      "city": "Washington",
+                      "state": "DC",
+                      "zip": "20001"
+                    },
+                    "collections": {
+                      "principalBalance": 4500.0,
+                      "originalCreditor": "ABC Bank",
+                      "accruedInterestAmount": 250.5,
+                      "totalBalance": 4750.5,
+                      "chargeOffDate": "2023-01-15",
+                      "firstDelinquencyDate": "2022-06-01",
+                      "settlementAggregationRate": 0.65,
+                      "originalAccountNumber": "4111111111111111",
+                      "itemizationBalance": 4500.0,
+                      "postItemizationInterest": 150.25,
+                      "postItemizationFees": 100.25,
+                      "postItemizationCredits": 50.0,
+                      "postItemizationPayments": 200.0,
+                      "productType": "Credit Card",
+                      "originalProductType": "Visa Signature",
+                      "extensions": null
+                    },
+                    "ssnLastFour": "1234",
+                    "dateOfBirth": "1985-03-15"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid data provided",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Invalid request data",
+                  "success": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Customer not found",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/drip-campaigns": {
+      "post": {
+        "description": "Enrolls a customer into a drip campaign. The customer is run through a compliance engine first. If compliance checks pass, the drip campaign is started immediately or scheduled for the next compliant time.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomersDripCampaignsPostRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/calls": {
+      "post": {
+        "description": "Creates an outbound voice call to a customer. The customer is run through a compliance engine first. If compliance checks pass, the call is initiated. If the checks fail, the request will return an error with the specific compliance failure reasons.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCallRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Create call response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCallResponse"
+                },
+                "example": {
+                  "requestId": "25deb7a2-ea2a-4993-8ad5-faed5367915b",
+                  "success": true,
+                  "data": {
+                    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                    "threadId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "toPhoneNumber": "+14155551234",
+                    "fromPhoneNumber": "+14155559876",
+                    "compliance": {
+                      "passed": true,
+                      "checksPassed": [
+                        {
+                          "id": "is-active",
+                          "name": "Is Active",
+                          "description": "Check if customer is active",
+                          "reason": "Customer is active"
+                        },
+                        {
+                          "id": "cease-and-desist-exclusion",
+                          "name": "Cease and Desist Exclusion",
+                          "description": "Prevent calling customers who have requested cease and desist",
+                          "reason": "Customer has not requested cease and desist"
+                        },
+                        {
+                          "id": "four-voice-call-per-day",
+                          "name": "Four Voice Call Per Day",
+                          "description": "Check if customer has had four or fewer voice calls today within the current respectful hours window",
+                          "reason": "Customer has had 3 voice calls today within respectful hours window (America/Los_Angeles), within the limit of 4"
+                        }
+                      ],
+                      "checksFailed": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "25deb7a2-ea2a-4993-8ad5-faed5367915b",
+                  "success": false
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "25deb7a2-ea2a-4993-8ad5-faed5367915b",
+                  "publicFacingMessage": "Customer not eligible for call. Failed rules: Respectful Hours Check (Customer local time is 03:00 (outside respectful hours 8am-8:50pm)), Model Validation Notice Delivered (No Model Validation Notice has been sent)",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "25deb7a2-ea2a-4993-8ad5-faed5367915b",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calls/bulk": {
+      "post": {
+        "description": "Creates outbound voice calls to multiple customers in a single request. Each customer is processed independently and runs through the compliance engine. Returns partial success - some calls may be created while others fail validation or compliance checks.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateCallsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk create calls response. Contains summary counts and detailed results for each customer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkCreateCallsResponse"
+                },
+                "example": {
+                  "requestId": "838be160-334c-47aa-a559-d92d5cdc2ef4",
+                  "success": true,
+                  "data": {
+                    "summary": {
+                      "total": 3,
+                      "successful": 2,
+                      "failed": 1
+                    },
+                    "results": [
+                      {
+                        "customerId": "550e8400-e29b-41d4-a716-446655440000",
+                        "success": true,
+                        "data": {
+                          "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                          "threadId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                          "toPhoneNumber": "+14155551234",
+                          "fromPhoneNumber": "+14155559876",
+                          "compliance": {
+                            "passed": true,
+                            "checksPassed": [
+                              {
+                                "id": "is-active",
+                                "name": "Is Active",
+                                "description": "Check if customer is active",
+                                "reason": "Customer is active"
+                              },
+                              {
+                                "id": "cease-and-desist-exclusion",
+                                "name": "Cease and Desist Exclusion",
+                                "description": "Prevent calling customers who have requested cease and desist",
+                                "reason": "Customer has not requested cease and desist"
+                              }
+                            ],
+                            "checksFailed": []
+                          },
+                          "createdAt": "2024-10-24T15:30:00.000Z"
+                        }
+                      },
+                      {
+                        "customerId": "550e8400-e29b-41d4-a716-446655440001",
+                        "success": true,
+                        "data": {
+                          "id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+                          "threadId": "b2c3d4e5-f6a7-4890-b123-456789abcdef",
+                          "toPhoneNumber": "+14155552345",
+                          "fromPhoneNumber": "+14155559876",
+                          "compliance": {
+                            "passed": true,
+                            "checksPassed": [
+                              {
+                                "id": "is-active",
+                                "name": "Is Active",
+                                "description": "Check if customer is active",
+                                "reason": "Customer is active"
+                              }
+                            ],
+                            "checksFailed": []
+                          },
+                          "createdAt": "2024-10-24T15:30:00.500Z"
+                        }
+                      },
+                      {
+                        "customerId": "550e8400-e29b-41d4-a716-446655440002",
+                        "success": false,
+                        "error": "Customer not eligible for call. 2 failed rule(s): 1. Respectful Hours Check [Customer local time is 03:00 (outside respectful hours 8am-8:50pm)], 2. Four Voice Call Per Day [Customer has had 4 voice calls today within respectful hours window (America/Los_Angeles), exceeding the limit of 4]"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid request body or schema validation errors",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "838be160-334c-47aa-a559-d92d5cdc2ef4",
+                  "publicFacingMessage": "customerIds must not contain duplicates",
+                  "success": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "838be160-334c-47aa-a559-d92d5cdc2ef4",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "838be160-334c-47aa-a559-d92d5cdc2ef4",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/drip-campaigns/{dripCampaignId}": {
+      "delete": {
+        "description": "Cancel a drip campaign.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "reason": {
+                    "description": "The reason the drip campaign was canceled.",
+                    "type": "string",
+                    "enum": ["customer-converted", "customer-engaged"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Drip campaign canceled",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/calls/get-signed-url": {
+      "post": {
+        "description": "Get a signed URL for a call recording.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewGetSignedUrlRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Signed url response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSignedUrlResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/interactions/sms/import": {
+      "post": {
+        "description": "Import a single SMS interaction for a customer. Use this to sync historical SMS messages or record SMS conversations from external systems.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "The unique identifier of the customer",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmsImportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "SMS interaction successfully imported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsImportResponse"
+                },
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": true,
+                  "data": {
+                    "id": "550e8400-e29b-41d4-a716-446655440000",
+                    "threadId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "channel": "sms",
+                    "direction": "inbound",
+                    "customerId": "7ff34749-ddef-4a1f-8568-296a2240a6cc",
+                    "timestamp": "2024-01-15T10:30:00.000Z",
+                    "createdAt": "2024-01-15T10:35:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid data provided",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Invalid request data",
+                  "success": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Customer not found",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/interactions/sms/import/bulk": {
+      "post": {
+        "description": "Import multiple SMS interactions for a customer in a single request. Returns partial success - some messages may be imported while others fail validation.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "The unique identifier of the customer",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmsImportBulkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk SMS import response. Contains arrays of successful and failed imports.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsImportBulkResponse"
+                },
+                "example": {
+                  "requestId": "838be160-334c-47aa-a559-d92d5cdc2ef4",
+                  "success": true,
+                  "data": {
+                    "summary": {
+                      "total": 2,
+                      "succeeded": 1,
+                      "failed": 1
+                    },
+                    "results": [
+                      {
+                        "success": true,
+                        "interaction": {
+                          "id": "550e8400-e29b-41d4-a716-446655440000",
+                          "threadId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                          "channel": "sms",
+                          "direction": "inbound",
+                          "customerId": "7ff34749-ddef-4a1f-8568-296a2240a6cc",
+                          "timestamp": "2024-01-15T10:30:00.000Z",
+                          "createdAt": "2024-01-15T10:35:00.000Z"
+                        }
+                      },
+                      {
+                        "success": false,
+                        "index": 1,
+                        "error": "Invalid phone number format"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Customer not found",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/interactions/sms/generate": {
+      "post": {
+        "description": "Generate an AI-powered SMS response for a customer. The generated message can optionally be persisted as an outbound interaction.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "The unique identifier of the customer",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmsGenerateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "SMS successfully generated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsGenerateResponse"
+                },
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": true,
+                  "data": {
+                    "message": "Hi John, thank you for reaching out. I'd be happy to help you with your account. Could you please confirm the best time to discuss your payment options?",
+                    "threadId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid data provided",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Invalid request data",
+                  "success": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Customer not found",
+                  "success": false
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity - validation failed",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "The 'to' field is required when persist is true",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/interactions/email/generate": {
+      "post": {
+        "description": "Generate an AI-powered email response for a customer. The generated email can optionally be persisted as an outbound interaction.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "The unique identifier of the customer",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailGenerateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Email successfully generated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailGenerateResponse"
+                },
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": true,
+                  "data": {
+                    "htmlBody": "<p>Dear John,</p><p>Thank you for reaching out. I'd be happy to help you with your account. Could you please confirm the best time to discuss your payment options?</p><p>Best regards,<br>Sarah Mitchell</p>",
+                    "plainTextBody": "Dear John,\n\nThank you for reaching out. I'd be happy to help you with your account. Could you please confirm the best time to discuss your payment options?\n\nBest regards,\nSarah Mitchell",
+                    "threadId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid data provided",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Invalid request data",
+                  "success": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Customer not found",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/interactions/email/import": {
+      "post": {
+        "description": "Import a single email interaction for a customer. Use this to sync historical emails or record email conversations from external systems.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "The unique identifier of the customer",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailImportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Email interaction successfully imported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailImportResponse"
+                },
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": true,
+                  "data": {
+                    "id": "550e8400-e29b-41d4-a716-446655440000",
+                    "messageId": "abc123@mail.example.com",
+                    "threadId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "channel": "email",
+                    "direction": "inbound",
+                    "customerId": "7ff34749-ddef-4a1f-8568-296a2240a6cc",
+                    "timestamp": "2024-01-15T10:30:00.000Z",
+                    "createdAt": "2024-01-15T10:35:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid data provided",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Invalid request data",
+                  "success": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Customer not found",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customerId}/interactions/email/import/bulk": {
+      "post": {
+        "description": "Import multiple email interactions for a customer in a single request. Returns partial success - some emails may be imported while others fail validation.",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "description": "The unique identifier of the customer",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailImportBulkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk email import response. Contains arrays of successful and failed imports.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailImportBulkResponse"
+                },
+                "example": {
+                  "requestId": "838be160-334c-47aa-a559-d92d5cdc2ef4",
+                  "success": true,
+                  "data": {
+                    "summary": {
+                      "total": 2,
+                      "succeeded": 1,
+                      "failed": 1
+                    },
+                    "results": [
+                      {
+                        "success": true,
+                        "interaction": {
+                          "id": "550e8400-e29b-41d4-a716-446655440000",
+                          "messageId": "abc123@mail.example.com",
+                          "threadId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                          "channel": "email",
+                          "direction": "inbound",
+                          "customerId": "7ff34749-ddef-4a1f-8568-296a2240a6cc",
+                          "timestamp": "2024-01-15T10:30:00.000Z",
+                          "createdAt": "2024-01-15T10:35:00.000Z"
+                        }
+                      },
+                      {
+                        "success": false,
+                        "index": 1,
+                        "error": "Email body is required"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Customer not found",
+                  "success": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients": {
+      "get": {
+        "description": "Retrieve all clients associated with your organization. Clients are sub-entities used to group customers.",
+        "responses": {
+          "200": {
+            "description": "List of clients",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientListResponse"
+                },
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "550e8400-e29b-41d4-a716-446655440000",
+                      "name": "Acme Corp"
+                    },
+                    {
+                      "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+                      "name": "Globex Inc"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interactions/{interactionId}/analyze": {
+      "post": {
+        "description": "Run on-demand analysis on an interaction to extract outcome variables. Supports SMS, voice, and email channels. Analysis is idempotent — if the interaction has already been analyzed, the existing results are returned.",
+        "parameters": [
+          {
+            "name": "interactionId",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the interaction to analyze.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalyzeInteractionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Analysis completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalyzeInteractionResponse"
+                },
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "success": true,
+                  "data": {
+                    "interactionId": "550e8400-e29b-41d4-a716-446655440000",
+                    "channel": "sms",
+                    "outputVariables": {
+                      "stop-requests": false,
+                      "human-follow-up-requested": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Analysis was skipped.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Unauthorized. Make sure to pass the correct authorization token.",
+                  "success": false
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Interaction not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "requestId": "96b887fb-9371-4515-b51e-28434f58dd7e",
+                  "publicFacingMessage": "Interaction not found",
+                  "success": false
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "webhooks": {
+    "/calls/webhook": {
+      "post": {
+        "description": "Once a call is completed, we will send a webhook to the URL you provided.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CallsWebhook"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return a 200 status to indicate that the data was received successfully"
+          }
+        }
+      }
+    },
+    "/drip-campaigns/webhook": {
+      "post": {
+        "description": "Once a call is created via a drip campaign, we will send a webhook to the URL you provided.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DripCampaignWebhook"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateCustomerRequest": {
+        "required": [
+          "externalId",
+          "firstName",
+          "lastName",
+          "email",
+          "primaryPhone",
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "description": "The ID of the customer in your system.",
+            "type": "string"
+          },
+          "clientId": {
+            "description": "The ID of the client (sub-entity of your organization) to associate with this customer.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "description": "The first name of the customer.",
+            "type": "string"
+          },
+          "middleName": {
+            "description": "The middle name of the customer.",
+            "type": "string"
+          },
+          "lastName": {
+            "description": "The last name of the customer.",
+            "type": "string"
+          },
+          "email": {
+            "description": "The email address of the customer.",
+            "type": "string"
+          },
+          "primaryPhone": {
+            "description": "The primary phone number of the customer. (E.164 format)",
+            "type": "string"
+          },
+          "secondaryPhone": {
+            "description": "The secondary phone number of the customer. (E.164 format)",
+            "type": "string"
+          },
+          "ssnLastFour": {
+            "description": "The last four digits of the customer's Social Security Number. Required for collections customers.",
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 4
+          },
+          "dateOfBirth": {
+            "description": "The date of birth of the customer. YYYY-MM-DD format. Required for collections customers.",
+            "type": "string"
+          },
+          "address": {
+            "required": ["zip"],
+            "description": "The address of the customer.",
+            "type": "object",
+            "properties": {
+              "line1": {
+                "description": "The first line of the address.",
+                "type": "string"
+              },
+              "line2": {
+                "description": "The second line of the address (e.g., apartment, suite, unit number).",
+                "type": "string"
+              },
+              "city": {
+                "description": "The city of the address.",
+                "type": "string"
+              },
+              "state": {
+                "description": "The state of the address.",
+                "type": "string"
+              },
+              "zip": {
+                "description": "The zip code of the address. Use 5 digits (12345) or 9 digits (12345-1234) format.",
+                "type": "string"
+              }
+            }
+          },
+          "collections": {
+            "required": ["totalBalance"],
+            "description": "Required for customers with collections. If set, you must also provide `ssnLastFour` and `dateOfBirth`.",
+            "type": "object",
+            "properties": {
+              "principalBalance": {
+                "description": "The principal balance amount.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "originalCreditor": {
+                "description": "The name of the original creditor.",
+                "type": "string",
+                "nullable": true
+              },
+              "accruedInterestAmount": {
+                "description": "The amount of accrued interest.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "totalBalance": {
+                "description": "The total balance of the customer's collections.",
+                "type": "number",
+                "minimum": 0
+              },
+              "chargeOffDate": {
+                "description": "The date when the account was charged off.",
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "firstDelinquencyDate": {
+                "description": "The date of the first delinquency. (ISO-8601 format: `YYYY-MM-DD`).",
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "settlementAggregationRate": {
+                "description": "The settlement aggregation rate.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "originalAccountNumber": {
+                "description": "The original account number.",
+                "type": "string",
+                "nullable": true
+              },
+              "itemizationBalance": {
+                "description": "The itemization balance amount.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "postItemizationInterest": {
+                "description": "Interest accrued after itemization.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "postItemizationFees": {
+                "description": "Fees accrued after itemization.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "postItemizationCredits": {
+                "description": "Credits applied after itemization.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "postItemizationPayments": {
+                "description": "Payments made after itemization.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "productType": {
+                "description": "The current product type.",
+                "type": "string",
+                "nullable": true
+              },
+              "originalProductType": {
+                "description": "The original product type.",
+                "type": "string",
+                "nullable": true
+              },
+              "extensions": {
+                "description": "Organization-specific extension fields for the balance. The accepted fields depend on your organization's configuration. Contact support for your specific schema.",
+                "type": "object",
+                "additionalProperties": true,
+                "nullable": true
+              }
+            }
+          }
+        }
+      },
+      "BulkCreateCustomersRequest": {
+        "required": ["customers"],
+        "type": "object",
+        "properties": {
+          "customers": {
+            "description": "Array of customers to create.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateCustomerRequest"
+            }
+          }
+        }
+      },
+      "BulkCreateCustomersResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the bulk operation completed successfully.",
+            "type": "boolean"
+          },
+          "data": {
+            "description": "Results of the bulk customer creation.",
+            "type": "object",
+            "required": ["results", "summary"],
+            "properties": {
+              "summary": {
+                "description": "Summary statistics for the bulk operation.",
+                "type": "object",
+                "required": ["total", "succeeded", "failed"],
+                "properties": {
+                  "total": {
+                    "description": "Total number of customers in the request.",
+                    "type": "integer"
+                  },
+                  "succeeded": {
+                    "description": "Number of customers successfully created.",
+                    "type": "integer"
+                  },
+                  "failed": {
+                    "description": "Number of customers that failed to create.",
+                    "type": "integer"
+                  }
+                }
+              },
+              "results": {
+                "description": "Array of results for each customer creation attempt, in the same order as the request.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/BulkCustomerResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BulkCustomerResult": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/BulkCustomerSuccess"
+          },
+          {
+            "$ref": "#/components/schemas/BulkCustomerFailure"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "success",
+          "mapping": {
+            "true": "#/components/schemas/BulkCustomerSuccess",
+            "false": "#/components/schemas/BulkCustomerFailure"
+          }
+        }
+      },
+      "BulkCustomerSuccess": {
+        "title": "Success Result",
+        "required": ["success", "customer"],
+        "type": "object",
+        "properties": {
+          "success": {
+            "description": "Indicates successful customer creation.",
+            "type": "boolean",
+            "enum": [true]
+          },
+          "customer": {
+            "description": "The created customer object.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Customer"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "createdAt": {
+                    "description": "Timestamp when the customer was created. ISO-8601 format.",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "BulkCustomerFailure": {
+        "title": "Failure Result",
+        "required": ["success", "externalId", "error"],
+        "type": "object",
+        "properties": {
+          "success": {
+            "description": "Indicates failed customer creation.",
+            "type": "boolean",
+            "enum": [false]
+          },
+          "externalId": {
+            "description": "The external ID of the customer that failed to create.",
+            "type": "string"
+          },
+          "error": {
+            "description": "Error message explaining why creation failed.",
+            "type": "string"
+          }
+        }
+      },
+      "UpdateCustomerRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "description": "The first name of the customer.",
+            "type": "string"
+          },
+          "middleName": {
+            "description": "The middle name of the customer.",
+            "type": "string"
+          },
+          "lastName": {
+            "description": "The last name of the customer.",
+            "type": "string"
+          },
+          "email": {
+            "description": "The email address of the customer.",
+            "type": "string"
+          },
+          "primaryPhone": {
+            "description": "The primary phone number of the customer. (E.164 format)",
+            "type": "string"
+          },
+          "secondaryPhone": {
+            "description": "The secondary phone number of the customer. (E.164 format)",
+            "type": "string",
+            "nullable": true
+          },
+          "ssnLastFour": {
+            "description": "The last four digits of the customer's Social Security Number.",
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 4,
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "description": "The date of birth of the customer. YYYY-MM-DD format.",
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "address": {
+            "description": "The address of the customer.",
+            "type": "object",
+            "nullable": true,
+            "properties": {
+              "line1": {
+                "description": "The first line of the address.",
+                "type": "string",
+                "nullable": true
+              },
+              "line2": {
+                "description": "The second line of the address (e.g., apartment, suite, unit number).",
+                "type": "string",
+                "nullable": true
+              },
+              "city": {
+                "description": "The city of the address.",
+                "type": "string",
+                "nullable": true
+              },
+              "state": {
+                "description": "The state of the address.",
+                "type": "string",
+                "nullable": true
+              },
+              "zip": {
+                "description": "The zip code of the address. Use 5 digits (12345) or 9 digits (12345-1234) format.",
+                "type": "string"
+              }
+            }
+          },
+          "collections": {
+            "description": "Collections account information for the customer.",
+            "type": "object",
+            "nullable": true,
+            "properties": {
+              "principalBalance": {
+                "description": "The principal balance amount.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "originalCreditor": {
+                "description": "The name of the original creditor.",
+                "type": "string",
+                "nullable": true
+              },
+              "accruedInterestAmount": {
+                "description": "The amount of accrued interest.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "totalBalance": {
+                "description": "The total balance of the customer's collections.",
+                "type": "number",
+                "minimum": 0
+              },
+              "chargeOffDate": {
+                "description": "The date when the account was charged off. (ISO-8601 format: `YYYY-MM-DD`).",
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "firstDelinquencyDate": {
+                "description": "The date of the first delinquency. (ISO-8601 format: `YYYY-MM-DD`).",
+                "type": "string",
+                "format": "date",
+                "nullable": true
+              },
+              "settlementAggregationRate": {
+                "description": "The settlement aggregation rate.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "originalAccountNumber": {
+                "description": "The original account number.",
+                "type": "string",
+                "nullable": true
+              },
+              "itemizationBalance": {
+                "description": "The itemization balance amount.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "postItemizationInterest": {
+                "description": "Interest accrued after itemization.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "postItemizationFees": {
+                "description": "Fees accrued after itemization.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "postItemizationCredits": {
+                "description": "Credits applied after itemization.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "postItemizationPayments": {
+                "description": "Payments made after itemization.",
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              },
+              "productType": {
+                "description": "The current product type.",
+                "type": "string",
+                "nullable": true
+              },
+              "originalProductType": {
+                "description": "The original product type.",
+                "type": "string",
+                "nullable": true
+              },
+              "extensions": {
+                "description": "Organization-specific extension fields for the balance. The accepted fields depend on your organization's configuration. Contact support for your specific schema.",
+                "type": "object",
+                "additionalProperties": true,
+                "nullable": true
+              }
+            }
+          }
+        }
+      },
+      "UpdateCustomerResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the update operation completed successfully.",
+            "type": "boolean"
+          },
+          "data": {
+            "description": "The updated customer object.",
+            "$ref": "#/components/schemas/Customer"
+          }
+        }
+      },
+      "CustomersDripCampaignsPostRequest": {
+        "required": ["campaignName"],
+        "type": "object",
+        "properties": {
+          "campaignName": {
+            "description": "The name of the drip campaign. This will be assigned to you.",
+            "type": "string"
+          },
+          "webhook": {
+            "description": "Webhook-related information to send the drip campaign updates to.",
+            "type": "object",
+            "required": ["url"],
+            "properties": {
+              "url": {
+                "description": "The endpoint to send the drip campaign updates to.",
+                "type": "string",
+                "format": "uri"
+              },
+              "secretId": {
+                "description": "The ID of the webhook secret for signing.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        }
+      },
+      "Customer": {
+        "required": [
+          "id",
+          "externalId",
+          "firstName",
+          "lastName",
+          "email",
+          "primaryPhone",
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The ID of the customer.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "clientId": {
+            "description": "The ID of the client associated with this customer.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "externalId": {
+            "description": "The ID of the customer in your system.",
+            "type": "string"
+          },
+          "firstName": {
+            "description": "The first name of the customer.",
+            "type": "string"
+          },
+          "middleName": {
+            "description": "The middle name of the customer.",
+            "type": "string"
+          },
+          "lastName": {
+            "description": "The last name of the customer.",
+            "type": "string"
+          },
+          "email": {
+            "description": "The email address of the customer.",
+            "type": "string"
+          },
+          "primaryPhone": {
+            "description": "The primary phone number of the customer. (E.164 format)",
+            "type": "string"
+          },
+          "secondaryPhone": {
+            "description": "The secondary phone number of the customer. (E.164 format)",
+            "type": "string"
+          },
+          "ssnLastFour": {
+            "description": "The last four digits of the customer's Social Security Number. Required for collections customers.",
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 4
+          },
+          "dateOfBirth": {
+            "description": "The date of birth of the customer. YYYY-MM-DD format. Required for collections customers.",
+            "type": "string"
+          },
+          "address": {
+            "description": "The address of the customer.",
+            "type": "object",
+            "required": ["zip"],
+            "properties": {
+              "line1": {
+                "description": "The first line of the address.",
+                "type": "string"
+              },
+              "line2": {
+                "description": "The second line of the address (e.g., apartment, suite, unit number).",
+                "type": "string"
+              },
+              "city": {
+                "description": "The city of the address.",
+                "type": "string"
+              },
+              "state": {
+                "description": "The state of the address.",
+                "type": "string"
+              },
+              "zip": {
+                "description": "The zip code of the address. Use 5 digits (12345) or 9 digits (12345-1234) format.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "CreateCallRequest": {
+        "required": ["agentId"],
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "description": "The agent identifier to use for the call. This will be assigned to you.",
+            "type": "string"
+          },
+          "webhook": {
+            "description": "Webhook-related information to send the call updates to.",
+            "type": "object",
+            "properties": {
+              "url": {
+                "description": "The endpoint to send the call updates to.",
+                "type": "string",
+                "format": "uri"
+              },
+              "secretId": {
+                "description": "The ID of the webhook secret for signing.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        }
+      },
+      "BulkCreateCallsRequest": {
+        "required": ["agentId", "customerIds"],
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "description": "The agent identifier to use for all calls. This will be assigned to you.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerIds": {
+            "description": "Array of customer IDs to create calls for. Must contain between 1 and 100 unique customer IDs.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          },
+          "webhook": {
+            "description": "Webhook-related information to send the call updates to.",
+            "type": "object",
+            "properties": {
+              "url": {
+                "description": "The endpoint to send the call updates to.",
+                "type": "string",
+                "format": "uri",
+                "nullable": true
+              },
+              "secretId": {
+                "description": "The ID of the webhook secret for signing.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        }
+      },
+      "BulkCreateCallsResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the bulk operation completed (always true for 200 responses).",
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "required": ["summary", "results"],
+            "properties": {
+              "summary": {
+                "description": "Summary counts of the bulk operation.",
+                "type": "object",
+                "required": ["total", "successful", "failed"],
+                "properties": {
+                  "total": {
+                    "description": "Total number of customers in the request.",
+                    "type": "integer"
+                  },
+                  "successful": {
+                    "description": "Number of calls successfully created.",
+                    "type": "integer"
+                  },
+                  "failed": {
+                    "description": "Number of calls that failed to be created.",
+                    "type": "integer"
+                  }
+                }
+              },
+              "results": {
+                "description": "Detailed results for each customer.",
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "title": "Success Result",
+                      "type": "object",
+                      "required": ["customerId", "success", "data"],
+                      "properties": {
+                        "customerId": {
+                          "description": "The customer ID.",
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "success": {
+                          "description": "Whether the call was successfully created.",
+                          "type": "boolean",
+                          "enum": [true]
+                        },
+                        "data": {
+                          "description": "The created call data.",
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "threadId",
+                            "toPhoneNumber",
+                            "fromPhoneNumber",
+                            "compliance",
+                            "createdAt"
+                          ],
+                          "properties": {
+                            "id": {
+                              "description": "The call identifier.",
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "threadId": {
+                              "description": "The thread identifier for the call.",
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "toPhoneNumber": {
+                              "description": "The customer's phone number.",
+                              "type": "string"
+                            },
+                            "fromPhoneNumber": {
+                              "description": "The phone number the call is from.",
+                              "type": "string"
+                            },
+                            "compliance": {
+                              "description": "Compliance check results.",
+                              "type": "object",
+                              "required": [
+                                "passed",
+                                "checksPassed",
+                                "checksFailed"
+                              ],
+                              "properties": {
+                                "passed": {
+                                  "description": "Whether all compliance checks passed.",
+                                  "type": "boolean"
+                                },
+                                "checksPassed": {
+                                  "description": "List of compliance checks that passed.",
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "reason": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "checksFailed": {
+                                  "description": "List of compliance checks that failed.",
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "reason": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "createdAt": {
+                              "description": "ISO 8601 timestamp of when the call was created.",
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "title": "Failure Result",
+                      "type": "object",
+                      "required": ["customerId", "success", "error"],
+                      "properties": {
+                        "customerId": {
+                          "description": "The customer ID.",
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "success": {
+                          "description": "Whether the call was successfully created.",
+                          "type": "boolean",
+                          "enum": [false]
+                        },
+                        "error": {
+                          "description": "Error message describing why the call creation failed.",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "NewGetSignedUrlRequest": {
+        "required": ["callId"],
+        "properties": {
+          "callId": {
+            "description": "The call ID. This is returned from `/calls/create`",
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "CreateCallResponse": {
+        "required": ["success", "requestId", "data"],
+        "properties": {
+          "requestId": {
+            "description": "The request identifier for the call.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the call was successful.",
+            "type": "boolean"
+          },
+          "data": {
+            "description": "The data for the call.",
+            "type": "object",
+            "required": ["id", "toPhoneNumber", "fromPhoneNumber"],
+            "properties": {
+              "id": {
+                "description": "The call identifier for the call. This is a UUID.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "threadId": {
+                "description": "The ID of the thread.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "toPhoneNumber": {
+                "description": "The phone number that the call was made to (E.164 format).",
+                "type": "string"
+              },
+              "fromPhoneNumber": {
+                "description": "The phone number that the call was made from (E.164 format).",
+                "type": "string"
+              },
+              "compliance": {
+                "description": "The compliance results for the call.",
+                "$ref": "#/components/schemas/Compliance"
+              }
+            }
+          }
+        }
+      },
+      "GetSignedUrlResponse": {
+        "required": ["requestId", "success", "data"],
+        "properties": {
+          "requestId": {
+            "description": "The request identifier for the call.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the call was successful.",
+            "type": "boolean"
+          },
+          "data": {
+            "description": "The data for the call.",
+            "type": "object",
+            "required": ["callId", "signedUrl"],
+            "properties": {
+              "callId": {
+                "description": "The call ID. This is returned in `/calls/create`",
+                "type": "string",
+                "format": "uuid"
+              },
+              "signedUrl": {
+                "description": "Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change).",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ComplianceCheck": {
+        "type": "object",
+        "required": ["id", "name", "description", "reason"],
+        "properties": {
+          "id": {
+            "description": "The unique identifier for the compliance check.",
+            "type": "string"
+          },
+          "name": {
+            "description": "The human-readable name of the compliance check.",
+            "type": "string"
+          },
+          "description": {
+            "description": "A description of what the compliance check does.",
+            "type": "string"
+          },
+          "reason": {
+            "description": "The reason why the check passed or failed.",
+            "type": "string"
+          }
+        }
+      },
+      "Compliance": {
+        "type": "object",
+        "required": ["passed", "checksPassed", "checksFailed"],
+        "properties": {
+          "passed": {
+            "description": "Whether all compliance checks passed.",
+            "type": "boolean"
+          },
+          "checksPassed": {
+            "description": "Array of compliance checks that passed.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComplianceCheck"
+            }
+          },
+          "checksFailed": {
+            "description": "Array of compliance checks that failed.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComplianceCheck"
+            }
+          }
+        }
+      },
+      "DripCampaignWebhook": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/DripCampaignCallCreatedWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/DripCampaignCallEndedWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/DripCampaignSmsWebhook"
+          }
+        ]
+      },
+      "DripCampaignCallCreatedWebhook": {
+        "title": "Call Created",
+        "required": [
+          "type",
+          "id",
+          "name",
+          "customerId",
+          "status",
+          "createdAt",
+          "callCreated"
+        ],
+        "properties": {
+          "type": {
+            "description": "The type of webhook.",
+            "type": "string",
+            "enum": ["drip-campaign.call-created"]
+          },
+          "id": {
+            "description": "The ID of the drip campaign.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "The name of the drip campaign.",
+            "type": "string"
+          },
+          "customerId": {
+            "description": "The ID of the customer.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "description": "The status of the drip campaign.",
+            "type": "string",
+            "enum": ["in-progress", "completed", "canceled"]
+          },
+          "createdAt": {
+            "description": "The timestamp of when the drip campaign was created. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "callCreated": {
+            "$ref": "#/components/schemas/CallCreated"
+          }
+        }
+      },
+      "DripCampaignCallEndedWebhook": {
+        "title": "Call Ended",
+        "required": ["type", "id", "name", "customerId", "status", "createdAt"],
+        "properties": {
+          "type": {
+            "description": "The type of webhook.",
+            "type": "string",
+            "enum": ["drip-campaign.call-ended"]
+          },
+          "id": {
+            "description": "The ID of the drip campaign.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "The name of the drip campaign.",
+            "type": "string"
+          },
+          "customerId": {
+            "description": "The ID of the customer.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "description": "The status of the drip campaign.",
+            "type": "string",
+            "enum": ["in-progress", "completed", "canceled"]
+          },
+          "createdAt": {
+            "description": "The timestamp of when the drip campaign was created. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "callEnded": {
+            "$ref": "#/components/schemas/CallEnded"
+          }
+        }
+      },
+      "DripCampaignSmsWebhook": {
+        "title": "SMS",
+        "required": [
+          "type",
+          "id",
+          "name",
+          "threadId",
+          "direction",
+          "customerId",
+          "status",
+          "createdAt",
+          "sms"
+        ],
+        "properties": {
+          "type": {
+            "description": "The type of webhook.",
+            "type": "string",
+            "enum": ["drip-campaign.sms"]
+          },
+          "id": {
+            "description": "The ID of the drip campaign.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "threadId": {
+            "description": "The ID of the thread.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "direction": {
+            "description": "The direction of the SMS.",
+            "type": "string",
+            "enum": ["inbound", "outbound"]
+          },
+          "name": {
+            "description": "The name of the drip campaign.",
+            "type": "string"
+          },
+          "customerId": {
+            "description": "The ID of the customer.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "description": "The status of the drip campaign.",
+            "type": "string",
+            "enum": ["in-progress", "completed", "canceled"]
+          },
+          "createdAt": {
+            "description": "The timestamp of when the drip campaign was created. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "sms": {
+            "$ref": "#/components/schemas/Sms"
+          }
+        }
+      },
+      "Sms": {
+        "description": "SMS Details",
+        "type": "object",
+        "required": [
+          "id",
+          "toPhoneNumber",
+          "fromPhoneNumber",
+          "message",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "description": "The ID of the SMS.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "message": {
+            "description": "The message of the SMS.",
+            "type": "string"
+          },
+          "toPhoneNumber": {
+            "description": "The phone number that the SMS was sent to (E.164 format).",
+            "type": "string"
+          },
+          "fromPhoneNumber": {
+            "description": "The phone number that the SMS was sent from (E.164 format).",
+            "type": "string"
+          },
+          "createdAt": {
+            "description": "The timestamp of when the SMS was created. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CallCreated": {
+        "description": "Details for the call that was created.",
+        "type": "object",
+        "required": ["id", "threadId", "toPhoneNumber", "fromPhoneNumber"],
+        "properties": {
+          "id": {
+            "description": "The ID of the call.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "threadId": {
+            "description": "The ID of the thread.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "toPhoneNumber": {
+            "description": "The phone number that the call was made to (E.164 format).",
+            "type": "string"
+          },
+          "fromPhoneNumber": {
+            "description": "The phone number that the call was made from (E.164 format).",
+            "type": "string"
+          },
+          "createdAt": {
+            "description": "The timestamp of when the call was created. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CallEnded": {
+        "description": "Details for the call that ended.",
+        "type": "object",
+        "required": [
+          "id",
+          "customerId",
+          "threadId",
+          "toPhoneNumber",
+          "fromPhoneNumber",
+          "messages",
+          "direction",
+          "endedReason",
+          "recordingUrl",
+          "durationMs",
+          "endedAt",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "description": "The ID of the interaction.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "threadId": {
+            "description": "The ID of the thread.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerId": {
+            "description": "The ID of the customer.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "toPhoneNumber": {
+            "description": "The phone number that the call was made to (E.164 format).",
+            "type": "string"
+          },
+          "fromPhoneNumber": {
+            "description": "The phone number that the call was made from (E.164 format).",
+            "type": "string"
+          },
+          "messages": {
+            "description": "The messages from the call.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "direction": {
+            "description": "Call direction.",
+            "type": "string",
+            "enum": ["inbound", "outbound"]
+          },
+          "endedReason": {
+            "description": "The reason the call ended.",
+            "type": "string",
+            "enum": [
+              "customer-did-not-answer",
+              "voicemail",
+              "customer-ended-call",
+              "agent-ended-call",
+              "silence-timed-out",
+              "unknown"
+            ]
+          },
+          "recordingUrl": {
+            "description": "Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change). For long-term access, you should either download and persist the file in your own storage.",
+            "type": "string"
+          },
+          "inputVariables": {
+            "description": "Key-value data passed to the agent at call start.",
+            "type": "object"
+          },
+          "outputVariables": {
+            "description": "Key-value data produced after the call (e.g., flags, extracted fields, outcomes). This field is `null` when no analysis is available (e.g., customer did not engage with agent or no analysis config exists).",
+            "type": "object",
+            "nullable": true
+          },
+          "durationMs": {
+            "description": "Duration of the call, in milliseconds.",
+            "type": "number"
+          },
+          "endedAt": {
+            "description": "Timestamp of when the call ended. ISO-8601 format.",
+            "type": "string"
+          },
+          "createdAt": {
+            "description": "Timestamp of when the call was created. ISO-8601 format.",
+            "type": "string"
+          }
+        }
+      },
+      "CallsWebhook": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/CallCreatedWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/CallEndedWebhook"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "call-created": "#/components/schemas/CallCreatedWebhook",
+            "call-ended": "#/components/schemas/CallEndedWebhook"
+          }
+        }
+      },
+      "CallCreatedWebhook": {
+        "title": "Call Created",
+        "required": [
+          "type",
+          "id",
+          "name",
+          "customerId",
+          "status",
+          "createdAt",
+          "callCreated"
+        ],
+        "properties": {
+          "type": {
+            "description": "The type of webhook.",
+            "type": "string",
+            "enum": ["call-created"]
+          },
+          "id": {
+            "description": "The ID of the drip campaign.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "The name of the drip campaign.",
+            "type": "string"
+          },
+          "customerId": {
+            "description": "The ID of the customer.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "description": "The status of the drip campaign.",
+            "type": "string",
+            "enum": ["in-progress", "completed", "canceled"]
+          },
+          "createdAt": {
+            "description": "The timestamp of when the drip campaign was created. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "callCreated": {
+            "$ref": "#/components/schemas/CallCreated"
+          }
+        }
+      },
+      "CallEndedWebhook": {
+        "title": "Call Ended",
+        "required": ["type", "id", "name", "customerId", "status", "createdAt"],
+        "properties": {
+          "type": {
+            "description": "The type of webhook.",
+            "type": "string",
+            "enum": ["call-ended"]
+          },
+          "id": {
+            "description": "The ID of the drip campaign.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "The name of the drip campaign.",
+            "type": "string"
+          },
+          "customerId": {
+            "description": "The ID of the customer.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "description": "The status of the drip campaign.",
+            "type": "string",
+            "enum": ["in-progress", "completed", "canceled"]
+          },
+          "createdAt": {
+            "description": "The timestamp of when the drip campaign was created. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "callEnded": {
+            "$ref": "#/components/schemas/CallEnded"
+          }
+        }
+      },
+      "Message": {
+        "required": [
+          "role",
+          "message",
+          "endTime",
+          "secondsFromStart",
+          "duration"
+        ],
+        "properties": {
+          "role": {
+            "description": "The role of the message.",
+            "type": "string",
+            "enum": ["user", "agent"]
+          },
+          "message": {
+            "description": "Text content for the turn.",
+            "type": "string"
+          },
+          "startedAt": {
+            "description": "When the turn started. ISO-8601 format.",
+            "type": "string"
+          },
+          "endedAt": {
+            "description": "When the turn finished. ISO-8601 format.",
+            "type": "string"
+          },
+          "secondsFromStart": {
+            "description": "Offset from call start to the beginning of this turn, in seconds.",
+            "type": "number"
+          },
+          "duration": {
+            "description": "Duration of the turn, in milliseconds.",
+            "type": "number"
+          }
+        }
+      },
+      "Error": {
+        "required": ["error", "message"],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SmsImportRequest": {
+        "required": ["direction", "timestamp", "from", "to", "body"],
+        "type": "object",
+        "properties": {
+          "direction": {
+            "description": "The direction of the SMS message.",
+            "type": "string",
+            "enum": ["inbound", "outbound"]
+          },
+          "timestamp": {
+            "description": "When the message was sent or received. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "from": {
+            "description": "The sender's phone number in E.164 format (e.g., +12025551234).",
+            "type": "string"
+          },
+          "to": {
+            "description": "The recipient's phone number in E.164 format (e.g., +12025551234).",
+            "type": "string"
+          },
+          "body": {
+            "description": "The message content. Must be at least 1 character.",
+            "type": "string",
+            "minLength": 1
+          },
+          "threadId": {
+            "description": "Optional thread identifier to group related messages together.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "segments": {
+            "description": "The number of SMS segments for this message. If not provided, it will be calculated automatically based on the message body.",
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "SmsImportResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the import was successful.",
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SmsInteractionData"
+          }
+        }
+      },
+      "SmsInteractionData": {
+        "required": ["id", "threadId", "channel", "direction", "customerId", "timestamp", "createdAt"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the imported interaction.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "threadId": {
+            "description": "The thread identifier for grouping related messages.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "channel": {
+            "description": "The communication channel.",
+            "type": "string",
+            "enum": ["sms"]
+          },
+          "direction": {
+            "description": "The direction of the message.",
+            "type": "string",
+            "enum": ["inbound", "outbound"]
+          },
+          "customerId": {
+            "description": "The customer identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "timestamp": {
+            "description": "When the message was sent or received. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "description": "When the interaction was created in the system. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SmsImportBulkRequest": {
+        "required": ["interactions"],
+        "type": "object",
+        "properties": {
+          "interactions": {
+            "description": "Array of SMS interactions to import. Must contain between 1 and 100 items.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SmsImportRequest"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          }
+        }
+      },
+      "SmsImportBulkResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the bulk operation completed.",
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "required": ["results", "summary"],
+            "properties": {
+              "summary": {
+                "description": "Summary statistics for the bulk operation.",
+                "type": "object",
+                "required": ["total", "succeeded", "failed"],
+                "properties": {
+                  "total": {
+                    "description": "Total number of interactions in the request.",
+                    "type": "integer"
+                  },
+                  "succeeded": {
+                    "description": "Number of interactions successfully imported.",
+                    "type": "integer"
+                  },
+                  "failed": {
+                    "description": "Number of interactions that failed to import.",
+                    "type": "integer"
+                  }
+                }
+              },
+              "results": {
+                "description": "Array of results for each import attempt.",
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "title": "Success Result",
+                      "type": "object",
+                      "required": ["success", "interaction"],
+                      "properties": {
+                        "success": {
+                          "description": "Indicates successful import.",
+                          "type": "boolean",
+                          "enum": [true]
+                        },
+                        "interaction": {
+                          "$ref": "#/components/schemas/SmsInteractionData"
+                        }
+                      }
+                    },
+                    {
+                      "title": "Failure Result",
+                      "type": "object",
+                      "required": ["success", "index", "error"],
+                      "properties": {
+                        "success": {
+                          "description": "Indicates failed import.",
+                          "type": "boolean",
+                          "enum": [false]
+                        },
+                        "index": {
+                          "description": "The index of the failed interaction in the request array.",
+                          "type": "integer"
+                        },
+                        "error": {
+                          "description": "Error message explaining why the import failed.",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "SmsGenerateRequest": {
+        "required": ["from"],
+        "type": "object",
+        "properties": {
+          "from": {
+            "description": "The organization's phone number in E.164 format. Used in prompt context for generating the response.",
+            "type": "string"
+          },
+          "to": {
+            "description": "The customer's phone number in E.164 format. Required when persist is true.",
+            "type": "string"
+          },
+          "persist": {
+            "description": "Whether to save the generated message as an outbound interaction. Defaults to true.",
+            "type": "boolean",
+            "default": true
+          },
+          "threadId": {
+            "description": "Optional thread identifier for grouping the persisted message with related conversations.",
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "SmsGenerateResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the generation was successful.",
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "required": ["message"],
+            "properties": {
+              "message": {
+                "description": "The AI-generated SMS response text.",
+                "type": "string"
+              },
+              "threadId": {
+                "description": "The thread identifier. Only present if the message was persisted.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        }
+      },
+      "EmailGenerateRequest": {
+        "type": "object",
+        "properties": {
+          "persist": {
+            "description": "Whether to save the generated email as an outbound interaction. Defaults to true.",
+            "type": "boolean",
+            "default": true
+          },
+          "threadId": {
+            "description": "Optional thread identifier for grouping the persisted email with related conversations.",
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "EmailGenerateResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the generation was successful.",
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "required": ["htmlBody", "plainTextBody"],
+            "properties": {
+              "htmlBody": {
+                "description": "The AI-generated email response in HTML format.",
+                "type": "string"
+              },
+              "plainTextBody": {
+                "description": "The AI-generated email response in plain text format.",
+                "type": "string"
+              },
+              "threadId": {
+                "description": "The thread identifier. Only present if the email was persisted.",
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        }
+      },
+      "EmailImportRequest": {
+        "required": ["direction", "timestamp", "from", "to", "subject"],
+        "type": "object",
+        "properties": {
+          "direction": {
+            "description": "The direction of the email.",
+            "type": "string",
+            "enum": ["inbound", "outbound"]
+          },
+          "timestamp": {
+            "description": "When the email was sent or received. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "from": {
+            "description": "The sender's email address.",
+            "type": "string",
+            "format": "email"
+          },
+          "to": {
+            "description": "Array of recipient email addresses. Must contain at least 1 recipient.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "minItems": 1
+          },
+          "cc": {
+            "description": "Array of CC recipient email addresses.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "default": []
+          },
+          "bcc": {
+            "description": "Array of BCC recipient email addresses.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "default": []
+          },
+          "subject": {
+            "description": "The email subject line.",
+            "type": "string"
+          },
+          "plainTextBody": {
+            "description": "The plain text content of the email. At least one of plainTextBody or htmlBody must have non-empty content.",
+            "type": "string"
+          },
+          "htmlBody": {
+            "description": "The HTML content of the email. At least one of plainTextBody or htmlBody must have non-empty content.",
+            "type": "string"
+          },
+          "threadId": {
+            "description": "Optional thread identifier to group related emails together.",
+            "type": "string"
+          },
+          "messageId": {
+            "description": "Optional message identifier from the email system.",
+            "type": "string"
+          }
+        }
+      },
+      "EmailImportResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the import was successful.",
+            "type": "boolean"
+          },
+          "data": {
+            "$ref": "#/components/schemas/EmailInteractionData"
+          }
+        }
+      },
+      "EmailInteractionData": {
+        "required": ["id", "threadId", "channel", "direction", "customerId", "timestamp", "createdAt"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the imported interaction.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "messageId": {
+            "description": "The message identifier from the email system.",
+            "type": "string"
+          },
+          "threadId": {
+            "description": "The thread identifier for grouping related emails.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "channel": {
+            "description": "The communication channel.",
+            "type": "string",
+            "enum": ["email"]
+          },
+          "direction": {
+            "description": "The direction of the email.",
+            "type": "string",
+            "enum": ["inbound", "outbound"]
+          },
+          "customerId": {
+            "description": "The customer identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "timestamp": {
+            "description": "When the email was sent or received. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "description": "When the interaction was created in the system. ISO-8601 format.",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "EmailImportBulkRequest": {
+        "required": ["interactions"],
+        "type": "object",
+        "properties": {
+          "interactions": {
+            "description": "Array of email interactions to import. Must contain between 1 and 100 items.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailImportRequest"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          }
+        }
+      },
+      "EmailImportBulkResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the bulk operation completed.",
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "required": ["results", "summary"],
+            "properties": {
+              "summary": {
+                "description": "Summary statistics for the bulk operation.",
+                "type": "object",
+                "required": ["total", "succeeded", "failed"],
+                "properties": {
+                  "total": {
+                    "description": "Total number of emails in the request.",
+                    "type": "integer"
+                  },
+                  "succeeded": {
+                    "description": "Number of emails successfully imported.",
+                    "type": "integer"
+                  },
+                  "failed": {
+                    "description": "Number of emails that failed to import.",
+                    "type": "integer"
+                  }
+                }
+              },
+              "results": {
+                "description": "Array of results for each import attempt.",
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "title": "Success Result",
+                      "type": "object",
+                      "required": ["success", "interaction"],
+                      "properties": {
+                        "success": {
+                          "description": "Indicates successful import.",
+                          "type": "boolean",
+                          "enum": [true]
+                        },
+                        "interaction": {
+                          "$ref": "#/components/schemas/EmailInteractionData"
+                        }
+                      }
+                    },
+                    {
+                      "title": "Failure Result",
+                      "type": "object",
+                      "required": ["success", "index", "error"],
+                      "properties": {
+                        "success": {
+                          "description": "Indicates failed import.",
+                          "type": "boolean",
+                          "enum": [false]
+                        },
+                        "index": {
+                          "description": "The index of the failed email in the request array.",
+                          "type": "integer"
+                        },
+                        "error": {
+                          "description": "Error message explaining why the import failed.",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "Client": {
+        "required": ["id", "name"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the client.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "The display name of the client.",
+            "type": "string"
+          }
+        }
+      },
+      "ClientListResponse": {
+        "required": ["success", "requestId", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the request was successful.",
+            "type": "boolean"
+          },
+          "data": {
+            "description": "Array of clients belonging to the organization.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Client"
+            }
+          }
+        }
+      },
+      "AnalyzeInteractionRequest": {
+        "type": "object",
+        "properties": {
+          "applyOutcomes": {
+            "description": "Whether to apply configured outcome actions (tags, escalations) to the customer based on the analysis results.",
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "AnalyzeInteractionResponse": {
+        "required": ["requestId", "success", "data"],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "description": "The request identifier.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "success": {
+            "description": "Whether the operation completed successfully.",
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "interactionId": {
+                "description": "The ID of the analyzed interaction.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "channel": {
+                "description": "The channel of the interaction.",
+                "type": "string",
+                "enum": ["sms", "voice", "email"]
+              },
+              "outputVariables": {
+                "description": "The analysis outcome variables extracted from the interaction. The specific fields depend on your organization's analysis configuration.",
+                "type": "object",
+                "additionalProperties": true,
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

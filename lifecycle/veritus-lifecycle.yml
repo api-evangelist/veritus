@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.veritus.com/guides/environments + https://status.veritus.com/
+versioning:
+  style: uri
+  current: v1
+  base_path: /api/v1
+  spec_version: 1.0.0
+deprecation:
+  policy_published: false
+  sunset_header: Not documented (no RFC 8594 Sunset/Deprecation headers observed).
+  deprecated_operations: []
+status_page:
+  url: https://status.veritus.com/
+  provider: Better Stack
+  components:
+    - app.veritus.com
+  reported_uptime: 99.994%
+sla:
+  published: false
+support:
+  channels:
+    - Slack (assigned per organization)
+    - email / Veritus Agent representative
+data_retention:
+  recording_urls: Call-recording signed URLs are time-limited (valid ~30 minutes); download and persist for long-term access.
+  policy: Data Retention and Disposal Policy referenced in the trust center (https://trust.veritus.com/).

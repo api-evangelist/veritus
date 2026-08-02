@@ -1,0 +1,58 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/veritus-openapi.json
+notes: >-
+  Entity-relationship graph derived from OpenAPI $ref links and id-reference
+  fields in the Veritus API. Ids are UUIDs unless noted; Customer also carries a
+  caller-owned externalId natural key.
+entities:
+  - name: Client
+    id: id (uuid)
+    description: Sub-entity of your organization used to group customers.
+    relationships:
+      - has_many: Customer
+        via: clientId
+  - name: Customer
+    id: id (uuid)
+    natural_key: externalId
+    description: A borrower/consumer contactable across voice, SMS, and email; may carry a collections sub-object.
+    relationships:
+      - belongs_to: Client
+        via: clientId
+      - has_many: Call
+      - has_many: Interaction
+      - has_many: DripCampaign
+  - name: Call
+    id: id (uuid)
+    description: An outbound voice call, gated by the compliance engine; grouped by threadId.
+    relationships:
+      - belongs_to: Customer
+      - has_one: Compliance
+      - has_one: Thread
+        via: threadId
+  - name: Interaction
+    id: id (uuid)
+    description: An SMS or email (or voice) message, inbound or outbound; grouped by threadId.
+    channels: [sms, email, voice]
+    relationships:
+      - belongs_to: Customer
+        via: customerId
+      - has_one: Thread
+        via: threadId
+  - name: DripCampaign
+    id: id (uuid)
+    description: An omnichannel outreach sequence enrolled per customer; auto-cancels on customer engagement.
+    status: [in-progress, completed, canceled, scheduled]
+    relationships:
+      - belongs_to: Customer
+        via: customerId
+  - name: Thread
+    id: threadId (uuid)
+    description: Groups related calls and interactions for a customer conversation.
+    relationships:
+      - has_many: Interaction
+      - has_many: Call
+  - name: Compliance
+    description: Embedded result object (passed + checksPassed[] + checksFailed[]) attached to call responses and webhooks.
+    relationships:
+      - belongs_to: Call

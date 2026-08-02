@@ -1,0 +1,35 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.veritus.com/guides/environments
+docs: https://docs.veritus.com/guides/environments
+summary: >-
+  Veritus provides two fully isolated environments - production and sandbox -
+  with separate infrastructure and data. The sandbox uses the same AI and
+  telephony stack as production and places real calls against test accounts,
+  so it is for development and QA only.
+environments:
+  - name: production
+    base_url: https://app.veritus.com/api/v1
+    purpose: Live customer interactions. All calls, transcripts, and webhooks are real.
+  - name: sandbox
+    base_url: https://sandbox.veritus.com/api/v1
+    purpose: Development, testing, and QA. Real calls are placed but tied to test accounts and controlled data.
+isolation:
+  data: Production and sandbox have separate infrastructures; resources are not shared, ensuring data isolation.
+  keys: Bearer API keys and agentIds are environment-specific and assigned by Veritus.
+credentials:
+  api_key: Static bearer secret key (prefix `sk-`), issued by Veritus per environment; cannot be self-regenerated.
+  agent_id: Voice agent identifier (agentId) assigned by Veritus; required to create calls.
+  webhook_secret: Optional per-organization webhook secret referenced by secretId for HMAC signing.
+test_values:
+  published: false
+  notes: >-
+    Veritus does not publish fixed test cards, tokens, or synthetic identities
+    (this is a lending-communications API, not a payments API). Sandbox calls use
+    real telephony against your own test accounts / non-sensitive data.
+time_simulation:
+  test_clocks: Not documented.
+  compliance_windows: >-
+    Compliance checks are time-zone and respectful-hours aware (8am-8:50pm local);
+    calls placed outside those windows return a 422 compliance failure in both
+    environments.

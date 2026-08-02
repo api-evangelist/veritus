@@ -1,0 +1,20 @@
+{
+  "provider": "veritus",
+  "sources": [
+    "veritus-calls-api-openapi.yml",
+    "veritus-clients-api-openapi.yml",
+    "veritus-customers-api-openapi.yml",
+    "veritus-interactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "veritus-calls-api-openapi.yml",
+    "veritus-clients-api-openapi.yml",
+    "veritus-customers-api-openapi.yml",
+    "veritus-interactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,117 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/veritus-openapi.json
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Veritus API
+  version: 1.0.0
+extends: openapi/veritus-openapi.json
+actions:
+  - target: $.info
+    description: Record enrichment provenance and the canonical support/docs contact.
+    update:
+      contact:
+        name: Veritus Agent Support
+        url: https://docs.veritus.com
+      x-apis-io-enriched: true
+  - target: $.servers
+    description: Add the documented production environment; the source spec ships only the sandbox host.
+    update:
+      - url: https://app.veritus.com/api/v1
+        description: Production
+  - target: $.paths['/customers'].post
+    description: Assign a stable operationId (the source spec omits operationIds).
+    update:
+      operationId: createCustomer
+      summary: Create Customer
+  - target: $.paths['/customers/bulk'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: bulkCreateCustomers
+      summary: Create Customers in Bulk
+  - target: $.paths['/customers/{customerId}'].patch
+    description: Assign a stable operationId.
+    update:
+      operationId: updateCustomer
+      summary: Update Customer
+  - target: $.paths['/customers/{customerId}/drip-campaigns'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: enrollDripCampaign
+      summary: Create Drip Campaign
+  - target: $.paths['/customers/{customerId}/calls'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: createCall
+      summary: Create Call
+  - target: $.paths['/calls/bulk'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: bulkCreateCalls
+      summary: Create Calls in Bulk
+  - target: $.paths['/customers/{customerId}/drip-campaigns/{dripCampaignId}'].delete
+    description: Assign a stable operationId.
+    update:
+      operationId: cancelDripCampaign
+      summary: Cancel Drip Campaign
+  - target: $.paths['/calls/get-signed-url'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: getCallSignedUrl
+      summary: Get Call Recording Signed URL
+  - target: $.paths['/customers/{customerId}/interactions/sms/import'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: importSms
+      summary: Import SMS
+  - target: $.paths['/customers/{customerId}/interactions/sms/import/bulk'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: bulkImportSms
+      summary: Import SMS in Bulk
+  - target: $.paths['/customers/{customerId}/interactions/sms/generate'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: generateSms
+      summary: Generate SMS
+  - target: $.paths['/customers/{customerId}/interactions/email/generate'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: generateEmail
+      summary: Generate Email
+  - target: $.paths['/customers/{customerId}/interactions/email/import'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: importEmail
+      summary: Import Email
+  - target: $.paths['/customers/{customerId}/interactions/email/import/bulk'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: bulkImportEmail
+      summary: Import Emails in Bulk
+  - target: $.paths['/clients'].get
+    description: Assign a stable operationId.
+    update:
+      operationId: listClients
+      summary: List Clients
+  - target: $.paths['/interactions/{interactionId}/analyze'].post
+    description: Assign a stable operationId.
+    update:
+      operationId: analyzeInteraction
+      summary: Analyze Interaction
+  - target: $.components
+    description: Document the standard response envelope and webhook signing scheme as reusable notes.
+    update:
+      x-response-envelope:
+        requestId: Server-generated UUID, echoed on every success and error response for tracing.
+        success: Boolean status flag present on every response.
+        data: Present on success responses.
+        publicFacingMessage: Human-readable message, present on many error responses.
+      x-webhook-signature:
+        headers:
+          - X-Webhook-Signature
+          - X-Webhook-Timestamp
+        algorithm: HMAC SHA-256
+        signed_content: '{timestamp}.{raw_json_body}'
+        signature_format: sha256={hex_encoded_hmac}
+        replay_window_seconds: 300

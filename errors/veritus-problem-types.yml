@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/veritus-openapi.json
+docs: https://docs.veritus.com/guides/core-concepts/creating-calls
+format: custom-envelope
+notes: >-
+  Veritus does not use RFC 9457 problem+json. Errors are returned as a JSON
+  envelope with a server-generated requestId, a success:false flag, and (for
+  most non-2xx responses) a human-readable publicFacingMessage. Always log the
+  requestId and include it when contacting support.
+envelope:
+  requestId: Server-generated UUID for the request (present on all responses).
+  success: Boolean; false on error.
+  publicFacingMessage: Human-readable explanation (present on most 4xx errors).
+problem_types:
+  - status: 400
+    title: Bad request
+    meaning: Invalid request body, schema validation failure, or malformed parameters (e.g. duplicate customerIds).
+    remediation: Validate the request body against the OpenAPI schema before sending; correct the flagged fields.
+  - status: 401
+    title: Unauthorized
+    meaning: Missing or incorrect bearer token.
+    remediation: 'Send a valid `Authorization: Bearer <key>` header; keys are issued by Veritus and cannot be self-regenerated.'
+  - status: 404
+    title: Not found
+    meaning: The referenced customer or interaction does not exist or does not belong to your organization.
+    remediation: Confirm the resource id and that it was created under the same organization/environment.
+  - status: 409
+    title: Conflict / already exists
+    meaning: A customer with the supplied externalId already exists (natural-key uniqueness).
+    remediation: Treat as idempotent - the resource already exists; fetch or update it instead of re-creating.
+  - status: 422
+    title: Unprocessable entity
+    meaning: The request is well-formed but fails a business rule - most commonly a compliance check (respectful hours, frequency limits, cease-and-desist, model-validation-notice) or a conditional field requirement.
+    remediation: Read publicFacingMessage for the specific failed rule(s); retry when the compliance condition is satisfied (e.g. within respectful hours).
+  - status: 500
+    title: Internal server error
+    meaning: Unexpected server-side error.
+    remediation: Retry with backoff; if it persists, contact support with the requestId.
+bulk_partial_success:
+  note: >-
+    Bulk endpoints (/customers/bulk, /calls/bulk, sms & email import/bulk) return
+    200 with a data.summary (total/succeeded/failed) and a per-item data.results[]
+    array where each item carries its own success flag and error string. Inspect
+    per-item results even on a 200 response.

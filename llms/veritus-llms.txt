@@ -1,0 +1,35 @@
+# Veritus Agent API Platform
+
+## Docs
+
+- [Create Calls in Bulk](https://docs.veritus.com/api-reference/calls/bulk/post.md): Creates outbound voice calls to multiple customers in a single request. Each customer is processed independently and runs through the compliance engine. Returns partial success - some calls may be created while others fail validation or compliance checks.
+- [List Clients](https://docs.veritus.com/api-reference/clients/get.md): Retrieve all clients associated with your organization. Clients are sub-entities used to group customers.
+- [Create Call](https://docs.veritus.com/api-reference/customers/[customerId]/calls/post.md): Creates an outbound voice call to a customer. The customer is run through a compliance engine first. If compliance checks pass, the call is initiated. If the checks fail, the request will return an error with the specific compliance failure reasons.
+- [Cancel Drip Campaign](https://docs.veritus.com/api-reference/customers/[customerId]/drip-campaigns/[dripCampaignId]/delete.md): Cancel a drip campaign.
+- [Create Drip Campaign](https://docs.veritus.com/api-reference/customers/[customerId]/drip-campaigns/create.md): Enrolls a customer into a drip campaign. The customer is run through a compliance engine first. If compliance checks pass, the drip campaign is started immediately or scheduled for the next compliant time.
+- [Generate Email](https://docs.veritus.com/api-reference/customers/[customerId]/interactions/email/generate.md): Generate an AI-powered email response for a customer. The generated email can optionally be persisted as an outbound interaction.
+- [Import Email](https://docs.veritus.com/api-reference/customers/[customerId]/interactions/email/import.md): Import a single email interaction for a customer. Use this to sync historical emails or record email conversations from external systems.
+- [Import Emails in Bulk](https://docs.veritus.com/api-reference/customers/[customerId]/interactions/email/import/bulk.md): Import multiple email interactions for a customer in a single request. Returns partial success - some emails may be imported while others fail validation.
+- [Generate SMS](https://docs.veritus.com/api-reference/customers/[customerId]/interactions/sms/generate.md): Generate an AI-powered SMS response for a customer. The generated message can optionally be persisted as an outbound interaction.
+- [Import SMS](https://docs.veritus.com/api-reference/customers/[customerId]/interactions/sms/import.md): Import a single SMS interaction for a customer. Use this to sync historical SMS messages or record SMS conversations from external systems.
+- [Import SMS in Bulk](https://docs.veritus.com/api-reference/customers/[customerId]/interactions/sms/import/bulk.md): Import multiple SMS interactions for a customer in a single request. Returns partial success - some messages may be imported while others fail validation.
+- [Update Customer](https://docs.veritus.com/api-reference/customers/[customerId]/patch.md): Update an existing customer's information. All fields are optional - only provide the fields you want to update.
+- [Create Customers in Bulk](https://docs.veritus.com/api-reference/customers/bulk/post.md): Create multiple customers in a single request. Returns partial success - some customers may be created while others fail validation or already exist.
+- [Create Customer](https://docs.veritus.com/api-reference/customers/post.md): Create a new customer. Once created, you can use the customer ID to enroll them into drip campaigns or make outbound calls.
+- [Analyze Interaction](https://docs.veritus.com/api-reference/interactions/[interactionId]/analyze.md): Run on-demand analysis on an interaction to extract outcome variables. Supports SMS, voice, and email channels. Analysis is idempotent — if the interaction has already been analyzed, the existing results are returned.
+- [Create Call Webhook](https://docs.veritus.com/api-reference/webhooks/calls.md): Once a call is completed, we will send a webhook to the URL you provided.
+- [Drip Campaign Webhook](https://docs.veritus.com/api-reference/webhooks/drip-campaign.md): Once a call is created via a drip campaign, we will send a webhook to the URL you provided.
+- [Authentication](https://docs.veritus.com/guides/authentication.md): How to authenticate your requests to the Veritus Agent API
+- [Creating Calls](https://docs.veritus.com/guides/core-concepts/creating-calls.md): How to create calls with compliance built in
+- [Drip Campaigns](https://docs.veritus.com/guides/core-concepts/drip-campaigns.md): How to create and manage omnichannel drip campaigns
+- [Environments](https://docs.veritus.com/guides/environments.md): How to use the Veritus Agent API in production and sandbox environments
+- [Webhook Security](https://docs.veritus.com/guides/webhook-security.md): How to verify webhook signatures from Veritus Agent
+- [Introduction](https://docs.veritus.com/index.md): Welcome to the Veritus Agent API Platform
+
+## OpenAPI Specs
+
+- [openapi](https://docs.veritus.com/api-reference/openapi.json)
+
+## Optional
+
+- [Veritus Home](https://veritus.com)
