@@ -1,0 +1,351 @@
+{
+  "item": [
+    {
+      "id": "ce9e98ad-7539-460f-a6e8-f7f0e601e16a",
+      "name": "Interactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62d71764-6f52-40e3-b906-efa98241919d",
+          "name": "Run on-demand analysis on an interaction to extract outcome variables. Supports SMS, voice, and email channels. Analysis is idempotent — if the interaction has already been analyzed, the existing results are returned.",
+          "request": {
+            "name": "Run on-demand analysis on an interaction to extract outcome variables. Supports SMS, voice, and email channels. Analysis is idempotent — if the interaction has already been analyzed, the existing results are returned.",
+            "description": {
+              "content": "Run on-demand analysis on an interaction to extract outcome variables. Supports SMS, voice, and email channels. Analysis is idempotent — if the interaction has already been analyzed, the existing results are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "interactions",
+                ":interactionId",
+                "analyze"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "interactionId",
+                  "description": "(Required) The unique identifier of the interaction to analyze."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applyOutcomes\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "47771b77-b902-4f0e-9a6c-e889d4b9735e",
+              "name": "Analysis completed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interactions",
+                    ":interactionId",
+                    "analyze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "interactionId",
+                      "description": "(Required) The unique identifier of the interaction to analyze."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applyOutcomes\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": true,\n  \"data\": {\n    \"interactionId\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"channel\": \"sms\",\n    \"outputVariables\": {\n      \"stop-requests\": false,\n      \"human-follow-up-requested\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15307637-387e-45bd-9ff9-6ba86b7a2ca3",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interactions",
+                    ":interactionId",
+                    "analyze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "interactionId",
+                      "description": "(Required) The unique identifier of the interaction to analyze."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applyOutcomes\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Analysis was skipped.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd4aed0e-3741-4a77-919a-1cca8fd72408",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interactions",
+                    ":interactionId",
+                    "analyze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "interactionId",
+                      "description": "(Required) The unique identifier of the interaction to analyze."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applyOutcomes\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "838146ba-1be7-4b46-a804-a871b910050c",
+              "name": "Interaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "interactions",
+                    ":interactionId",
+                    "analyze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "interactionId",
+                      "description": "(Required) The unique identifier of the interaction to analyze."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applyOutcomes\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Interaction not found\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.veritus.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2ae5166e-84f6-4b7b-ad64-a63f69682d99",
+    "name": "Veritus Calls Interactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for the Veritus Agent Platform",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritus Calls Interactions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Interactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /interactions/{interactionId}/analyze",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/interactions/:interactionId/analyze",
+            "params": [
+              {
+                "name": "interactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the interaction to analyze."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Run on-demand analysis on an interaction to extract outcome variables. Supports SMS, voice, and email channels. Analysis is idempotent — if the interaction has already been analyzed, the existing results are returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

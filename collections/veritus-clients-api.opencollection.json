@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritus Calls Clients API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.veritus.com/api/v1/clients"
+          },
+          "docs": "Retrieve all clients associated with your organization. Clients are sub-entities used to group customers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

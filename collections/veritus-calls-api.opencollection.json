@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritus Calls API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Calls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /calls/bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/calls/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates outbound voice calls to multiple customers in a single request. Each customer is processed independently and runs through the compliance engine. Returns partial success - some calls may be created while others fail validation or compliance checks."
+        },
+        {
+          "info": {
+            "name": "POST /calls/get-signed-url",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/calls/get-signed-url",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get a signed URL for a call recording."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

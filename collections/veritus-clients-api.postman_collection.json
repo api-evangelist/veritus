@@ -1,0 +1,162 @@
+{
+  "item": [
+    {
+      "id": "973a8889-f567-42d5-963b-b2e413fe5ed5",
+      "name": "Clients",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3897a90-3c81-405f-b1cf-f6e173cbc8c5",
+          "name": "Retrieve all clients associated with your organization. Clients are sub-entities used to group customers.",
+          "request": {
+            "name": "Retrieve all clients associated with your organization. Clients are sub-entities used to group customers.",
+            "description": {
+              "content": "Retrieve all clients associated with your organization. Clients are sub-entities used to group customers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1778ce18-9f98-40d3-90db-f53a5a2229cd",
+              "name": "List of clients",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"name\": \"Acme Corp\"\n    },\n    {\n      \"id\": \"6ba7b810-9dad-11d1-80b4-00c04fd430c8\",\n      \"name\": \"Globex Inc\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2364a40-de87-454e-a0ad-fd29350626fa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.veritus.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "58d7476a-3777-4861-a4fa-c4cea66830e2",
+    "name": "Veritus Calls Clients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for the Veritus Agent Platform",
+      "type": "text/plain"
+    }
+  }
+}

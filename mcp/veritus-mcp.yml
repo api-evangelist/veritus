@@ -3,58 +3,62 @@ method: derived
 source: openapi/veritus-openapi.json
 status: candidate
 official: false
-notes: >-
-  No official/hosted Veritus MCP server was found (searched docs.veritus.com,
-  the site, and the web, July 2026). The following is a candidate tool surface
-  derived one-to-one from the Veritus API OpenAPI operations, suitable for a
-  generated MCP wrapper. Auth is a static bearer key; base URL is
-  https://app.veritus.com/api/v1 (production) or the sandbox host.
+notes: No official/hosted Veritus MCP server was found (searched docs.veritus.com, the site, and the web,
+  July 2026). The following is a candidate tool surface derived one-to-one from the Veritus API OpenAPI
+  operations, suitable for a generated MCP wrapper. Auth is a static bearer key; base URL is https://app.veritus.com/api/v1
+  (production) or the sandbox host.
 tools:
-  - name: create_customer
-    operation: POST /customers
-    description: Create a customer (deduplicated on externalId).
-  - name: bulk_create_customers
-    operation: POST /customers/bulk
-    description: Create up to 100 customers with partial-success results.
-  - name: update_customer
-    operation: PATCH /customers/{customerId}
-    description: Update an existing customer's fields.
-  - name: list_clients
-    operation: GET /clients
-    description: List client sub-entities in your organization.
-  - name: create_call
-    operation: POST /customers/{customerId}/calls
-    description: Place a compliance-checked outbound voice call to a customer.
-  - name: bulk_create_calls
-    operation: POST /calls/bulk
-    description: Place calls to up to 100 customers with partial-success results.
-  - name: get_call_signed_url
-    operation: POST /calls/get-signed-url
-    description: Get a time-limited signed URL for a call recording.
-  - name: enroll_drip_campaign
-    operation: POST /customers/{customerId}/drip-campaigns
-    description: Enroll a customer into an omnichannel drip campaign.
-  - name: cancel_drip_campaign
-    operation: DELETE /customers/{customerId}/drip-campaigns/{dripCampaignId}
-    description: Cancel a running drip campaign.
-  - name: import_sms
-    operation: POST /customers/{customerId}/interactions/sms/import
-    description: Import a single historical SMS interaction.
-  - name: bulk_import_sms
-    operation: POST /customers/{customerId}/interactions/sms/import/bulk
-    description: Import up to 100 SMS interactions.
-  - name: generate_sms
-    operation: POST /customers/{customerId}/interactions/sms/generate
-    description: Generate an AI SMS reply for a customer.
-  - name: import_email
-    operation: POST /customers/{customerId}/interactions/email/import
-    description: Import a single historical email interaction.
-  - name: bulk_import_email
-    operation: POST /customers/{customerId}/interactions/email/import/bulk
-    description: Import up to 100 email interactions.
-  - name: generate_email
-    operation: POST /customers/{customerId}/interactions/email/generate
-    description: Generate an AI email reply for a customer.
-  - name: analyze_interaction
-    operation: POST /interactions/{interactionId}/analyze
-    description: Run idempotent outcome analysis on an interaction (sms/voice/email).
+- name: create_customer
+  operation: POST /customers
+  description: Create a customer (deduplicated on externalId).
+- name: bulk_create_customers
+  operation: POST /customers/bulk
+  description: Create up to 100 customers with partial-success results.
+- name: update_customer
+  operation: PATCH /customers/{customerId}
+  description: Update an existing customer's fields.
+- name: list_clients
+  operation: GET /clients
+  description: List client sub-entities in your organization.
+- name: create_call
+  operation: POST /customers/{customerId}/calls
+  description: Place a compliance-checked outbound voice call to a customer.
+- name: bulk_create_calls
+  operation: POST /calls/bulk
+  description: Place calls to up to 100 customers with partial-success results.
+- name: get_call_signed_url
+  operation: POST /calls/get-signed-url
+  description: Get a time-limited signed URL for a call recording.
+- name: enroll_drip_campaign
+  operation: POST /customers/{customerId}/drip-campaigns
+  description: Enroll a customer into an omnichannel drip campaign.
+- name: cancel_drip_campaign
+  operation: DELETE /customers/{customerId}/drip-campaigns/{dripCampaignId}
+  description: Cancel a running drip campaign.
+- name: import_sms
+  operation: POST /customers/{customerId}/interactions/sms/import
+  description: Import a single historical SMS interaction.
+- name: bulk_import_sms
+  operation: POST /customers/{customerId}/interactions/sms/import/bulk
+  description: Import up to 100 SMS interactions.
+- name: generate_sms
+  operation: POST /customers/{customerId}/interactions/sms/generate
+  description: Generate an AI SMS reply for a customer.
+- name: import_email
+  operation: POST /customers/{customerId}/interactions/email/import
+  description: Import a single historical email interaction.
+- name: bulk_import_email
+  operation: POST /customers/{customerId}/interactions/email/import/bulk
+  description: Import up to 100 email interactions.
+- name: generate_email
+  operation: POST /customers/{customerId}/interactions/email/generate
+  description: Generate an AI email reply for a customer.
+- name: analyze_interaction
+  operation: POST /interactions/{interactionId}/analyze
+  description: Run idempotent outcome analysis on an interaction (sms/voice/email).
+deployment:
+  mode: none
+  verified: derived
+  tools: 16
+  checked: '2026-08-12'
+  source: catalog MCP census

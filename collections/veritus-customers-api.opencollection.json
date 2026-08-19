@@ -1,0 +1,260 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritus Calls Customers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new customer. Once created, you can use the customer ID to enroll them into drip campaigns or make outbound calls. "
+        },
+        {
+          "info": {
+            "name": "POST /customers/bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create multiple customers in a single request. Returns partial success - some customers may be created while others fail validation or already exist."
+        },
+        {
+          "info": {
+            "name": "PATCH /customers/{customerId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the customer to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing customer's information. All fields are optional - only provide the fields you want to update."
+        },
+        {
+          "info": {
+            "name": "POST /customers/{customerId}/drip-campaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId/drip-campaigns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrolls a customer into a drip campaign. The customer is run through a compliance engine first. If compliance checks pass, the drip campaign is started immediately or scheduled for the next compliant time."
+        },
+        {
+          "info": {
+            "name": "POST /customers/{customerId}/calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId/calls",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an outbound voice call to a customer. The customer is run through a compliance engine first. If compliance checks pass, the call is initiated. If the checks fail, the request will return an error with the specific compliance failure reasons."
+        },
+        {
+          "info": {
+            "name": "DELETE /customers/{customerId}/drip-campaigns/{dripCampaignId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId/drip-campaigns/:dripCampaignId",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a drip campaign."
+        },
+        {
+          "info": {
+            "name": "POST /customers/{customerId}/interactions/sms/import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId/interactions/sms/import",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the customer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import a single SMS interaction for a customer. Use this to sync historical SMS messages or record SMS conversations from external systems."
+        },
+        {
+          "info": {
+            "name": "POST /customers/{customerId}/interactions/sms/import/bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId/interactions/sms/import/bulk",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the customer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import multiple SMS interactions for a customer in a single request. Returns partial success - some messages may be imported while others fail validation."
+        },
+        {
+          "info": {
+            "name": "POST /customers/{customerId}/interactions/sms/generate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId/interactions/sms/generate",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the customer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate an AI-powered SMS response for a customer. The generated message can optionally be persisted as an outbound interaction."
+        },
+        {
+          "info": {
+            "name": "POST /customers/{customerId}/interactions/email/generate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId/interactions/email/generate",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the customer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate an AI-powered email response for a customer. The generated email can optionally be persisted as an outbound interaction."
+        },
+        {
+          "info": {
+            "name": "POST /customers/{customerId}/interactions/email/import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId/interactions/email/import",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the customer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import a single email interaction for a customer. Use this to sync historical emails or record email conversations from external systems."
+        },
+        {
+          "info": {
+            "name": "POST /customers/{customerId}/interactions/email/import/bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.veritus.com/api/v1/customers/:customerId/interactions/email/import/bulk",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the customer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import multiple email interactions for a customer in a single request. Returns partial success - some emails may be imported while others fail validation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,3687 @@
+{
+  "item": [
+    {
+      "id": "68ef3ca9-bf15-436f-a3b0-2952ce7fada2",
+      "name": "Customers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f6ee8c4-0a3f-4567-8dd2-3b48915882a5",
+          "name": "Create a new customer. Once created, you can use the customer ID to enroll them into drip campaigns or make outbound calls. ",
+          "request": {
+            "name": "Create a new customer. Once created, you can use the customer ID to enroll them into drip campaigns or make outbound calls. ",
+            "description": {
+              "content": "Create a new customer. Once created, you can use the customer ID to enroll them into drip campaigns or make outbound calls. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"address\": {\n    \"zip\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"clientId\": \"<uuid>\",\n  \"middleName\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"collections\": {\n    \"totalBalance\": \"<number>\",\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": 8139,\n      \"key_1\": 6300,\n      \"key_2\": \"string\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "435dd1c9-6140-403a-8ce7-b15b7a2f34d3",
+              "name": "Customer response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"address\": {\n    \"zip\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"clientId\": \"<uuid>\",\n  \"middleName\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"collections\": {\n    \"totalBalance\": \"<number>\",\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": 7655,\n      \"key_1\": 1931\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": true,\n  \"data\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"externalId\": \"CUST-12345\",\n    \"firstName\": \"John\",\n    \"middleName\": \"Christopher\",\n    \"lastName\": \"Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"primaryPhone\": \"+12025551234\",\n    \"secondaryPhone\": \"+12025555678\",\n    \"address\": {\n      \"line1\": \"123 Main St\",\n      \"line2\": \"Apt 4B\",\n      \"city\": \"Washington\",\n      \"state\": \"DC\",\n      \"zip\": \"20001\"\n    },\n    \"collections\": {\n      \"principalBalance\": 5000,\n      \"originalCreditor\": \"ABC Bank\",\n      \"accruedInterestAmount\": 250.5,\n      \"totalBalance\": 5250.5,\n      \"chargeOffDate\": \"2023-01-15\",\n      \"firstDelinquencyDate\": \"2022-06-01\",\n      \"settlementAggregationRate\": 0.65,\n      \"originalAccountNumber\": \"4111111111111111\",\n      \"itemizationBalance\": 5000,\n      \"postItemizationInterest\": 150.25,\n      \"postItemizationFees\": 100.25,\n      \"postItemizationCredits\": 50,\n      \"postItemizationPayments\": 200,\n      \"productType\": \"Credit Card\",\n      \"originalProductType\": \"Visa Signature\",\n      \"extensions\": null\n    },\n    \"ssnLastFour\": \"1234\",\n    \"dateOfBirth\": \"1985-03-15\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08d181ff-c3dd-4315-897b-f044bef9d973",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"address\": {\n    \"zip\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"clientId\": \"<uuid>\",\n  \"middleName\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"collections\": {\n    \"totalBalance\": \"<number>\",\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": 7655,\n      \"key_1\": 1931\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e78936f-690a-47e8-869a-d145c0caaf3c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"address\": {\n    \"zip\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"clientId\": \"<uuid>\",\n  \"middleName\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"collections\": {\n    \"totalBalance\": \"<number>\",\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": 7655,\n      \"key_1\": 1931\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38dc2807-0af2-4164-a390-c54c306d123b",
+              "name": "Customer already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"address\": {\n    \"zip\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"clientId\": \"<uuid>\",\n  \"middleName\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"collections\": {\n    \"totalBalance\": \"<number>\",\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": 7655,\n      \"key_1\": 1931\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"A customer with external ID 'abc1234' already exists.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc5abf8b-9be3-461b-b252-338158fcd863",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"address\": {\n    \"zip\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"clientId\": \"<uuid>\",\n  \"middleName\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"collections\": {\n    \"totalBalance\": \"<number>\",\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": 7655,\n      \"key_1\": 1931\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90b33f25-e137-408b-a2d0-ba5b53a5ea26",
+          "name": "Create multiple customers in a single request. Returns partial success - some customers may be created while others fail validation or already exist.",
+          "request": {
+            "name": "Create multiple customers in a single request. Returns partial success - some customers may be created while others fail validation or already exist.",
+            "description": {
+              "content": "Create multiple customers in a single request. Returns partial success - some customers may be created while others fail validation or already exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customers\": [\n    {\n      \"externalId\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhone\": \"<string>\",\n      \"address\": {\n        \"zip\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"clientId\": \"<uuid>\",\n      \"middleName\": \"<string>\",\n      \"secondaryPhone\": \"<string>\",\n      \"ssnLastFour\": \"<string>\",\n      \"dateOfBirth\": \"<string>\",\n      \"collections\": {\n        \"totalBalance\": \"<number>\",\n        \"principalBalance\": \"<number>\",\n        \"originalCreditor\": \"<string>\",\n        \"accruedInterestAmount\": \"<number>\",\n        \"chargeOffDate\": \"<date>\",\n        \"firstDelinquencyDate\": \"<date>\",\n        \"settlementAggregationRate\": \"<number>\",\n        \"originalAccountNumber\": \"<string>\",\n        \"itemizationBalance\": \"<number>\",\n        \"postItemizationInterest\": \"<number>\",\n        \"postItemizationFees\": \"<number>\",\n        \"postItemizationCredits\": \"<number>\",\n        \"postItemizationPayments\": \"<number>\",\n        \"productType\": \"<string>\",\n        \"originalProductType\": \"<string>\",\n        \"extensions\": {\n          \"key_0\": 2744.399207959717,\n          \"key_1\": 8787\n        }\n      }\n    },\n    {\n      \"externalId\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"primaryPhone\": \"<string>\",\n      \"address\": {\n        \"zip\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      \"clientId\": \"<uuid>\",\n      \"middleName\": \"<string>\",\n      \"secondaryPhone\": \"<string>\",\n      \"ssnLastFour\": \"<string>\",\n      \"dateOfBirth\": \"<string>\",\n      \"collections\": {\n        \"totalBalance\": \"<number>\",\n        \"principalBalance\": \"<number>\",\n        \"originalCreditor\": \"<string>\",\n        \"accruedInterestAmount\": \"<number>\",\n        \"chargeOffDate\": \"<date>\",\n        \"firstDelinquencyDate\": \"<date>\",\n        \"settlementAggregationRate\": \"<number>\",\n        \"originalAccountNumber\": \"<string>\",\n        \"itemizationBalance\": \"<number>\",\n        \"postItemizationInterest\": \"<number>\",\n        \"postItemizationFees\": \"<number>\",\n        \"postItemizationCredits\": \"<number>\",\n        \"postItemizationPayments\": \"<number>\",\n        \"productType\": \"<string>\",\n        \"originalProductType\": \"<string>\",\n        \"extensions\": {\n          \"key_0\": true,\n          \"key_1\": 3513.529269768889\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4940a489-f030-4063-a2e7-3c5d6c13ba6a",
+              "name": "Bulk customer creation response. Contains arrays of successful and failed customer creations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customers\": [\n    {\n      \"externalId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhone\": \"string\",\n      \"address\": {\n        \"zip\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\"\n      },\n      \"clientId\": \"365852f6-e373-8612-d00c-3c4742ebf958\",\n      \"middleName\": \"string\",\n      \"secondaryPhone\": \"string\",\n      \"ssnLastFour\": \"stri\",\n      \"dateOfBirth\": \"string\",\n      \"collections\": {\n        \"totalBalance\": 7336.233396430709,\n        \"principalBalance\": 374.00498459220665,\n        \"originalCreditor\": \"string\",\n        \"accruedInterestAmount\": 677.6914042426596,\n        \"chargeOffDate\": \"1948-10-28\",\n        \"firstDelinquencyDate\": \"2008-07-24\",\n        \"settlementAggregationRate\": 2668.3027258036786,\n        \"originalAccountNumber\": \"string\",\n        \"itemizationBalance\": 3934.4860888332823,\n        \"postItemizationInterest\": 7379.757229414939,\n        \"postItemizationFees\": 7712.0275062208475,\n        \"postItemizationCredits\": 5965.107717116886,\n        \"postItemizationPayments\": 1468.9192319222611,\n        \"productType\": \"string\",\n        \"originalProductType\": \"string\",\n        \"extensions\": {\n          \"key_0\": 8022.91764055464,\n          \"key_1\": 994\n        }\n      }\n    },\n    {\n      \"externalId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhone\": \"string\",\n      \"address\": {\n        \"zip\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\"\n      },\n      \"clientId\": \"de412d06-0f8d-5e01-0d71-235b2b5d55fd\",\n      \"middleName\": \"string\",\n      \"secondaryPhone\": \"string\",\n      \"ssnLastFour\": \"stri\",\n      \"dateOfBirth\": \"string\",\n      \"collections\": {\n        \"totalBalance\": 8885.494465395626,\n        \"principalBalance\": 1410.9224284591637,\n        \"originalCreditor\": \"string\",\n        \"accruedInterestAmount\": 4921.214596309047,\n        \"chargeOffDate\": \"1948-05-11\",\n        \"firstDelinquencyDate\": \"1978-08-24\",\n        \"settlementAggregationRate\": 2041.3904880399614,\n        \"originalAccountNumber\": \"string\",\n        \"itemizationBalance\": 8802.416467747607,\n        \"postItemizationInterest\": 4764.530563217021,\n        \"postItemizationFees\": 1390.126588865671,\n        \"postItemizationCredits\": 6596.493693437154,\n        \"postItemizationPayments\": 9227.635591770979,\n        \"productType\": \"string\",\n        \"originalProductType\": \"string\",\n        \"extensions\": {\n          \"key_0\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"838be160-334c-47aa-a559-d92d5cdc2ef4\",\n  \"success\": true,\n  \"data\": {\n    \"summary\": {\n      \"total\": 2,\n      \"succeeded\": 1,\n      \"failed\": 1\n    },\n    \"results\": [\n      {\n        \"externalId\": \"CUST-123456\",\n        \"success\": false,\n        \"error\": \"Customer with external ID 'CUST-123456' already exists\"\n      },\n      {\n        \"success\": true,\n        \"customer\": {\n          \"id\": \"7ff34749-ddef-4a1f-8568-296a2240a6cc\",\n          \"externalId\": \"CUST-987654\",\n          \"firstName\": \"Johnny\",\n          \"middleName\": \"Fuji\",\n          \"lastName\": \"Appleseed\",\n          \"email\": \"johnny@veritus.com\",\n          \"primaryPhone\": \"+14153334444\",\n          \"secondaryPhone\": null,\n          \"ssnLastFour\": \"5345\",\n          \"dateOfBirth\": \"1990-01-21\",\n          \"address\": {\n            \"line1\": \"123 Main St\",\n            \"line2\": \"Suite 200\",\n            \"city\": \"San Francisco\",\n            \"state\": \"CA\",\n            \"zip\": \"94131\"\n          },\n          \"collections\": {\n            \"principalBalance\": 5000,\n            \"originalCreditor\": \"ABC Bank\",\n            \"accruedInterestAmount\": 250.5,\n            \"totalBalance\": 5250.5,\n            \"chargeOffDate\": \"2023-01-15\",\n            \"firstDelinquencyDate\": \"2022-06-01\",\n            \"extensions\": null\n          },\n          \"createdAt\": \"2025-10-23T05:38:45.468Z\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59dba417-a812-44fb-9338-5a75796a8f60",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customers\": [\n    {\n      \"externalId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhone\": \"string\",\n      \"address\": {\n        \"zip\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\"\n      },\n      \"clientId\": \"365852f6-e373-8612-d00c-3c4742ebf958\",\n      \"middleName\": \"string\",\n      \"secondaryPhone\": \"string\",\n      \"ssnLastFour\": \"stri\",\n      \"dateOfBirth\": \"string\",\n      \"collections\": {\n        \"totalBalance\": 7336.233396430709,\n        \"principalBalance\": 374.00498459220665,\n        \"originalCreditor\": \"string\",\n        \"accruedInterestAmount\": 677.6914042426596,\n        \"chargeOffDate\": \"1948-10-28\",\n        \"firstDelinquencyDate\": \"2008-07-24\",\n        \"settlementAggregationRate\": 2668.3027258036786,\n        \"originalAccountNumber\": \"string\",\n        \"itemizationBalance\": 3934.4860888332823,\n        \"postItemizationInterest\": 7379.757229414939,\n        \"postItemizationFees\": 7712.0275062208475,\n        \"postItemizationCredits\": 5965.107717116886,\n        \"postItemizationPayments\": 1468.9192319222611,\n        \"productType\": \"string\",\n        \"originalProductType\": \"string\",\n        \"extensions\": {\n          \"key_0\": 8022.91764055464,\n          \"key_1\": 994\n        }\n      }\n    },\n    {\n      \"externalId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhone\": \"string\",\n      \"address\": {\n        \"zip\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\"\n      },\n      \"clientId\": \"de412d06-0f8d-5e01-0d71-235b2b5d55fd\",\n      \"middleName\": \"string\",\n      \"secondaryPhone\": \"string\",\n      \"ssnLastFour\": \"stri\",\n      \"dateOfBirth\": \"string\",\n      \"collections\": {\n        \"totalBalance\": 8885.494465395626,\n        \"principalBalance\": 1410.9224284591637,\n        \"originalCreditor\": \"string\",\n        \"accruedInterestAmount\": 4921.214596309047,\n        \"chargeOffDate\": \"1948-05-11\",\n        \"firstDelinquencyDate\": \"1978-08-24\",\n        \"settlementAggregationRate\": 2041.3904880399614,\n        \"originalAccountNumber\": \"string\",\n        \"itemizationBalance\": 8802.416467747607,\n        \"postItemizationInterest\": 4764.530563217021,\n        \"postItemizationFees\": 1390.126588865671,\n        \"postItemizationCredits\": 6596.493693437154,\n        \"postItemizationPayments\": 9227.635591770979,\n        \"productType\": \"string\",\n        \"originalProductType\": \"string\",\n        \"extensions\": {\n          \"key_0\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e4c46a9-a521-4032-a538-ae6ea9cf6d76",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customers\": [\n    {\n      \"externalId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhone\": \"string\",\n      \"address\": {\n        \"zip\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\"\n      },\n      \"clientId\": \"365852f6-e373-8612-d00c-3c4742ebf958\",\n      \"middleName\": \"string\",\n      \"secondaryPhone\": \"string\",\n      \"ssnLastFour\": \"stri\",\n      \"dateOfBirth\": \"string\",\n      \"collections\": {\n        \"totalBalance\": 7336.233396430709,\n        \"principalBalance\": 374.00498459220665,\n        \"originalCreditor\": \"string\",\n        \"accruedInterestAmount\": 677.6914042426596,\n        \"chargeOffDate\": \"1948-10-28\",\n        \"firstDelinquencyDate\": \"2008-07-24\",\n        \"settlementAggregationRate\": 2668.3027258036786,\n        \"originalAccountNumber\": \"string\",\n        \"itemizationBalance\": 3934.4860888332823,\n        \"postItemizationInterest\": 7379.757229414939,\n        \"postItemizationFees\": 7712.0275062208475,\n        \"postItemizationCredits\": 5965.107717116886,\n        \"postItemizationPayments\": 1468.9192319222611,\n        \"productType\": \"string\",\n        \"originalProductType\": \"string\",\n        \"extensions\": {\n          \"key_0\": 8022.91764055464,\n          \"key_1\": 994\n        }\n      }\n    },\n    {\n      \"externalId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhone\": \"string\",\n      \"address\": {\n        \"zip\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\"\n      },\n      \"clientId\": \"de412d06-0f8d-5e01-0d71-235b2b5d55fd\",\n      \"middleName\": \"string\",\n      \"secondaryPhone\": \"string\",\n      \"ssnLastFour\": \"stri\",\n      \"dateOfBirth\": \"string\",\n      \"collections\": {\n        \"totalBalance\": 8885.494465395626,\n        \"principalBalance\": 1410.9224284591637,\n        \"originalCreditor\": \"string\",\n        \"accruedInterestAmount\": 4921.214596309047,\n        \"chargeOffDate\": \"1948-05-11\",\n        \"firstDelinquencyDate\": \"1978-08-24\",\n        \"settlementAggregationRate\": 2041.3904880399614,\n        \"originalAccountNumber\": \"string\",\n        \"itemizationBalance\": 8802.416467747607,\n        \"postItemizationInterest\": 4764.530563217021,\n        \"postItemizationFees\": 1390.126588865671,\n        \"postItemizationCredits\": 6596.493693437154,\n        \"postItemizationPayments\": 9227.635591770979,\n        \"productType\": \"string\",\n        \"originalProductType\": \"string\",\n        \"extensions\": {\n          \"key_0\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2002773-51ee-4545-893e-2247678a272b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customers\": [\n    {\n      \"externalId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhone\": \"string\",\n      \"address\": {\n        \"zip\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\"\n      },\n      \"clientId\": \"365852f6-e373-8612-d00c-3c4742ebf958\",\n      \"middleName\": \"string\",\n      \"secondaryPhone\": \"string\",\n      \"ssnLastFour\": \"stri\",\n      \"dateOfBirth\": \"string\",\n      \"collections\": {\n        \"totalBalance\": 7336.233396430709,\n        \"principalBalance\": 374.00498459220665,\n        \"originalCreditor\": \"string\",\n        \"accruedInterestAmount\": 677.6914042426596,\n        \"chargeOffDate\": \"1948-10-28\",\n        \"firstDelinquencyDate\": \"2008-07-24\",\n        \"settlementAggregationRate\": 2668.3027258036786,\n        \"originalAccountNumber\": \"string\",\n        \"itemizationBalance\": 3934.4860888332823,\n        \"postItemizationInterest\": 7379.757229414939,\n        \"postItemizationFees\": 7712.0275062208475,\n        \"postItemizationCredits\": 5965.107717116886,\n        \"postItemizationPayments\": 1468.9192319222611,\n        \"productType\": \"string\",\n        \"originalProductType\": \"string\",\n        \"extensions\": {\n          \"key_0\": 8022.91764055464,\n          \"key_1\": 994\n        }\n      }\n    },\n    {\n      \"externalId\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"email\": \"string\",\n      \"primaryPhone\": \"string\",\n      \"address\": {\n        \"zip\": \"string\",\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\"\n      },\n      \"clientId\": \"de412d06-0f8d-5e01-0d71-235b2b5d55fd\",\n      \"middleName\": \"string\",\n      \"secondaryPhone\": \"string\",\n      \"ssnLastFour\": \"stri\",\n      \"dateOfBirth\": \"string\",\n      \"collections\": {\n        \"totalBalance\": 8885.494465395626,\n        \"principalBalance\": 1410.9224284591637,\n        \"originalCreditor\": \"string\",\n        \"accruedInterestAmount\": 4921.214596309047,\n        \"chargeOffDate\": \"1948-05-11\",\n        \"firstDelinquencyDate\": \"1978-08-24\",\n        \"settlementAggregationRate\": 2041.3904880399614,\n        \"originalAccountNumber\": \"string\",\n        \"itemizationBalance\": 8802.416467747607,\n        \"postItemizationInterest\": 4764.530563217021,\n        \"postItemizationFees\": 1390.126588865671,\n        \"postItemizationCredits\": 6596.493693437154,\n        \"postItemizationPayments\": 9227.635591770979,\n        \"productType\": \"string\",\n        \"originalProductType\": \"string\",\n        \"extensions\": {\n          \"key_0\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3037a49f-694b-463d-8131-f778ae749497",
+          "name": "Update an existing customer's information. All fields are optional - only provide the fields you want to update.",
+          "request": {
+            "name": "Update an existing customer's information. All fields are optional - only provide the fields you want to update.",
+            "description": {
+              "content": "Update an existing customer's information. All fields are optional - only provide the fields you want to update.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) The unique identifier of the customer to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"<string>\",\n  \"middleName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"collections\": {\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"totalBalance\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": 122.31465656721063,\n      \"key_1\": true\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e659005c-2c46-41ae-9316-b65ab3a2b6af",
+              "name": "Customer successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"middleName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"collections\": {\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"totalBalance\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": \"string\",\n      \"key_1\": 5009.697895783349\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": true,\n  \"data\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"externalId\": \"CUST-12345\",\n    \"firstName\": \"Jane\",\n    \"middleName\": \"Marie\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane.doe@example.com\",\n    \"primaryPhone\": \"+12025551234\",\n    \"secondaryPhone\": \"+12025555678\",\n    \"address\": {\n      \"line1\": \"456 Oak Ave\",\n      \"line2\": \"Unit 12\",\n      \"city\": \"Washington\",\n      \"state\": \"DC\",\n      \"zip\": \"20001\"\n    },\n    \"collections\": {\n      \"principalBalance\": 4500,\n      \"originalCreditor\": \"ABC Bank\",\n      \"accruedInterestAmount\": 250.5,\n      \"totalBalance\": 4750.5,\n      \"chargeOffDate\": \"2023-01-15\",\n      \"firstDelinquencyDate\": \"2022-06-01\",\n      \"settlementAggregationRate\": 0.65,\n      \"originalAccountNumber\": \"4111111111111111\",\n      \"itemizationBalance\": 4500,\n      \"postItemizationInterest\": 150.25,\n      \"postItemizationFees\": 100.25,\n      \"postItemizationCredits\": 50,\n      \"postItemizationPayments\": 200,\n      \"productType\": \"Credit Card\",\n      \"originalProductType\": \"Visa Signature\",\n      \"extensions\": null\n    },\n    \"ssnLastFour\": \"1234\",\n    \"dateOfBirth\": \"1985-03-15\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba7916cf-5189-4dfa-a4af-f19f2fb0cc4e",
+              "name": "Bad request - invalid data provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"middleName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"collections\": {\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"totalBalance\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": \"string\",\n      \"key_1\": 5009.697895783349\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Invalid request data\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5083fa30-4390-43b0-a465-dab94e0d0304",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"middleName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"collections\": {\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"totalBalance\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": \"string\",\n      \"key_1\": 5009.697895783349\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f49c5ba-36d1-402e-85cb-0283c98a8ae4",
+              "name": "Customer not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"middleName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"collections\": {\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"totalBalance\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": \"string\",\n      \"key_1\": 5009.697895783349\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Customer not found\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "346652a0-9f3d-48b4-abbf-7a52f0d61a67",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"<string>\",\n  \"middleName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<string>\",\n  \"primaryPhone\": \"<string>\",\n  \"secondaryPhone\": \"<string>\",\n  \"ssnLastFour\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"collections\": {\n    \"principalBalance\": \"<number>\",\n    \"originalCreditor\": \"<string>\",\n    \"accruedInterestAmount\": \"<number>\",\n    \"totalBalance\": \"<number>\",\n    \"chargeOffDate\": \"<date>\",\n    \"firstDelinquencyDate\": \"<date>\",\n    \"settlementAggregationRate\": \"<number>\",\n    \"originalAccountNumber\": \"<string>\",\n    \"itemizationBalance\": \"<number>\",\n    \"postItemizationInterest\": \"<number>\",\n    \"postItemizationFees\": \"<number>\",\n    \"postItemizationCredits\": \"<number>\",\n    \"postItemizationPayments\": \"<number>\",\n    \"productType\": \"<string>\",\n    \"originalProductType\": \"<string>\",\n    \"extensions\": {\n      \"key_0\": \"string\",\n      \"key_1\": 5009.697895783349\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fb77aea-684a-4663-8a88-5bd2503e7b11",
+          "name": "Enrolls a customer into a drip campaign. The customer is run through a compliance engine first. If compliance checks pass, the drip campaign is started immediately or scheduled for the next compliant time.",
+          "request": {
+            "name": "Enrolls a customer into a drip campaign. The customer is run through a compliance engine first. If compliance checks pass, the drip campaign is started immediately or scheduled for the next compliant time.",
+            "description": {
+              "content": "Enrolls a customer into a drip campaign. The customer is run through a compliance engine first. If compliance checks pass, the drip campaign is started immediately or scheduled for the next compliant time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "drip-campaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"campaignName\": \"<string>\",\n  \"webhook\": {\n    \"url\": \"<uri>\",\n    \"secretId\": \"<uuid>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be886229-b509-4213-81ce-8a65cdee31c7",
+          "name": "Creates an outbound voice call to a customer. The customer is run through a compliance engine first. If compliance checks pass, the call is initiated. If the checks fail, the request will return an error with the specific compliance failure reasons.",
+          "request": {
+            "name": "Creates an outbound voice call to a customer. The customer is run through a compliance engine first. If compliance checks pass, the call is initiated. If the checks fail, the request will return an error with the specific compliance failure reasons.",
+            "description": {
+              "content": "Creates an outbound voice call to a customer. The customer is run through a compliance engine first. If compliance checks pass, the call is initiated. If the checks fail, the request will return an error with the specific compliance failure reasons.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "calls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agentId\": \"<string>\",\n  \"webhook\": {\n    \"url\": \"<uri>\",\n    \"secretId\": \"<uuid>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "945d9e4b-35f5-4d01-babf-a480a3b6d930",
+              "name": "Create call response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentId\": \"<string>\",\n  \"webhook\": {\n    \"url\": \"<uri>\",\n    \"secretId\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"25deb7a2-ea2a-4993-8ad5-faed5367915b\",\n  \"success\": true,\n  \"data\": {\n    \"id\": \"f47ac10b-58cc-4372-a567-0e02b2c3d479\",\n    \"threadId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"toPhoneNumber\": \"+14155551234\",\n    \"fromPhoneNumber\": \"+14155559876\",\n    \"compliance\": {\n      \"passed\": true,\n      \"checksPassed\": [\n        {\n          \"id\": \"is-active\",\n          \"name\": \"Is Active\",\n          \"description\": \"Check if customer is active\",\n          \"reason\": \"Customer is active\"\n        },\n        {\n          \"id\": \"cease-and-desist-exclusion\",\n          \"name\": \"Cease and Desist Exclusion\",\n          \"description\": \"Prevent calling customers who have requested cease and desist\",\n          \"reason\": \"Customer has not requested cease and desist\"\n        },\n        {\n          \"id\": \"four-voice-call-per-day\",\n          \"name\": \"Four Voice Call Per Day\",\n          \"description\": \"Check if customer has had four or fewer voice calls today within the current respectful hours window\",\n          \"reason\": \"Customer has had 3 voice calls today within respectful hours window (America/Los_Angeles), within the limit of 4\"\n        }\n      ],\n      \"checksFailed\": []\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00780a07-fa0f-4652-be78-09dff285d352",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentId\": \"<string>\",\n  \"webhook\": {\n    \"url\": \"<uri>\",\n    \"secretId\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"25deb7a2-ea2a-4993-8ad5-faed5367915b\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dc5e8a1-1bed-4de0-a3c2-718c763fa74b",
+              "name": "Unprocessable entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentId\": \"<string>\",\n  \"webhook\": {\n    \"url\": \"<uri>\",\n    \"secretId\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"25deb7a2-ea2a-4993-8ad5-faed5367915b\",\n  \"publicFacingMessage\": \"Customer not eligible for call. Failed rules: Respectful Hours Check (Customer local time is 03:00 (outside respectful hours 8am-8:50pm)), Model Validation Notice Delivered (No Model Validation Notice has been sent)\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a14e3ad-5e25-4445-8693-ca07156ffe0f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "calls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agentId\": \"<string>\",\n  \"webhook\": {\n    \"url\": \"<uri>\",\n    \"secretId\": \"<uuid>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"25deb7a2-ea2a-4993-8ad5-faed5367915b\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "563805d2-52f4-4ce4-8631-d59440aba1ac",
+          "name": "Cancel a drip campaign.",
+          "request": {
+            "name": "Cancel a drip campaign.",
+            "description": {
+              "content": "Cancel a drip campaign.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "drip-campaigns",
+                ":dripCampaignId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5ddeb36d-c397-487f-bd86-b0b78461c40e",
+              "name": "Drip campaign canceled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "drip-campaigns",
+                    ":dripCampaignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c723ec71-a06f-45c7-969c-1d7fa7332e9e",
+          "name": "Import a single SMS interaction for a customer. Use this to sync historical SMS messages or record SMS conversations from external systems.",
+          "request": {
+            "name": "Import a single SMS interaction for a customer. Use this to sync historical SMS messages or record SMS conversations from external systems.",
+            "description": {
+              "content": "Import a single SMS interaction for a customer. Use this to sync historical SMS messages or record SMS conversations from external systems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "interactions",
+                "sms",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) The unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"threadId\": \"<uuid>\",\n  \"segments\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c555df9-958b-45cf-90e0-eb8cabb6264e",
+              "name": "SMS interaction successfully imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"threadId\": \"<uuid>\",\n  \"segments\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": true,\n  \"data\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"threadId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"channel\": \"sms\",\n    \"direction\": \"inbound\",\n    \"customerId\": \"7ff34749-ddef-4a1f-8568-296a2240a6cc\",\n    \"timestamp\": \"2024-01-15T10:30:00.000Z\",\n    \"createdAt\": \"2024-01-15T10:35:00.000Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53d3073c-7648-4fe4-9cca-1a4135160925",
+              "name": "Bad request - invalid data provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"threadId\": \"<uuid>\",\n  \"segments\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Invalid request data\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf5f3de1-fb1b-4ab7-aa32-1d9b779b371b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"threadId\": \"<uuid>\",\n  \"segments\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a793f2ba-d0e3-4929-b7c9-9159610ffe0c",
+              "name": "Customer not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"threadId\": \"<uuid>\",\n  \"segments\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Customer not found\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb856829-2446-4bc3-aadb-8fe97f08c355",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"body\": \"<string>\",\n  \"threadId\": \"<uuid>\",\n  \"segments\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff25f0f5-0dcb-445d-af23-5ffb3d1b68d1",
+          "name": "Import multiple SMS interactions for a customer in a single request. Returns partial success - some messages may be imported while others fail validation.",
+          "request": {
+            "name": "Import multiple SMS interactions for a customer in a single request. Returns partial success - some messages may be imported while others fail validation.",
+            "description": {
+              "content": "Import multiple SMS interactions for a customer in a single request. Returns partial success - some messages may be imported while others fail validation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "interactions",
+                "sms",
+                "import",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) The unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"from\": \"<string>\",\n      \"to\": \"<string>\",\n      \"body\": \"<string>\",\n      \"threadId\": \"<uuid>\",\n      \"segments\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b21002c-2c1d-43fd-bdd2-5dfd26ce2a63",
+              "name": "Bulk SMS import response. Contains arrays of successful and failed imports.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1959-07-16T11:04:16.589Z\",\n      \"from\": \"string\",\n      \"to\": \"string\",\n      \"body\": \"string\",\n      \"threadId\": \"5e95c62b-f97b-5c24-0c19-5fa9f7a2ac81\",\n      \"segments\": 5256\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"838be160-334c-47aa-a559-d92d5cdc2ef4\",\n  \"success\": true,\n  \"data\": {\n    \"summary\": {\n      \"total\": 2,\n      \"succeeded\": 1,\n      \"failed\": 1\n    },\n    \"results\": [\n      {\n        \"success\": true,\n        \"interaction\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"threadId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n          \"channel\": \"sms\",\n          \"direction\": \"inbound\",\n          \"customerId\": \"7ff34749-ddef-4a1f-8568-296a2240a6cc\",\n          \"timestamp\": \"2024-01-15T10:30:00.000Z\",\n          \"createdAt\": \"2024-01-15T10:35:00.000Z\"\n        }\n      },\n      {\n        \"success\": false,\n        \"index\": 1,\n        \"error\": \"Invalid phone number format\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e719269-350c-4afb-bba5-7745ec2bb2ef",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1959-07-16T11:04:16.589Z\",\n      \"from\": \"string\",\n      \"to\": \"string\",\n      \"body\": \"string\",\n      \"threadId\": \"5e95c62b-f97b-5c24-0c19-5fa9f7a2ac81\",\n      \"segments\": 5256\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1267693-64d5-40d3-8dc2-ef6c568e0b24",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1959-07-16T11:04:16.589Z\",\n      \"from\": \"string\",\n      \"to\": \"string\",\n      \"body\": \"string\",\n      \"threadId\": \"5e95c62b-f97b-5c24-0c19-5fa9f7a2ac81\",\n      \"segments\": 5256\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d0737c7-32fd-4962-84f8-4f0b56dcb4ec",
+              "name": "Customer not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1959-07-16T11:04:16.589Z\",\n      \"from\": \"string\",\n      \"to\": \"string\",\n      \"body\": \"string\",\n      \"threadId\": \"5e95c62b-f97b-5c24-0c19-5fa9f7a2ac81\",\n      \"segments\": 5256\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Customer not found\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f990c9fa-33ee-4feb-82ff-dd28720f5e46",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1959-07-16T11:04:16.589Z\",\n      \"from\": \"string\",\n      \"to\": \"string\",\n      \"body\": \"string\",\n      \"threadId\": \"5e95c62b-f97b-5c24-0c19-5fa9f7a2ac81\",\n      \"segments\": 5256\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fca0df5f-a8d2-4489-b9ba-eaf9b9dca7f5",
+          "name": "Generate an AI-powered SMS response for a customer. The generated message can optionally be persisted as an outbound interaction.",
+          "request": {
+            "name": "Generate an AI-powered SMS response for a customer. The generated message can optionally be persisted as an outbound interaction.",
+            "description": {
+              "content": "Generate an AI-powered SMS response for a customer. The generated message can optionally be persisted as an outbound interaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "interactions",
+                "sms",
+                "generate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) The unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71d43623-d74b-43b2-ba18-43d975d684f0",
+              "name": "SMS successfully generated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": true,\n  \"data\": {\n    \"message\": \"Hi John, thank you for reaching out. I'd be happy to help you with your account. Could you please confirm the best time to discuss your payment options?\",\n    \"threadId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3589d4a6-53a7-4539-b815-79f71a07fb62",
+              "name": "Bad request - invalid data provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Invalid request data\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cca343b0-7a59-43e0-afbb-eec98a260853",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6370f733-f4c4-4314-afc8-f016fedcb9b8",
+              "name": "Customer not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Customer not found\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a1999b4-cde4-42ec-bf2b-93610a878a99",
+              "name": "Unprocessable entity - validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"The 'to' field is required when persist is true\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2c752c9-c2f8-441a-9d73-47f4aafd9928",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "sms",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\",\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9693a4c6-d35b-4e0e-920c-526bf37ae030",
+          "name": "Generate an AI-powered email response for a customer. The generated email can optionally be persisted as an outbound interaction.",
+          "request": {
+            "name": "Generate an AI-powered email response for a customer. The generated email can optionally be persisted as an outbound interaction.",
+            "description": {
+              "content": "Generate an AI-powered email response for a customer. The generated email can optionally be persisted as an outbound interaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "interactions",
+                "email",
+                "generate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) The unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf9d3e1e-9459-403c-be20-58ad3a8c7aa1",
+              "name": "Email successfully generated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": true,\n  \"data\": {\n    \"htmlBody\": \"<p>Dear John,</p><p>Thank you for reaching out. I'd be happy to help you with your account. Could you please confirm the best time to discuss your payment options?</p><p>Best regards,<br>Sarah Mitchell</p>\",\n    \"plainTextBody\": \"Dear John,\\n\\nThank you for reaching out. I'd be happy to help you with your account. Could you please confirm the best time to discuss your payment options?\\n\\nBest regards,\\nSarah Mitchell\",\n    \"threadId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf008975-7ced-4383-989f-dc8412aeb01f",
+              "name": "Bad request - invalid data provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Invalid request data\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "100461ef-89c9-4239-9197-6a826299cd9e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c71064e7-9d22-4d52-abe9-d3ccae0f794d",
+              "name": "Customer not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Customer not found\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5467fe50-31e4-44be-9ab8-4227e9b4e8c7",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"persist\": true,\n  \"threadId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "260d9506-6f27-4e3d-842a-5440982b1f5b",
+          "name": "Import a single email interaction for a customer. Use this to sync historical emails or record email conversations from external systems.",
+          "request": {
+            "name": "Import a single email interaction for a customer. Use this to sync historical emails or record email conversations from external systems.",
+            "description": {
+              "content": "Import a single email interaction for a customer. Use this to sync historical emails or record email conversations from external systems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "interactions",
+                "email",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) The unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<email>\",\n  \"to\": [\n    \"<email>\"\n  ],\n  \"subject\": \"<string>\",\n  \"plainTextBody\": \"<string>\",\n  \"htmlBody\": \"<string>\",\n  \"threadId\": \"<string>\",\n  \"messageId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fb17e744-e0cb-4435-b2fc-0375f703a5a3",
+              "name": "Email interaction successfully imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<email>\",\n  \"to\": [\n    \"<email>\"\n  ],\n  \"subject\": \"<string>\",\n  \"plainTextBody\": \"<string>\",\n  \"htmlBody\": \"<string>\",\n  \"threadId\": \"<string>\",\n  \"messageId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": true,\n  \"data\": {\n    \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n    \"messageId\": \"abc123@mail.example.com\",\n    \"threadId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"channel\": \"email\",\n    \"direction\": \"inbound\",\n    \"customerId\": \"7ff34749-ddef-4a1f-8568-296a2240a6cc\",\n    \"timestamp\": \"2024-01-15T10:30:00.000Z\",\n    \"createdAt\": \"2024-01-15T10:35:00.000Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "321700a3-9b29-442d-b72e-ffd33c361899",
+              "name": "Bad request - invalid data provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<email>\",\n  \"to\": [\n    \"<email>\"\n  ],\n  \"subject\": \"<string>\",\n  \"plainTextBody\": \"<string>\",\n  \"htmlBody\": \"<string>\",\n  \"threadId\": \"<string>\",\n  \"messageId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Invalid request data\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d46c4bfa-cf16-467b-8abf-711139dc6ff8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<email>\",\n  \"to\": [\n    \"<email>\"\n  ],\n  \"subject\": \"<string>\",\n  \"plainTextBody\": \"<string>\",\n  \"htmlBody\": \"<string>\",\n  \"threadId\": \"<string>\",\n  \"messageId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fb3981b-4f5c-4656-9fd4-07155bf0e16a",
+              "name": "Customer not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<email>\",\n  \"to\": [\n    \"<email>\"\n  ],\n  \"subject\": \"<string>\",\n  \"plainTextBody\": \"<string>\",\n  \"htmlBody\": \"<string>\",\n  \"threadId\": \"<string>\",\n  \"messageId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Customer not found\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1ce519c-bc0d-4b8b-a0b4-7800edf9ee9f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"direction\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"from\": \"<email>\",\n  \"to\": [\n    \"<email>\"\n  ],\n  \"subject\": \"<string>\",\n  \"plainTextBody\": \"<string>\",\n  \"htmlBody\": \"<string>\",\n  \"threadId\": \"<string>\",\n  \"messageId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1248f395-173f-4cd9-947e-f2644d4d9335",
+          "name": "Import multiple email interactions for a customer in a single request. Returns partial success - some emails may be imported while others fail validation.",
+          "request": {
+            "name": "Import multiple email interactions for a customer in a single request. Returns partial success - some emails may be imported while others fail validation.",
+            "description": {
+              "content": "Import multiple email interactions for a customer in a single request. Returns partial success - some emails may be imported while others fail validation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "interactions",
+                "email",
+                "import",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) The unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"from\": \"<email>\",\n      \"to\": [\n        \"<email>\"\n      ],\n      \"subject\": \"<string>\",\n      \"plainTextBody\": \"<string>\",\n      \"htmlBody\": \"<string>\",\n      \"threadId\": \"<string>\",\n      \"messageId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49f98318-bd30-4894-9df4-265efdeebdb0",
+              "name": "Bulk email import response. Contains arrays of successful and failed imports.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1969-04-19T09:00:07.836Z\",\n      \"from\": \"s-ztmK1tG10@jkIJKYlFy.lrtz\",\n      \"to\": [\n        \"hyiqC@UJuqXObgNTVgh.ysxc\"\n      ],\n      \"subject\": \"string\",\n      \"plainTextBody\": \"string\",\n      \"htmlBody\": \"string\",\n      \"threadId\": \"string\",\n      \"messageId\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"838be160-334c-47aa-a559-d92d5cdc2ef4\",\n  \"success\": true,\n  \"data\": {\n    \"summary\": {\n      \"total\": 2,\n      \"succeeded\": 1,\n      \"failed\": 1\n    },\n    \"results\": [\n      {\n        \"success\": true,\n        \"interaction\": {\n          \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n          \"messageId\": \"abc123@mail.example.com\",\n          \"threadId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n          \"channel\": \"email\",\n          \"direction\": \"inbound\",\n          \"customerId\": \"7ff34749-ddef-4a1f-8568-296a2240a6cc\",\n          \"timestamp\": \"2024-01-15T10:30:00.000Z\",\n          \"createdAt\": \"2024-01-15T10:35:00.000Z\"\n        }\n      },\n      {\n        \"success\": false,\n        \"index\": 1,\n        \"error\": \"Email body is required\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a66f6dd3-4dcc-4c75-94b4-c71ad43c78a6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1969-04-19T09:00:07.836Z\",\n      \"from\": \"s-ztmK1tG10@jkIJKYlFy.lrtz\",\n      \"to\": [\n        \"hyiqC@UJuqXObgNTVgh.ysxc\"\n      ],\n      \"subject\": \"string\",\n      \"plainTextBody\": \"string\",\n      \"htmlBody\": \"string\",\n      \"threadId\": \"string\",\n      \"messageId\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "978aff2d-defa-4685-b0b9-820a44570cf8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1969-04-19T09:00:07.836Z\",\n      \"from\": \"s-ztmK1tG10@jkIJKYlFy.lrtz\",\n      \"to\": [\n        \"hyiqC@UJuqXObgNTVgh.ysxc\"\n      ],\n      \"subject\": \"string\",\n      \"plainTextBody\": \"string\",\n      \"htmlBody\": \"string\",\n      \"threadId\": \"string\",\n      \"messageId\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Unauthorized. Make sure to pass the correct authorization token.\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1529316-3089-40fb-a112-e5ab1448895b",
+              "name": "Customer not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1969-04-19T09:00:07.836Z\",\n      \"from\": \"s-ztmK1tG10@jkIJKYlFy.lrtz\",\n      \"to\": [\n        \"hyiqC@UJuqXObgNTVgh.ysxc\"\n      ],\n      \"subject\": \"string\",\n      \"plainTextBody\": \"string\",\n      \"htmlBody\": \"string\",\n      \"threadId\": \"string\",\n      \"messageId\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"publicFacingMessage\": \"Customer not found\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c511ee3-42a8-451e-880e-25b03e44ffa4",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "interactions",
+                    "email",
+                    "import",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) The unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"interactions\": [\n    {\n      \"direction\": \"inbound\",\n      \"timestamp\": \"1969-04-19T09:00:07.836Z\",\n      \"from\": \"s-ztmK1tG10@jkIJKYlFy.lrtz\",\n      \"to\": [\n        \"hyiqC@UJuqXObgNTVgh.ysxc\"\n      ],\n      \"subject\": \"string\",\n      \"plainTextBody\": \"string\",\n      \"htmlBody\": \"string\",\n      \"threadId\": \"string\",\n      \"messageId\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"96b887fb-9371-4515-b51e-28434f58dd7e\",\n  \"success\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.veritus.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2de62cdf-3ccb-41aa-a9ee-a0c3d37497d5",
+    "name": "Veritus Calls Customers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for the Veritus Agent Platform",
+      "type": "text/plain"
+    }
+  }
+}
