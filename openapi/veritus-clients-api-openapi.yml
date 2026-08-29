@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Veritus Calls Clients API
+  title: Veritus Clients API
   description: API for the Veritus Agent Platform
   license:
     name: MIT

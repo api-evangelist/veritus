@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Veritus Calls API
   description: API for the Veritus Agent Platform
@@ -121,37 +121,6 @@ paths:
       - Calls
 components:
   schemas:
-    BulkCreateCallsRequest:
-      required:
-      - agentId
-      - customerIds
-      type: object
-      properties:
-        agentId:
-          description: The agent identifier to use for all calls. This will be assigned to you.
-          type: string
-          format: uuid
-        customerIds:
-          description: Array of customer IDs to create calls for. Must contain between 1 and 100 unique customer IDs.
-          type: array
-          items:
-            type: string
-            format: uuid
-          minItems: 1
-          maxItems: 100
-        webhook:
-          description: Webhook-related information to send the call updates to.
-          type: object
-          properties:
-            url:
-              description: The endpoint to send the call updates to.
-              type: string
-              format: uri
-              nullable: true
-            secretId:
-              description: The ID of the webhook secret for signing.
-              type: string
-              format: uuid
     NewGetSignedUrlRequest:
       required:
       - callId
@@ -160,33 +129,6 @@ components:
           description: The call ID. This is returned from `/calls/create`
           type: string
           format: uuid
-    GetSignedUrlResponse:
-      required:
-      - requestId
-      - success
-      - data
-      properties:
-        requestId:
-          description: The request identifier for the call.
-          type: string
-          format: uuid
-        success:
-          description: Whether the call was successful.
-          type: boolean
-        data:
-          description: The data for the call.
-          type: object
-          required:
-          - callId
-          - signedUrl
-          properties:
-            callId:
-              description: The call ID. This is returned in `/calls/create`
-              type: string
-              format: uuid
-            signedUrl:
-              description: Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change).
-              type: string
     BulkCreateCallsResponse:
       required:
       - success
@@ -332,6 +274,64 @@ components:
                     error:
                       description: Error message describing why the call creation failed.
                       type: string
+    BulkCreateCallsRequest:
+      required:
+      - agentId
+      - customerIds
+      type: object
+      properties:
+        agentId:
+          description: The agent identifier to use for all calls. This will be assigned to you.
+          type: string
+          format: uuid
+        customerIds:
+          description: Array of customer IDs to create calls for. Must contain between 1 and 100 unique customer IDs.
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+        webhook:
+          description: Webhook-related information to send the call updates to.
+          type: object
+          properties:
+            url:
+              description: The endpoint to send the call updates to.
+              type: string
+              format: uri
+              nullable: true
+            secretId:
+              description: The ID of the webhook secret for signing.
+              type: string
+              format: uuid
+    GetSignedUrlResponse:
+      required:
+      - requestId
+      - success
+      - data
+      properties:
+        requestId:
+          description: The request identifier for the call.
+          type: string
+          format: uuid
+        success:
+          description: Whether the call was successful.
+          type: boolean
+        data:
+          description: The data for the call.
+          type: object
+          required:
+          - callId
+          - signedUrl
+          properties:
+            callId:
+              description: The call ID. This is returned in `/calls/create`
+              type: string
+              format: uuid
+            signedUrl:
+              description: Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change).
+              type: string
   securitySchemes:
     bearerAuth:
       type: http

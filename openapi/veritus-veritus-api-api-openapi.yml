@@ -1,0 +1,426 @@
+openapi: 3.2.0
+info:
+  title: Veritus API
+  description: API for the Veritus Agent Platform
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://sandbox.veritus.com/api/v1
+security:
+- bearerAuth: []
+tags:
+- name: Veritus API
+paths: {}
+webhooks:
+  /calls/webhook:
+    post:
+      description: Once a call is completed, we will send a webhook to the URL you provided.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallsWebhook'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+      tags:
+      - Veritus API
+  /drip-campaigns/webhook:
+    post:
+      description: Once a call is created via a drip campaign, we will send a webhook to the URL you provided.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DripCampaignWebhook'
+      tags:
+      - Veritus API
+components:
+  schemas:
+    CallEnded:
+      description: Details for the call that ended.
+      type: object
+      required:
+      - id
+      - customerId
+      - threadId
+      - toPhoneNumber
+      - fromPhoneNumber
+      - messages
+      - direction
+      - endedReason
+      - recordingUrl
+      - durationMs
+      - endedAt
+      - createdAt
+      properties:
+        id:
+          description: The ID of the interaction.
+          type: string
+          format: uuid
+        threadId:
+          description: The ID of the thread.
+          type: string
+          format: uuid
+        customerId:
+          description: The ID of the customer.
+          type: string
+          format: uuid
+        toPhoneNumber:
+          description: The phone number that the call was made to (E.164 format).
+          type: string
+        fromPhoneNumber:
+          description: The phone number that the call was made from (E.164 format).
+          type: string
+        messages:
+          description: The messages from the call.
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        direction:
+          description: Call direction.
+          type: string
+          enum:
+          - inbound
+          - outbound
+        endedReason:
+          description: The reason the call ended.
+          type: string
+          enum:
+          - customer-did-not-answer
+          - voicemail
+          - customer-ended-call
+          - agent-ended-call
+          - silence-timed-out
+          - unknown
+        recordingUrl:
+          description: Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change). For long-term access, you should either download and persist the file in your own storage.
+          type: string
+        inputVariables:
+          description: Key-value data passed to the agent at call start.
+          type: object
+        outputVariables:
+          description: Key-value data produced after the call (e.g., flags, extracted fields, outcomes). This field is `null` when no analysis is available (e.g., customer did not engage with agent or no analysis config exists).
+          type: object
+          nullable: true
+        durationMs:
+          description: Duration of the call, in milliseconds.
+          type: number
+        endedAt:
+          description: Timestamp of when the call ended. ISO-8601 format.
+          type: string
+        createdAt:
+          description: Timestamp of when the call was created. ISO-8601 format.
+          type: string
+    Message:
+      required:
+      - role
+      - message
+      - endTime
+      - secondsFromStart
+      - duration
+      properties:
+        role:
+          description: The role of the message.
+          type: string
+          enum:
+          - user
+          - agent
+        message:
+          description: Text content for the turn.
+          type: string
+        startedAt:
+          description: When the turn started. ISO-8601 format.
+          type: string
+        endedAt:
+          description: When the turn finished. ISO-8601 format.
+          type: string
+        secondsFromStart:
+          description: Offset from call start to the beginning of this turn, in seconds.
+          type: number
+        duration:
+          description: Duration of the turn, in milliseconds.
+          type: number
+    DripCampaignWebhook:
+      oneOf:
+      - $ref: '#/components/schemas/DripCampaignCallCreatedWebhook'
+      - $ref: '#/components/schemas/DripCampaignCallEndedWebhook'
+      - $ref: '#/components/schemas/DripCampaignSmsWebhook'
+    DripCampaignCallCreatedWebhook:
+      title: Call Created
+      required:
+      - type
+      - id
+      - name
+      - customerId
+      - status
+      - createdAt
+      - callCreated
+      properties:
+        type:
+          description: The type of webhook.
+          type: string
+          enum:
+          - drip-campaign.call-created
+        id:
+          description: The ID of the drip campaign.
+          type: string
+          format: uuid
+        name:
+          description: The name of the drip campaign.
+          type: string
+        customerId:
+          description: The ID of the customer.
+          type: string
+          format: uuid
+        status:
+          description: The status of the drip campaign.
+          type: string
+          enum:
+          - in-progress
+          - completed
+          - canceled
+        createdAt:
+          description: The timestamp of when the drip campaign was created. ISO-8601 format.
+          type: string
+          format: date-time
+        callCreated:
+          $ref: '#/components/schemas/CallCreated'
+    DripCampaignCallEndedWebhook:
+      title: Call Ended
+      required:
+      - type
+      - id
+      - name
+      - customerId
+      - status
+      - createdAt
+      properties:
+        type:
+          description: The type of webhook.
+          type: string
+          enum:
+          - drip-campaign.call-ended
+        id:
+          description: The ID of the drip campaign.
+          type: string
+          format: uuid
+        name:
+          description: The name of the drip campaign.
+          type: string
+        customerId:
+          description: The ID of the customer.
+          type: string
+          format: uuid
+        status:
+          description: The status of the drip campaign.
+          type: string
+          enum:
+          - in-progress
+          - completed
+          - canceled
+        createdAt:
+          description: The timestamp of when the drip campaign was created. ISO-8601 format.
+          type: string
+          format: date-time
+        callEnded:
+          $ref: '#/components/schemas/CallEnded'
+    Sms:
+      description: SMS Details
+      type: object
+      required:
+      - id
+      - toPhoneNumber
+      - fromPhoneNumber
+      - message
+      - createdAt
+      properties:
+        id:
+          description: The ID of the SMS.
+          type: string
+          format: uuid
+        message:
+          description: The message of the SMS.
+          type: string
+        toPhoneNumber:
+          description: The phone number that the SMS was sent to (E.164 format).
+          type: string
+        fromPhoneNumber:
+          description: The phone number that the SMS was sent from (E.164 format).
+          type: string
+        createdAt:
+          description: The timestamp of when the SMS was created. ISO-8601 format.
+          type: string
+          format: date-time
+    CallCreated:
+      description: Details for the call that was created.
+      type: object
+      required:
+      - id
+      - threadId
+      - toPhoneNumber
+      - fromPhoneNumber
+      properties:
+        id:
+          description: The ID of the call.
+          type: string
+          format: uuid
+        threadId:
+          description: The ID of the thread.
+          type: string
+          format: uuid
+        toPhoneNumber:
+          description: The phone number that the call was made to (E.164 format).
+          type: string
+        fromPhoneNumber:
+          description: The phone number that the call was made from (E.164 format).
+          type: string
+        createdAt:
+          description: The timestamp of when the call was created. ISO-8601 format.
+          type: string
+          format: date-time
+    DripCampaignSmsWebhook:
+      title: SMS
+      required:
+      - type
+      - id
+      - name
+      - threadId
+      - direction
+      - customerId
+      - status
+      - createdAt
+      - sms
+      properties:
+        type:
+          description: The type of webhook.
+          type: string
+          enum:
+          - drip-campaign.sms
+        id:
+          description: The ID of the drip campaign.
+          type: string
+          format: uuid
+        threadId:
+          description: The ID of the thread.
+          type: string
+          format: uuid
+        direction:
+          description: The direction of the SMS.
+          type: string
+          enum:
+          - inbound
+          - outbound
+        name:
+          description: The name of the drip campaign.
+          type: string
+        customerId:
+          description: The ID of the customer.
+          type: string
+          format: uuid
+        status:
+          description: The status of the drip campaign.
+          type: string
+          enum:
+          - in-progress
+          - completed
+          - canceled
+        createdAt:
+          description: The timestamp of when the drip campaign was created. ISO-8601 format.
+          type: string
+          format: date-time
+        sms:
+          $ref: '#/components/schemas/Sms'
+    CallCreatedWebhook:
+      title: Call Created
+      required:
+      - type
+      - id
+      - name
+      - customerId
+      - status
+      - createdAt
+      - callCreated
+      properties:
+        type:
+          description: The type of webhook.
+          type: string
+          enum:
+          - call-created
+        id:
+          description: The ID of the drip campaign.
+          type: string
+          format: uuid
+        name:
+          description: The name of the drip campaign.
+          type: string
+        customerId:
+          description: The ID of the customer.
+          type: string
+          format: uuid
+        status:
+          description: The status of the drip campaign.
+          type: string
+          enum:
+          - in-progress
+          - completed
+          - canceled
+        createdAt:
+          description: The timestamp of when the drip campaign was created. ISO-8601 format.
+          type: string
+          format: date-time
+        callCreated:
+          $ref: '#/components/schemas/CallCreated'
+    CallsWebhook:
+      oneOf:
+      - $ref: '#/components/schemas/CallCreatedWebhook'
+      - $ref: '#/components/schemas/CallEndedWebhook'
+      discriminator:
+        propertyName: type
+        mapping:
+          call-created: '#/components/schemas/CallCreatedWebhook'
+          call-ended: '#/components/schemas/CallEndedWebhook'
+    CallEndedWebhook:
+      title: Call Ended
+      required:
+      - type
+      - id
+      - name
+      - customerId
+      - status
+      - createdAt
+      properties:
+        type:
+          description: The type of webhook.
+          type: string
+          enum:
+          - call-ended
+        id:
+          description: The ID of the drip campaign.
+          type: string
+          format: uuid
+        name:
+          description: The name of the drip campaign.
+          type: string
+        customerId:
+          description: The ID of the customer.
+          type: string
+          format: uuid
+        status:
+          description: The status of the drip campaign.
+          type: string
+          enum:
+          - in-progress
+          - completed
+          - canceled
+        createdAt:
+          description: The timestamp of when the drip campaign was created. ISO-8601 format.
+          type: string
+          format: date-time
+        callEnded:
+          $ref: '#/components/schemas/CallEnded'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

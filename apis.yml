@@ -185,6 +185,16 @@ apis:
     url: lifecycle/veritus-lifecycle.yml
   - type: DataModel
     url: data-model/veritus-data-model.yml
+- aid: veritus:veritus-veritus-api-api
+  name: Veritus Veritus API
+  description: The Veritus API API from Veritus — 0 operation(s) for veritus api.
+  humanURL: https://docs.veritus.com/
+  baseURL: https://app.veritus.com/api/v1
+  tags:
+  - Veritus API
+  properties:
+  - type: OpenAPI
+    url: openapi/veritus-veritus-api-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

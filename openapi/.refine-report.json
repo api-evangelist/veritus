@@ -1,20 +1,49 @@
 {
   "provider": "veritus",
   "sources": [
-    "veritus-calls-api-openapi.yml",
-    "veritus-clients-api-openapi.yml",
-    "veritus-customers-api-openapi.yml",
-    "veritus-interactions-api-openapi.yml"
+    "_original/veritus-openapi.json"
   ],
   "outputs": [
     "veritus-calls-api-openapi.yml",
     "veritus-clients-api-openapi.yml",
     "veritus-customers-api-openapi.yml",
-    "veritus-interactions-api-openapi.yml"
+    "veritus-interactions-api-openapi.yml",
+    "veritus-veritus-api-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "veritus-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "veritus-openapi.json: tagged paths POST /customers -> Customers",
+    "veritus-openapi.json: tagged paths POST /customers/bulk -> Customers",
+    "veritus-openapi.json: tagged paths PATCH /customers/{customerId} -> Customers",
+    "veritus-openapi.json: tagged paths POST /customers/{customerId}/drip-campaigns -> Customers",
+    "veritus-openapi.json: tagged paths POST /customers/{customerId}/calls -> Customers",
+    "veritus-openapi.json: tagged paths POST /calls/bulk -> Calls",
+    "veritus-openapi.json: tagged paths DELETE /customers/{customerId}/drip-campaigns/{dripCampaignId} -> Customers",
+    "veritus-openapi.json: tagged paths POST /calls/get-signed-url -> Calls",
+    "veritus-openapi.json: tagged paths POST /customers/{customerId}/interactions/sms/import -> Customers",
+    "veritus-openapi.json: tagged paths POST /customers/{customerId}/interactions/sms/import/bulk -> Customers",
+    "veritus-openapi.json: tagged paths POST /customers/{customerId}/interactions/sms/generate -> Customers",
+    "veritus-openapi.json: tagged paths POST /customers/{customerId}/interactions/email/generate -> Customers",
+    "veritus-openapi.json: tagged paths POST /customers/{customerId}/interactions/email/import -> Customers",
+    "veritus-openapi.json: tagged paths POST /customers/{customerId}/interactions/email/import/bulk -> Customers",
+    "veritus-openapi.json: tagged paths GET /clients -> Clients",
+    "veritus-openapi.json: tagged paths POST /interactions/{interactionId}/analyze -> Interactions",
+    "veritus-openapi.json: tagged webhooks POST /calls/webhook -> Veritus API",
+    "veritus-openapi.json: tagged webhooks POST /drip-campaigns/webhook -> Veritus API",
+    "veritus-openapi.json: declared missing tag: Calls",
+    "veritus-openapi.json: declared missing tag: Clients",
+    "veritus-openapi.json: declared missing tag: Customers",
+    "veritus-openapi.json: declared missing tag: Interactions",
+    "veritus-openapi.json: declared missing tag: Veritus API"
+  ],
+  "skipped": [
+    "veritus-calls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "veritus-clients-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "veritus-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "veritus-interactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
