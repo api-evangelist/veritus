@@ -1,16 +1,13 @@
 aid: veritus
 name: Veritus
-description: >-
-  Veritus (Veritus Agent) is a San Francisco fintech (Y Combinator S2025) building
-  compliant, voice-first AI agents for the consumer-lending lifecycle - origination,
-  servicing, and collections. Its omnichannel platform places AI voice calls, SMS,
-  and email to borrowers, running every contact through a built-in compliance engine
-  (respectful hours, frequency limits, cease-and-desist, model-validation notices)
-  before outreach. The REST API (OpenAPI 3.1, bearer auth, isolated sandbox and
-  production environments, HMAC-signed webhooks) lets lenders, servicers, and
-  collections agencies create customers, place compliance-checked calls, run
-  omnichannel drip campaigns, import and analyze SMS/email interactions, and
-  retrieve call recordings.
+description: Veritus (Veritus Agent) is a San Francisco fintech (Y Combinator S2025) building compliant,
+  voice-first AI agents for the consumer-lending lifecycle - origination, servicing, and collections.
+  Its omnichannel platform places AI voice calls, SMS, and email to borrowers, running every contact through
+  a built-in compliance engine (respectful hours, frequency limits, cease-and-desist, model-validation
+  notices) before outreach. The REST API (OpenAPI 3.1, bearer auth, isolated sandbox and production environments,
+  HMAC-signed webhooks) lets lenders, servicers, and collections agencies create customers, place compliance-checked
+  calls, run omnichannel drip campaigns, import and analyze SMS/email interactions, and retrieve call
+  recordings.
 deliveryModel:
   model: saas
   open_source: false
@@ -47,7 +44,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-09-16'
 tags:
 - Company
 - Fintech
@@ -188,7 +185,7 @@ apis:
   - type: DataModel
     url: data-model/veritus-data-model.yml
 - aid: veritus:veritus-veritus-api-api
-  name: Veritus Veritus API
+  name: Veritus API
   description: The Veritus API API from Veritus — 0 operation(s) for veritus api.
   humanURL: https://docs.veritus.com/
   baseURL: https://app.veritus.com/api/v1
@@ -205,7 +202,10 @@ maintainers:
 common:
 - type: X-MCPServerCandidate
   url: mcp/veritus-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: Overlay
   url: overlays/veritus-openapi-overlay.yaml
 - type: Website
