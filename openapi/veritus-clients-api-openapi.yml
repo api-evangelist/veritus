@@ -40,6 +40,10 @@ paths:
                 success: false
       tags:
       - Clients
+      summary: Get clients
+      x-summary-source: derived
+      operationId: getClients
+      x-operation-id-source: derived
 components:
   schemas:
     Client:

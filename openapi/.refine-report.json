@@ -38,12 +38,14 @@
     "veritus-openapi.json: declared missing tag: Clients",
     "veritus-openapi.json: declared missing tag: Customers",
     "veritus-openapi.json: declared missing tag: Interactions",
-    "veritus-openapi.json: declared missing tag: Veritus API"
+    "veritus-openapi.json: declared missing tag: Veritus API",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "veritus-calls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "veritus-clients-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "veritus-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "veritus-interactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "veritus-interactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "veritus-veritus-api-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

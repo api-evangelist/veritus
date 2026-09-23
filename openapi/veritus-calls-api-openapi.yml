@@ -101,6 +101,10 @@ paths:
                 success: false
       tags:
       - Calls
+      summary: Create calls bulk
+      x-summary-source: derived
+      operationId: postCallsBulk
+      x-operation-id-source: derived
   /calls/get-signed-url:
     post:
       description: Get a signed URL for a call recording.
@@ -119,16 +123,70 @@ paths:
                 $ref: '#/components/schemas/GetSignedUrlResponse'
       tags:
       - Calls
+      summary: Create calls get signed url
+      x-summary-source: derived
+      operationId: postCallsGetSignedUrl
+      x-operation-id-source: derived
 components:
   schemas:
-    NewGetSignedUrlRequest:
+    BulkCreateCallsRequest:
       required:
-      - callId
+      - agentId
+      - customerIds
+      type: object
       properties:
-        callId:
-          description: The call ID. This is returned from `/calls/create`
+        agentId:
+          description: The agent identifier to use for all calls. This will be assigned to you.
           type: string
           format: uuid
+        customerIds:
+          description: Array of customer IDs to create calls for. Must contain between 1 and 100 unique customer IDs.
+          type: array
+          items:
+            type: string
+            format: uuid
+          minItems: 1
+          maxItems: 100
+        webhook:
+          description: Webhook-related information to send the call updates to.
+          type: object
+          properties:
+            url:
+              description: The endpoint to send the call updates to.
+              type: string
+              format: uri
+              nullable: true
+            secretId:
+              description: The ID of the webhook secret for signing.
+              type: string
+              format: uuid
+    GetSignedUrlResponse:
+      required:
+      - requestId
+      - success
+      - data
+      properties:
+        requestId:
+          description: The request identifier for the call.
+          type: string
+          format: uuid
+        success:
+          description: Whether the call was successful.
+          type: boolean
+        data:
+          description: The data for the call.
+          type: object
+          required:
+          - callId
+          - signedUrl
+          properties:
+            callId:
+              description: The call ID. This is returned in `/calls/create`
+              type: string
+              format: uuid
+            signedUrl:
+              description: Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change).
+              type: string
     BulkCreateCallsResponse:
       required:
       - success
@@ -274,64 +332,14 @@ components:
                     error:
                       description: Error message describing why the call creation failed.
                       type: string
-    BulkCreateCallsRequest:
+    NewGetSignedUrlRequest:
       required:
-      - agentId
-      - customerIds
-      type: object
+      - callId
       properties:
-        agentId:
-          description: The agent identifier to use for all calls. This will be assigned to you.
+        callId:
+          description: The call ID. This is returned from `/calls/create`
           type: string
           format: uuid
-        customerIds:
-          description: Array of customer IDs to create calls for. Must contain between 1 and 100 unique customer IDs.
-          type: array
-          items:
-            type: string
-            format: uuid
-          minItems: 1
-          maxItems: 100
-        webhook:
-          description: Webhook-related information to send the call updates to.
-          type: object
-          properties:
-            url:
-              description: The endpoint to send the call updates to.
-              type: string
-              format: uri
-              nullable: true
-            secretId:
-              description: The ID of the webhook secret for signing.
-              type: string
-              format: uuid
-    GetSignedUrlResponse:
-      required:
-      - requestId
-      - success
-      - data
-      properties:
-        requestId:
-          description: The request identifier for the call.
-          type: string
-          format: uuid
-        success:
-          description: Whether the call was successful.
-          type: boolean
-        data:
-          description: The data for the call.
-          type: object
-          required:
-          - callId
-          - signedUrl
-          properties:
-            callId:
-              description: The call ID. This is returned in `/calls/create`
-              type: string
-              format: uuid
-            signedUrl:
-              description: Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change).
-              type: string
   securitySchemes:
     bearerAuth:
       type: http

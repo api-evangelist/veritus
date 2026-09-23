@@ -14,7 +14,7 @@ tags:
 paths:
   /customers:
     post:
-      description: 'Create a new customer. Once created, you can use the customer ID to enroll them into drip campaigns or make outbound calls. '
+      description: Create a new customer. Once created, you can use the customer ID to enroll them into drip campaigns or make outbound calls.
       requestBody:
         content:
           application/json:
@@ -97,6 +97,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Create customers
+      x-summary-source: derived
+      operationId: postCustomers
+      x-operation-id-source: derived
   /customers/bulk:
     post:
       description: Create multiple customers in a single request. Returns partial success - some customers may be created while others fail validation or already exist.
@@ -176,6 +180,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Create customers bulk
+      x-summary-source: derived
+      operationId: postCustomersBulk
+      x-operation-id-source: derived
   /customers/{customerId}:
     patch:
       description: Update an existing customer's information. All fields are optional - only provide the fields you want to update.
@@ -270,6 +278,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Update customers by customer id
+      x-summary-source: derived
+      operationId: patchCustomersByCustomerId
+      x-operation-id-source: derived
   /customers/{customerId}/drip-campaigns:
     post:
       description: Enrolls a customer into a drip campaign. The customer is run through a compliance engine first. If compliance checks pass, the drip campaign is started immediately or scheduled for the next compliant time.
@@ -280,6 +292,10 @@ paths:
               $ref: '#/components/schemas/CustomersDripCampaignsPostRequest'
       tags:
       - Customers
+      summary: Create customers by customer id drip campaigns
+      x-summary-source: derived
+      operationId: postCustomersByCustomerIdDripCampaigns
+      x-operation-id-source: derived
   /customers/{customerId}/calls:
     post:
       description: Creates an outbound voice call to a customer. The customer is run through a compliance engine first. If compliance checks pass, the call is initiated. If the checks fail, the request will return an error with the specific compliance failure reasons.
@@ -344,6 +360,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Create customers by customer id calls
+      x-summary-source: derived
+      operationId: postCustomersByCustomerIdCalls
+      x-operation-id-source: derived
   /customers/{customerId}/drip-campaigns/{dripCampaignId}:
     delete:
       description: Cancel a drip campaign.
@@ -364,6 +384,10 @@ paths:
           content: {}
       tags:
       - Customers
+      summary: Delete customers by customer id drip campaigns by drip campaign id
+      x-summary-source: derived
+      operationId: deleteCustomersByCustomerIdDripCampaignsByDripCampaignId
+      x-operation-id-source: derived
   /customers/{customerId}/interactions/sms/import:
     post:
       description: Import a single SMS interaction for a customer. Use this to sync historical SMS messages or record SMS conversations from external systems.
@@ -432,6 +456,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Create customers by customer id interactions sms import
+      x-summary-source: derived
+      operationId: postCustomersByCustomerIdInteractionsSmsImport
+      x-operation-id-source: derived
   /customers/{customerId}/interactions/sms/import/bulk:
     post:
       description: Import multiple SMS interactions for a customer in a single request. Returns partial success - some messages may be imported while others fail validation.
@@ -509,6 +537,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Create customers by customer id interactions sms import bulk
+      x-summary-source: derived
+      operationId: postCustomersByCustomerIdInteractionsSmsImportBulk
+      x-operation-id-source: derived
   /customers/{customerId}/interactions/sms/generate:
     post:
       description: Generate an AI-powered SMS response for a customer. The generated message can optionally be persisted as an outbound interaction.
@@ -580,6 +612,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Create customers by customer id interactions sms generate
+      x-summary-source: derived
+      operationId: postCustomersByCustomerIdInteractionsSmsGenerate
+      x-operation-id-source: derived
   /customers/{customerId}/interactions/email/generate:
     post:
       description: Generate an AI-powered email response for a customer. The generated email can optionally be persisted as an outbound interaction.
@@ -652,6 +688,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Create customers by customer id interactions email generate
+      x-summary-source: derived
+      operationId: postCustomersByCustomerIdInteractionsEmailGenerate
+      x-operation-id-source: derived
   /customers/{customerId}/interactions/email/import:
     post:
       description: Import a single email interaction for a customer. Use this to sync historical emails or record email conversations from external systems.
@@ -721,6 +761,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Create customers by customer id interactions email import
+      x-summary-source: derived
+      operationId: postCustomersByCustomerIdInteractionsEmailImport
+      x-operation-id-source: derived
   /customers/{customerId}/interactions/email/import/bulk:
     post:
       description: Import multiple email interactions for a customer in a single request. Returns partial success - some emails may be imported while others fail validation.
@@ -799,6 +843,10 @@ paths:
                 success: false
       tags:
       - Customers
+      summary: Create customers by customer id interactions email import bulk
+      x-summary-source: derived
+      operationId: postCustomersByCustomerIdInteractionsEmailImportBulk
+      x-operation-id-source: derived
 components:
   schemas:
     SmsImportBulkResponse:
@@ -874,16 +922,97 @@ components:
                     error:
                       description: Error message explaining why the import failed.
                       type: string
-    BulkCreateCustomersRequest:
+    BulkCreateCustomersResponse:
       required:
-      - customers
+      - success
+      - requestId
+      - data
       type: object
       properties:
-        customers:
-          description: Array of customers to create.
+        requestId:
+          description: The request identifier.
+          type: string
+          format: uuid
+        success:
+          description: Whether the bulk operation completed successfully.
+          type: boolean
+        data:
+          description: Results of the bulk customer creation.
+          type: object
+          required:
+          - results
+          - summary
+          properties:
+            summary:
+              description: Summary statistics for the bulk operation.
+              type: object
+              required:
+              - total
+              - succeeded
+              - failed
+              properties:
+                total:
+                  description: Total number of customers in the request.
+                  type: integer
+                succeeded:
+                  description: Number of customers successfully created.
+                  type: integer
+                failed:
+                  description: Number of customers that failed to create.
+                  type: integer
+            results:
+              description: Array of results for each customer creation attempt, in the same order as the request.
+              type: array
+              items:
+                $ref: '#/components/schemas/BulkCustomerResult'
+    ComplianceCheck:
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - reason
+      properties:
+        id:
+          description: The unique identifier for the compliance check.
+          type: string
+        name:
+          description: The human-readable name of the compliance check.
+          type: string
+        description:
+          description: A description of what the compliance check does.
+          type: string
+        reason:
+          description: The reason why the check passed or failed.
+          type: string
+    SmsImportBulkRequest:
+      required:
+      - interactions
+      type: object
+      properties:
+        interactions:
+          description: Array of SMS interactions to import. Must contain between 1 and 100 items.
           type: array
           items:
-            $ref: '#/components/schemas/CreateCustomerRequest'
+            $ref: '#/components/schemas/SmsImportRequest'
+          minItems: 1
+          maxItems: 100
+    SmsImportResponse:
+      required:
+      - success
+      - requestId
+      - data
+      type: object
+      properties:
+        requestId:
+          description: The request identifier.
+          type: string
+          format: uuid
+        success:
+          description: Whether the import was successful.
+          type: boolean
+        data:
+          $ref: '#/components/schemas/SmsInteractionData'
     SmsInteractionData:
       required:
       - id
@@ -926,6 +1055,182 @@ components:
           description: When the interaction was created in the system. ISO-8601 format.
           type: string
           format: date-time
+    EmailImportBulkRequest:
+      required:
+      - interactions
+      type: object
+      properties:
+        interactions:
+          description: Array of email interactions to import. Must contain between 1 and 100 items.
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailImportRequest'
+          minItems: 1
+          maxItems: 100
+    EmailInteractionData:
+      required:
+      - id
+      - threadId
+      - channel
+      - direction
+      - customerId
+      - timestamp
+      - createdAt
+      type: object
+      properties:
+        id:
+          description: The unique identifier of the imported interaction.
+          type: string
+          format: uuid
+        messageId:
+          description: The message identifier from the email system.
+          type: string
+        threadId:
+          description: The thread identifier for grouping related emails.
+          type: string
+          format: uuid
+        channel:
+          description: The communication channel.
+          type: string
+          enum:
+          - email
+        direction:
+          description: The direction of the email.
+          type: string
+          enum:
+          - inbound
+          - outbound
+        customerId:
+          description: The customer identifier.
+          type: string
+          format: uuid
+        timestamp:
+          description: When the email was sent or received. ISO-8601 format.
+          type: string
+          format: date-time
+        createdAt:
+          description: When the interaction was created in the system. ISO-8601 format.
+          type: string
+          format: date-time
+    BulkCustomerResult:
+      oneOf:
+      - $ref: '#/components/schemas/BulkCustomerSuccess'
+      - $ref: '#/components/schemas/BulkCustomerFailure'
+      discriminator:
+        propertyName: success
+        mapping:
+          'true': '#/components/schemas/BulkCustomerSuccess'
+          'false': '#/components/schemas/BulkCustomerFailure'
+    SmsImportRequest:
+      required:
+      - direction
+      - timestamp
+      - from
+      - to
+      - body
+      type: object
+      properties:
+        direction:
+          description: The direction of the SMS message.
+          type: string
+          enum:
+          - inbound
+          - outbound
+        timestamp:
+          description: When the message was sent or received. ISO-8601 format.
+          type: string
+          format: date-time
+        from:
+          description: The sender's phone number in E.164 format (e.g., +12025551234).
+          type: string
+        to:
+          description: The recipient's phone number in E.164 format (e.g., +12025551234).
+          type: string
+        body:
+          description: The message content. Must be at least 1 character.
+          type: string
+          minLength: 1
+        threadId:
+          description: Optional thread identifier to group related messages together.
+          type: string
+          format: uuid
+        segments:
+          description: The number of SMS segments for this message. If not provided, it will be calculated automatically based on the message body.
+          type: integer
+          minimum: 1
+    EmailImportBulkResponse:
+      required:
+      - success
+      - requestId
+      - data
+      type: object
+      properties:
+        requestId:
+          description: The request identifier.
+          type: string
+          format: uuid
+        success:
+          description: Whether the bulk operation completed.
+          type: boolean
+        data:
+          type: object
+          required:
+          - results
+          - summary
+          properties:
+            summary:
+              description: Summary statistics for the bulk operation.
+              type: object
+              required:
+              - total
+              - succeeded
+              - failed
+              properties:
+                total:
+                  description: Total number of emails in the request.
+                  type: integer
+                succeeded:
+                  description: Number of emails successfully imported.
+                  type: integer
+                failed:
+                  description: Number of emails that failed to import.
+                  type: integer
+            results:
+              description: Array of results for each import attempt.
+              type: array
+              items:
+                oneOf:
+                - title: Success Result
+                  type: object
+                  required:
+                  - success
+                  - interaction
+                  properties:
+                    success:
+                      description: Indicates successful import.
+                      type: boolean
+                      enum:
+                      - true
+                    interaction:
+                      $ref: '#/components/schemas/EmailInteractionData'
+                - title: Failure Result
+                  type: object
+                  required:
+                  - success
+                  - index
+                  - error
+                  properties:
+                    success:
+                      description: Indicates failed import.
+                      type: boolean
+                      enum:
+                      - false
+                    index:
+                      description: The index of the failed email in the request array.
+                      type: integer
+                    error:
+                      description: Error message explaining why the import failed.
+                      type: string
     CreateCustomerRequest:
       required:
       - externalId
@@ -1071,28 +1376,36 @@ components:
               type: object
               additionalProperties: true
               nullable: true
-    SmsImportBulkRequest:
+    SmsGenerateRequest:
       required:
-      - interactions
+      - from
       type: object
       properties:
-        interactions:
-          description: Array of SMS interactions to import. Must contain between 1 and 100 items.
+        from:
+          description: The organization's phone number in E.164 format. Used in prompt context for generating the response.
+          type: string
+        to:
+          description: The customer's phone number in E.164 format. Required when persist is true.
+          type: string
+        persist:
+          description: Whether to save the generated message as an outbound interaction. Defaults to true.
+          type: boolean
+          default: true
+        threadId:
+          description: Optional thread identifier for grouping the persisted message with related conversations.
+          type: string
+          format: uuid
+    BulkCreateCustomersRequest:
+      required:
+      - customers
+      type: object
+      properties:
+        customers:
+          description: Array of customers to create.
           type: array
           items:
-            $ref: '#/components/schemas/SmsImportRequest'
-          minItems: 1
-          maxItems: 100
-    BulkCustomerResult:
-      oneOf:
-      - $ref: '#/components/schemas/BulkCustomerSuccess'
-      - $ref: '#/components/schemas/BulkCustomerFailure'
-      discriminator:
-        propertyName: success
-        mapping:
-          'true': '#/components/schemas/BulkCustomerSuccess'
-          'false': '#/components/schemas/BulkCustomerFailure'
-    SmsImportResponse:
+            $ref: '#/components/schemas/CreateCustomerRequest'
+    EmailGenerateResponse:
       required:
       - success
       - requestId
@@ -1104,10 +1417,24 @@ components:
           type: string
           format: uuid
         success:
-          description: Whether the import was successful.
+          description: Whether the generation was successful.
           type: boolean
         data:
-          $ref: '#/components/schemas/SmsInteractionData'
+          type: object
+          required:
+          - htmlBody
+          - plainTextBody
+          properties:
+            htmlBody:
+              description: The AI-generated email response in HTML format.
+              type: string
+            plainTextBody:
+              description: The AI-generated email response in plain text format.
+              type: string
+            threadId:
+              description: The thread identifier. Only present if the email was persisted.
+              type: string
+              format: uuid
     CreateCallResponse:
       required:
       - success
@@ -1146,516 +1473,6 @@ components:
             compliance:
               description: The compliance results for the call.
               $ref: '#/components/schemas/Compliance'
-    EmailGenerateRequest:
-      type: object
-      properties:
-        persist:
-          description: Whether to save the generated email as an outbound interaction. Defaults to true.
-          type: boolean
-          default: true
-        threadId:
-          description: Optional thread identifier for grouping the persisted email with related conversations.
-          type: string
-          format: uuid
-    EmailImportRequest:
-      required:
-      - direction
-      - timestamp
-      - from
-      - to
-      - subject
-      type: object
-      properties:
-        direction:
-          description: The direction of the email.
-          type: string
-          enum:
-          - inbound
-          - outbound
-        timestamp:
-          description: When the email was sent or received. ISO-8601 format.
-          type: string
-          format: date-time
-        from:
-          description: The sender's email address.
-          type: string
-          format: email
-        to:
-          description: Array of recipient email addresses. Must contain at least 1 recipient.
-          type: array
-          items:
-            type: string
-            format: email
-          minItems: 1
-        cc:
-          description: Array of CC recipient email addresses.
-          type: array
-          items:
-            type: string
-            format: email
-          default: []
-        bcc:
-          description: Array of BCC recipient email addresses.
-          type: array
-          items:
-            type: string
-            format: email
-          default: []
-        subject:
-          description: The email subject line.
-          type: string
-        plainTextBody:
-          description: The plain text content of the email. At least one of plainTextBody or htmlBody must have non-empty content.
-          type: string
-        htmlBody:
-          description: The HTML content of the email. At least one of plainTextBody or htmlBody must have non-empty content.
-          type: string
-        threadId:
-          description: Optional thread identifier to group related emails together.
-          type: string
-        messageId:
-          description: Optional message identifier from the email system.
-          type: string
-    SmsImportRequest:
-      required:
-      - direction
-      - timestamp
-      - from
-      - to
-      - body
-      type: object
-      properties:
-        direction:
-          description: The direction of the SMS message.
-          type: string
-          enum:
-          - inbound
-          - outbound
-        timestamp:
-          description: When the message was sent or received. ISO-8601 format.
-          type: string
-          format: date-time
-        from:
-          description: The sender's phone number in E.164 format (e.g., +12025551234).
-          type: string
-        to:
-          description: The recipient's phone number in E.164 format (e.g., +12025551234).
-          type: string
-        body:
-          description: The message content. Must be at least 1 character.
-          type: string
-          minLength: 1
-        threadId:
-          description: Optional thread identifier to group related messages together.
-          type: string
-          format: uuid
-        segments:
-          description: The number of SMS segments for this message. If not provided, it will be calculated automatically based on the message body.
-          type: integer
-          minimum: 1
-    BulkCreateCustomersResponse:
-      required:
-      - success
-      - requestId
-      - data
-      type: object
-      properties:
-        requestId:
-          description: The request identifier.
-          type: string
-          format: uuid
-        success:
-          description: Whether the bulk operation completed successfully.
-          type: boolean
-        data:
-          description: Results of the bulk customer creation.
-          type: object
-          required:
-          - results
-          - summary
-          properties:
-            summary:
-              description: Summary statistics for the bulk operation.
-              type: object
-              required:
-              - total
-              - succeeded
-              - failed
-              properties:
-                total:
-                  description: Total number of customers in the request.
-                  type: integer
-                succeeded:
-                  description: Number of customers successfully created.
-                  type: integer
-                failed:
-                  description: Number of customers that failed to create.
-                  type: integer
-            results:
-              description: Array of results for each customer creation attempt, in the same order as the request.
-              type: array
-              items:
-                $ref: '#/components/schemas/BulkCustomerResult'
-    Compliance:
-      type: object
-      required:
-      - passed
-      - checksPassed
-      - checksFailed
-      properties:
-        passed:
-          description: Whether all compliance checks passed.
-          type: boolean
-        checksPassed:
-          description: Array of compliance checks that passed.
-          type: array
-          items:
-            $ref: '#/components/schemas/ComplianceCheck'
-        checksFailed:
-          description: Array of compliance checks that failed.
-          type: array
-          items:
-            $ref: '#/components/schemas/ComplianceCheck'
-    CreateCallRequest:
-      required:
-      - agentId
-      type: object
-      properties:
-        agentId:
-          description: The agent identifier to use for the call. This will be assigned to you.
-          type: string
-        webhook:
-          description: Webhook-related information to send the call updates to.
-          type: object
-          properties:
-            url:
-              description: The endpoint to send the call updates to.
-              type: string
-              format: uri
-            secretId:
-              description: The ID of the webhook secret for signing.
-              type: string
-              format: uuid
-    ComplianceCheck:
-      type: object
-      required:
-      - id
-      - name
-      - description
-      - reason
-      properties:
-        id:
-          description: The unique identifier for the compliance check.
-          type: string
-        name:
-          description: The human-readable name of the compliance check.
-          type: string
-        description:
-          description: A description of what the compliance check does.
-          type: string
-        reason:
-          description: The reason why the check passed or failed.
-          type: string
-    EmailInteractionData:
-      required:
-      - id
-      - threadId
-      - channel
-      - direction
-      - customerId
-      - timestamp
-      - createdAt
-      type: object
-      properties:
-        id:
-          description: The unique identifier of the imported interaction.
-          type: string
-          format: uuid
-        messageId:
-          description: The message identifier from the email system.
-          type: string
-        threadId:
-          description: The thread identifier for grouping related emails.
-          type: string
-          format: uuid
-        channel:
-          description: The communication channel.
-          type: string
-          enum:
-          - email
-        direction:
-          description: The direction of the email.
-          type: string
-          enum:
-          - inbound
-          - outbound
-        customerId:
-          description: The customer identifier.
-          type: string
-          format: uuid
-        timestamp:
-          description: When the email was sent or received. ISO-8601 format.
-          type: string
-          format: date-time
-        createdAt:
-          description: When the interaction was created in the system. ISO-8601 format.
-          type: string
-          format: date-time
-    BulkCustomerSuccess:
-      title: Success Result
-      required:
-      - success
-      - customer
-      type: object
-      properties:
-        success:
-          description: Indicates successful customer creation.
-          type: boolean
-          enum:
-          - true
-        customer:
-          description: The created customer object.
-          allOf:
-          - $ref: '#/components/schemas/Customer'
-          - type: object
-            properties:
-              createdAt:
-                description: Timestamp when the customer was created. ISO-8601 format.
-                type: string
-                format: date-time
-    EmailImportResponse:
-      required:
-      - success
-      - requestId
-      - data
-      type: object
-      properties:
-        requestId:
-          description: The request identifier.
-          type: string
-          format: uuid
-        success:
-          description: Whether the import was successful.
-          type: boolean
-        data:
-          $ref: '#/components/schemas/EmailInteractionData'
-    SmsGenerateRequest:
-      required:
-      - from
-      type: object
-      properties:
-        from:
-          description: The organization's phone number in E.164 format. Used in prompt context for generating the response.
-          type: string
-        to:
-          description: The customer's phone number in E.164 format. Required when persist is true.
-          type: string
-        persist:
-          description: Whether to save the generated message as an outbound interaction. Defaults to true.
-          type: boolean
-          default: true
-        threadId:
-          description: Optional thread identifier for grouping the persisted message with related conversations.
-          type: string
-          format: uuid
-    SmsGenerateResponse:
-      required:
-      - success
-      - requestId
-      - data
-      type: object
-      properties:
-        requestId:
-          description: The request identifier.
-          type: string
-          format: uuid
-        success:
-          description: Whether the generation was successful.
-          type: boolean
-        data:
-          type: object
-          required:
-          - message
-          properties:
-            message:
-              description: The AI-generated SMS response text.
-              type: string
-            threadId:
-              description: The thread identifier. Only present if the message was persisted.
-              type: string
-              format: uuid
-    Customer:
-      required:
-      - id
-      - externalId
-      - firstName
-      - lastName
-      - email
-      - primaryPhone
-      - address
-      type: object
-      properties:
-        id:
-          description: The ID of the customer.
-          type: string
-          format: uuid
-        clientId:
-          description: The ID of the client associated with this customer.
-          type: string
-          format: uuid
-        externalId:
-          description: The ID of the customer in your system.
-          type: string
-        firstName:
-          description: The first name of the customer.
-          type: string
-        middleName:
-          description: The middle name of the customer.
-          type: string
-        lastName:
-          description: The last name of the customer.
-          type: string
-        email:
-          description: The email address of the customer.
-          type: string
-        primaryPhone:
-          description: The primary phone number of the customer. (E.164 format)
-          type: string
-        secondaryPhone:
-          description: The secondary phone number of the customer. (E.164 format)
-          type: string
-        ssnLastFour:
-          description: The last four digits of the customer's Social Security Number. Required for collections customers.
-          type: string
-          minLength: 4
-          maxLength: 4
-        dateOfBirth:
-          description: The date of birth of the customer. YYYY-MM-DD format. Required for collections customers.
-          type: string
-        address:
-          description: The address of the customer.
-          type: object
-          required:
-          - zip
-          properties:
-            line1:
-              description: The first line of the address.
-              type: string
-            line2:
-              description: The second line of the address (e.g., apartment, suite, unit number).
-              type: string
-            city:
-              description: The city of the address.
-              type: string
-            state:
-              description: The state of the address.
-              type: string
-            zip:
-              description: The zip code of the address. Use 5 digits (12345) or 9 digits (12345-1234) format.
-              type: string
-    EmailGenerateResponse:
-      required:
-      - success
-      - requestId
-      - data
-      type: object
-      properties:
-        requestId:
-          description: The request identifier.
-          type: string
-          format: uuid
-        success:
-          description: Whether the generation was successful.
-          type: boolean
-        data:
-          type: object
-          required:
-          - htmlBody
-          - plainTextBody
-          properties:
-            htmlBody:
-              description: The AI-generated email response in HTML format.
-              type: string
-            plainTextBody:
-              description: The AI-generated email response in plain text format.
-              type: string
-            threadId:
-              description: The thread identifier. Only present if the email was persisted.
-              type: string
-              format: uuid
-    EmailImportBulkResponse:
-      required:
-      - success
-      - requestId
-      - data
-      type: object
-      properties:
-        requestId:
-          description: The request identifier.
-          type: string
-          format: uuid
-        success:
-          description: Whether the bulk operation completed.
-          type: boolean
-        data:
-          type: object
-          required:
-          - results
-          - summary
-          properties:
-            summary:
-              description: Summary statistics for the bulk operation.
-              type: object
-              required:
-              - total
-              - succeeded
-              - failed
-              properties:
-                total:
-                  description: Total number of emails in the request.
-                  type: integer
-                succeeded:
-                  description: Number of emails successfully imported.
-                  type: integer
-                failed:
-                  description: Number of emails that failed to import.
-                  type: integer
-            results:
-              description: Array of results for each import attempt.
-              type: array
-              items:
-                oneOf:
-                - title: Success Result
-                  type: object
-                  required:
-                  - success
-                  - interaction
-                  properties:
-                    success:
-                      description: Indicates successful import.
-                      type: boolean
-                      enum:
-                      - true
-                    interaction:
-                      $ref: '#/components/schemas/EmailInteractionData'
-                - title: Failure Result
-                  type: object
-                  required:
-                  - success
-                  - index
-                  - error
-                  properties:
-                    success:
-                      description: Indicates failed import.
-                      type: boolean
-                      enum:
-                      - false
-                    index:
-                      description: The index of the failed email in the request array.
-                      type: integer
-                    error:
-                      description: Error message explaining why the import failed.
-                      type: string
     UpdateCustomerRequest:
       type: object
       properties:
@@ -1793,37 +1610,74 @@ components:
               type: object
               additionalProperties: true
               nullable: true
-    EmailImportBulkRequest:
-      required:
-      - interactions
-      type: object
-      properties:
-        interactions:
-          description: Array of email interactions to import. Must contain between 1 and 100 items.
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailImportRequest'
-          minItems: 1
-          maxItems: 100
-    BulkCustomerFailure:
-      title: Failure Result
+    SmsGenerateResponse:
       required:
       - success
-      - externalId
-      - error
+      - requestId
+      - data
+      type: object
+      properties:
+        requestId:
+          description: The request identifier.
+          type: string
+          format: uuid
+        success:
+          description: Whether the generation was successful.
+          type: boolean
+        data:
+          type: object
+          required:
+          - message
+          properties:
+            message:
+              description: The AI-generated SMS response text.
+              type: string
+            threadId:
+              description: The thread identifier. Only present if the message was persisted.
+              type: string
+              format: uuid
+    CreateCallRequest:
+      required:
+      - agentId
+      type: object
+      properties:
+        agentId:
+          description: The agent identifier to use for the call. This will be assigned to you.
+          type: string
+        webhook:
+          description: Webhook-related information to send the call updates to.
+          type: object
+          properties:
+            url:
+              description: The endpoint to send the call updates to.
+              type: string
+              format: uri
+            secretId:
+              description: The ID of the webhook secret for signing.
+              type: string
+              format: uuid
+    BulkCustomerSuccess:
+      title: Success Result
+      required:
+      - success
+      - customer
       type: object
       properties:
         success:
-          description: Indicates failed customer creation.
+          description: Indicates successful customer creation.
           type: boolean
           enum:
-          - false
-        externalId:
-          description: The external ID of the customer that failed to create.
-          type: string
-        error:
-          description: Error message explaining why creation failed.
-          type: string
+          - true
+        customer:
+          description: The created customer object.
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          - type: object
+            properties:
+              createdAt:
+                description: Timestamp when the customer was created. ISO-8601 format.
+                type: string
+                format: date-time
     CustomersDripCampaignsPostRequest:
       required:
       - campaignName
@@ -1846,6 +1700,150 @@ components:
               description: The ID of the webhook secret for signing.
               type: string
               format: uuid
+    EmailImportResponse:
+      required:
+      - success
+      - requestId
+      - data
+      type: object
+      properties:
+        requestId:
+          description: The request identifier.
+          type: string
+          format: uuid
+        success:
+          description: Whether the import was successful.
+          type: boolean
+        data:
+          $ref: '#/components/schemas/EmailInteractionData'
+    Customer:
+      required:
+      - id
+      - externalId
+      - firstName
+      - lastName
+      - email
+      - primaryPhone
+      - address
+      type: object
+      properties:
+        id:
+          description: The ID of the customer.
+          type: string
+          format: uuid
+        clientId:
+          description: The ID of the client associated with this customer.
+          type: string
+          format: uuid
+        externalId:
+          description: The ID of the customer in your system.
+          type: string
+        firstName:
+          description: The first name of the customer.
+          type: string
+        middleName:
+          description: The middle name of the customer.
+          type: string
+        lastName:
+          description: The last name of the customer.
+          type: string
+        email:
+          description: The email address of the customer.
+          type: string
+        primaryPhone:
+          description: The primary phone number of the customer. (E.164 format)
+          type: string
+        secondaryPhone:
+          description: The secondary phone number of the customer. (E.164 format)
+          type: string
+        ssnLastFour:
+          description: The last four digits of the customer's Social Security Number. Required for collections customers.
+          type: string
+          minLength: 4
+          maxLength: 4
+        dateOfBirth:
+          description: The date of birth of the customer. YYYY-MM-DD format. Required for collections customers.
+          type: string
+        address:
+          description: The address of the customer.
+          type: object
+          required:
+          - zip
+          properties:
+            line1:
+              description: The first line of the address.
+              type: string
+            line2:
+              description: The second line of the address (e.g., apartment, suite, unit number).
+              type: string
+            city:
+              description: The city of the address.
+              type: string
+            state:
+              description: The state of the address.
+              type: string
+            zip:
+              description: The zip code of the address. Use 5 digits (12345) or 9 digits (12345-1234) format.
+              type: string
+    EmailImportRequest:
+      required:
+      - direction
+      - timestamp
+      - from
+      - to
+      - subject
+      type: object
+      properties:
+        direction:
+          description: The direction of the email.
+          type: string
+          enum:
+          - inbound
+          - outbound
+        timestamp:
+          description: When the email was sent or received. ISO-8601 format.
+          type: string
+          format: date-time
+        from:
+          description: The sender's email address.
+          type: string
+          format: email
+        to:
+          description: Array of recipient email addresses. Must contain at least 1 recipient.
+          type: array
+          items:
+            type: string
+            format: email
+          minItems: 1
+        cc:
+          description: Array of CC recipient email addresses.
+          type: array
+          items:
+            type: string
+            format: email
+          default: []
+        bcc:
+          description: Array of BCC recipient email addresses.
+          type: array
+          items:
+            type: string
+            format: email
+          default: []
+        subject:
+          description: The email subject line.
+          type: string
+        plainTextBody:
+          description: The plain text content of the email. At least one of plainTextBody or htmlBody must have non-empty content.
+          type: string
+        htmlBody:
+          description: The HTML content of the email. At least one of plainTextBody or htmlBody must have non-empty content.
+          type: string
+        threadId:
+          description: Optional thread identifier to group related emails together.
+          type: string
+        messageId:
+          description: Optional message identifier from the email system.
+          type: string
     UpdateCustomerResponse:
       required:
       - success
@@ -1863,6 +1861,56 @@ components:
         data:
           description: The updated customer object.
           $ref: '#/components/schemas/Customer'
+    EmailGenerateRequest:
+      type: object
+      properties:
+        persist:
+          description: Whether to save the generated email as an outbound interaction. Defaults to true.
+          type: boolean
+          default: true
+        threadId:
+          description: Optional thread identifier for grouping the persisted email with related conversations.
+          type: string
+          format: uuid
+    BulkCustomerFailure:
+      title: Failure Result
+      required:
+      - success
+      - externalId
+      - error
+      type: object
+      properties:
+        success:
+          description: Indicates failed customer creation.
+          type: boolean
+          enum:
+          - false
+        externalId:
+          description: The external ID of the customer that failed to create.
+          type: string
+        error:
+          description: Error message explaining why creation failed.
+          type: string
+    Compliance:
+      type: object
+      required:
+      - passed
+      - checksPassed
+      - checksFailed
+      properties:
+        passed:
+          description: Whether all compliance checks passed.
+          type: boolean
+        checksPassed:
+          description: Array of compliance checks that passed.
+          type: array
+          items:
+            $ref: '#/components/schemas/ComplianceCheck'
+        checksFailed:
+          description: Array of compliance checks that failed.
+          type: array
+          items:
+            $ref: '#/components/schemas/ComplianceCheck'
   securitySchemes:
     bearerAuth:
       type: http

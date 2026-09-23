@@ -73,6 +73,10 @@ paths:
       - bearerAuth: []
       tags:
       - Interactions
+      summary: Create interactions by interaction id analyze
+      x-summary-source: derived
+      operationId: postInteractionsByInteractionIdAnalyze
+      x-operation-id-source: derived
 components:
   schemas:
     AnalyzeInteractionRequest:
