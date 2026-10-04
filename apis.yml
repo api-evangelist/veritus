@@ -54,6 +54,7 @@ tags:
 - Voice AI
 - Communications
 - Compliance
+- Debt Collection
 tags_raw:
 - Company
 - Fintech
@@ -63,6 +64,7 @@ tags_raw:
 - Voice AI
 - Communications
 - Compliance
+- Debt Collection
 apis:
 - aid: veritus:veritus-calls-api
   name: Veritus Calls API
