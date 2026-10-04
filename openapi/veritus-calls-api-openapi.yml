@@ -160,6 +160,33 @@ components:
               description: The ID of the webhook secret for signing.
               type: string
               format: uuid
+    GetSignedUrlResponse:
+      required:
+      - requestId
+      - success
+      - data
+      properties:
+        requestId:
+          description: The request identifier for the call.
+          type: string
+          format: uuid
+        success:
+          description: Whether the call was successful.
+          type: boolean
+        data:
+          description: The data for the call.
+          type: object
+          required:
+          - callId
+          - signedUrl
+          properties:
+            callId:
+              description: The call ID. This is returned in `/calls/create`
+              type: string
+              format: uuid
+            signedUrl:
+              description: Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change).
+              type: string
     BulkCreateCallsResponse:
       required:
       - success
@@ -313,33 +340,6 @@ components:
           description: The call ID. This is returned from `/calls/create`
           type: string
           format: uuid
-    GetSignedUrlResponse:
-      required:
-      - requestId
-      - success
-      - data
-      properties:
-        requestId:
-          description: The request identifier for the call.
-          type: string
-          format: uuid
-        success:
-          description: Whether the call was successful.
-          type: boolean
-        data:
-          description: The data for the call.
-          type: object
-          required:
-          - callId
-          - signedUrl
-          properties:
-            callId:
-              description: The call ID. This is returned in `/calls/create`
-              type: string
-              format: uuid
-            signedUrl:
-              description: Signed, time-limited URL for downloading the audio recording. The link is valid for 30 minutes (subject to change).
-              type: string
   securitySchemes:
     bearerAuth:
       type: http

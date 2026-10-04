@@ -79,13 +79,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AnalyzeInteractionRequest:
-      type: object
-      properties:
-        applyOutcomes:
-          description: Whether to apply configured outcome actions (tags, escalations) to the customer based on the analysis results.
-          type: boolean
-          default: true
     AnalyzeInteractionResponse:
       required:
       - requestId
@@ -119,6 +112,13 @@ components:
               type: object
               additionalProperties: true
               nullable: true
+    AnalyzeInteractionRequest:
+      type: object
+      properties:
+        applyOutcomes:
+          description: Whether to apply configured outcome actions (tags, escalations) to the customer based on the analysis results.
+          type: boolean
+          default: true
   securitySchemes:
     bearerAuth:
       type: http
