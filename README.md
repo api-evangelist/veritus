@@ -64,6 +64,131 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Veritus is a company surfaced as a portfolio company of threshold-ventures and added to the API Evangelist network as a stub for enrichment. Sector: unknown. This profile is a lead awaiting the enrichment pipeline.
+Veritus (Veritus Agent) is a San Francisco fintech (Y Combinator S2025) building compliant, voice-first AI agents for the consumer-lending lifecycle - origination, servicing, and collections. Its omnichannel platform places AI voice calls, SMS, and email to borrowers, running every contact through a built-in compliance engine (respectful hours, frequency limits, cease-and-desist, model-validation notices) before outreach. The REST API (OpenAPI 3.1, bearer auth, isolated sandbox and production environments, HMAC-signed webhooks) lets lenders, servicers, and collections agencies create customers, place compliance-checked calls, run omnichannel drip campaigns, import and analyze SMS/email interactions, and retrieve call recordings.
 
-Backed by: threshold-ventures — https://veritus.com/
+**Areas:** Company · Fintech · Consumer Lending · Collection · AI Agents · Voice AI · Communications · Compliance · Debt Collection
+
+## Veritus on APIs.io
+
+Everything profiled for Veritus is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/veritus/](https://apis.io/providers/veritus/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [Veritus Calls API](https://apis.io/apis/veritus/veritus-calls-api/) — The Calls API from Veritus — 2 operation(s) for calls.
+- [Veritus Clients API](https://apis.io/apis/veritus/veritus-clients-api/) — The Clients API from Veritus — 1 operation(s) for clients.
+- [Veritus Customers API](https://apis.io/apis/veritus/veritus-customers-api/) — The Customers API from Veritus — 12 operation(s) for customers.
+- [Veritus Interactions API](https://apis.io/apis/veritus/veritus-interactions-api/) — The Interactions API from Veritus — 1 operation(s) for interactions.
+- [Veritus API](https://apis.io/apis/veritus/veritus-veritus-api-api/) — The Veritus API API from Veritus — 0 operation(s) for veritus api.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Veritus Agent Webhooks](https://apis.io/asyncapis/veritus/veritus-webhooks-asyncapi/)
+
+#### Event channels (2)
+
+Individual events and webhooks the provider emits.
+
+- [/calls/webhook](https://apis.io/channels/veritus/calls-webhook/)
+- [/drip-campaigns/webhook](https://apis.io/channels/veritus/drip-campaigns-webhook/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [veritus-mcp.yml](https://apis.io/servers/veritus/veritus-mcp-yml/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Veritus Calls API](https://apis.io/collections/veritus/open-veritus-calls-api/)
+- [Veritus Calls Clients API](https://apis.io/collections/veritus/open-veritus-clients-api/)
+- [Veritus Calls Customers API](https://apis.io/collections/veritus/open-veritus-customers-api/)
+- [Veritus Calls Interactions API](https://apis.io/collections/veritus/open-veritus-interactions-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Veritus Openapi Overlay](https://apis.io/overlays/veritus/veritus-openapi-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Veritus Authentication](https://apis.io/security/veritus/veritus-authentication/)
+- [Veritus Domain Security](https://apis.io/security/veritus/veritus-domain-security/)
+- [Veritus Trust Center](https://apis.io/security/veritus/veritus-trust-center/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://veritus.com/)
+- [Documentation](https://docs.veritus.com/)
+- [Sign up](https://app.veritus.com/try)
+- [Blog](https://veritus.com/insights/)
+- [Terms of service](https://veritus.com/terms)
+- [Privacy policy](https://veritus.com/privacy)
+- [Status](https://status.veritus.com/)
+
+## API Evangelist rating
+
+**Kin Score 50.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 58.2 |
+| Contract governance | 4.5 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 61.3 |
+| Access clarity | 50.0 |
+
+**Agent readiness 30.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.4** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/veritus/](https://apis.io/providers/veritus/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Veritus: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/veritus/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
